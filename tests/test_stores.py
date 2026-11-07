@@ -48,7 +48,8 @@ class FakeClient:
 
     def search(self, **kwargs):
         self.calls.append(("search", kwargs))
-        return [[dict(id=key, distance=0.9, entity={k: row[k] for k in kwargs["output_fields"]})
+        # Misma forma que devuelve pymilvus 2.6.6: clave primaria por nombre de campo.
+        return [[dict(chunk_id=key, distance=0.9, entity={k: row[k] for k in kwargs["output_fields"]})
                  for key, row in self.rows[kwargs["collection_name"]].items()][:kwargs["limit"]]]
 
     def drop_collection(self, collection_name):

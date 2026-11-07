@@ -109,7 +109,8 @@ def search(client, name, qvec, k, filters: dict | None = None,
     result = []
     for hit in hits[0]:
         row = dict(hit["entity"])
-        row["chunk_id"] = hit["id"]
+        # pymilvus expone la clave primaria con su nombre de campo; versiones antiguas usan "id".
+        row["chunk_id"] = hit["chunk_id"] if "chunk_id" in hit else hit["id"]
         row["provenance_ids"] = json.loads(row["provenance_ids"])
         row["score"] = float(hit["distance"])
         result.append(row)
