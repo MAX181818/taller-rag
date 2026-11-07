@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema name="rag" version="1.6">
+  <uniqueKey>chunk_id</uniqueKey>
+  <fieldType name="string" class="solr.StrField" sortMissingLast="true"/>
+  <fieldType name="plong" class="solr.LongPointField" docValues="true"/>
+  <fieldType name="pint" class="solr.IntPointField" docValues="true"/>
+  <fieldType name="text_multi" class="solr.TextField" positionIncrementGap="100">
+    <analyzer>
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.ASCIIFoldingFilterFactory"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="text_es" class="solr.TextField" positionIncrementGap="100">
+    <analyzer>
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.SpanishLightStemFilterFactory"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="text_en" class="solr.TextField" positionIncrementGap="100">
+    <analyzer>
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.EnglishMinimalStemFilterFactory"/>
+    </analyzer>
+  </fieldType>
+  <field name="chunk_id" type="string" indexed="true" stored="true" required="true"/>
+  <field name="text" type="text_multi" indexed="true" stored="true"/>
+  <field name="title" type="text_multi" indexed="true" stored="true"/>
+  <field name="text_es" type="text_es" indexed="true" stored="true"/>
+  <field name="text_en" type="text_en" indexed="true" stored="true"/>
+  <field name="document_id" type="string" indexed="true" stored="true"/>
+  <field name="collection_name" type="string" indexed="true" stored="true"/>
+  <field name="source" type="string" indexed="true" stored="true"/>
+  <field name="language" type="string" indexed="true" stored="true"/>
+  <field name="chunker" type="string" indexed="true" stored="true"/>
+  <field name="url" type="string" indexed="true" stored="true"/>
+  <field name="provenance_ids" type="string" indexed="true" stored="true" multiValued="true"/>
+  <field name="created_ts" type="plong" indexed="true" stored="true"/>
+  <field name="start_char" type="pint" indexed="true" stored="true"/>
+  <field name="end_char" type="pint" indexed="true" stored="true"/>
+  <field name="n_tokens" type="pint" indexed="true" stored="true"/>
+  <field name="_version_" type="plong" indexed="true" stored="true"/>
+  <copyField source="text" dest="text_es"/>
+  <copyField source="text" dest="text_en"/>
+</schema>
