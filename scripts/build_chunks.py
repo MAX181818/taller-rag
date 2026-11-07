@@ -54,9 +54,10 @@ def _percentile(values, q):
     return ordered[lower] + (ordered[upper] - ordered[lower]) * (position - lower)
 
 
-def build_chunks(documents, tok, chunker):
+def build_chunks(documents, tok, chunker, label_suffix=""):
     """Fusiona textos equivalentes entre documentos y conserva apariciones."""
     segment = CHUNKERS[chunker]
+    label = chunker + label_suffix
     groups = defaultdict(list)
     counts = defaultdict(list)
     originals = {}
@@ -74,10 +75,10 @@ def build_chunks(documents, tok, chunker):
         for span in spans:
             text = original[span.start:span.end]
             occurrence = dict(document_id=document_id, start_char=span.start, end_char=span.end)
-            record = dict(chunk_id=chunk_id(document_id, chunker, span.start, span.end),
+            record = dict(chunk_id=chunk_id(document_id, label, span.start, span.end),
                           document_id=document_id,
                           provenance_ids=sorted(set(doc.get("provenance_ids") or []) | {document_id}),
-                          chunker=chunker, start_char=span.start, end_char=span.end,
+                          chunker=label, start_char=span.start, end_char=span.end,
                           text=text, title=doc.get("title"), url=doc.get("url"),
                           collection_name=doc.get("collection_name"), source=doc.get("source"),
                           language=(doc.get("language_base") or "").strip() or "und",
@@ -118,12 +119,13 @@ def main(argv=None):
     parser.add_argument("--input", required=True)
     parser.add_argument("--sample", required=True)
     parser.add_argument("--chunker", choices=CHUNKERS, required=True)
+    parser.add_argument("--label-suffix", default="")
     parser.add_argument("--extra")
     parser.add_argument("--out", required=True)
     args = parser.parse_args(argv)
     documents = load_documents(args.input, args.sample, args.extra)
     tok = AutoTokenizer.from_pretrained("intfloat/multilingual-e5-small", local_files_only=True)
-    records, stats = build_chunks(documents, tok, args.chunker)
+    records, stats = build_chunks(documents, tok, args.chunker, args.label_suffix)
     output = Path(args.out)
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("w", encoding="utf-8", newline="\n") as target:
@@ -132,9 +134,9 @@ def main(argv=None):
     stats_path = Path("reports/chunking/stats.json")
     stats_path.parent.mkdir(parents=True, exist_ok=True)
     all_stats = json.loads(stats_path.read_text(encoding="utf-8")) if stats_path.exists() else {}
-    all_stats[args.chunker] = stats
+    all_stats[args.chunker + args.label_suffix] = stats
     stats_path.write_text(json.dumps(all_stats, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
-    print(json.dumps(dict(chunker=args.chunker, **stats), ensure_ascii=False, allow_nan=False))
+    print(json.dumps(dict(chunker=args.chunker + args.label_suffix, **stats), ensure_ascii=False, allow_nan=False))
 
 
 if __name__ == "__main__":

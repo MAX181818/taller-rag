@@ -202,3 +202,23 @@ def test_missing_sample_document_is_rejected(tmp_path):
 def test_invalid_window_is_rejected(tok, size, overlap):
     with pytest.raises(ValueError):
         chunk_fixed_tokens("Texto", tok, size=size, overlap=overlap)
+
+
+def test_label_suffix_keeps_segmentation_and_changes_ids(tok, tmp_path, monkeypatch, capsys):
+    monkeypatch.chdir(tmp_path)
+    docs = [document("a", "el " * 600)]
+    plain, _ = build_chunks(docs, tok, "tok256")
+    labeled, _ = build_chunks(docs, tok, "tok256", label_suffix="_10k")
+    assert [r["text"] for r in labeled] == [r["text"] for r in plain]
+    assert all(r["chunker"] == "tok256_10k" for r in labeled)
+    assert {r["chunk_id"] for r in labeled}.isdisjoint(r["chunk_id"] for r in plain)
+    for row in labeled:
+        assert row["chunk_id"] == hashlib.sha256(
+            f'a|tok256_10k|{row["start_char"]}|{row["end_char"]}'.encode()).hexdigest()[:32]
+    pd.DataFrame(docs).drop(columns="provenance_ids").to_parquet("corpus.parquet")
+    pd.DataFrame([dict(document_id="a", provenance_ids="a")]).to_csv("sample.csv", index=False)
+    main(["--input", "corpus.parquet", "--sample", "sample.csv", "--chunker", "tok256",
+          "--label-suffix", "_10k", "--out", "chunks.jsonl"])
+    assert json.loads(capsys.readouterr().out)["chunker"] == "tok256_10k"
+    assert [json.loads(line) for line in tmp_path.joinpath("chunks.jsonl").read_text(encoding="utf-8").splitlines()] == labeled
+    assert set(json.loads(tmp_path.joinpath("reports/chunking/stats.json").read_text(encoding="utf-8"))) == {"tok256_10k"}
