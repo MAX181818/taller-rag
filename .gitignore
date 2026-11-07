@@ -1,0 +1,16 @@
+.env
+__pycache__/
+.pytest_cache/
+.venv/
+.idea/
+data/*.parquet
+data/derived/
+*.log
+reports/runs/raw/*.tmp
+informe/*.aux
+informe/*.log
+informe/*.out
+informe/*.toc
+informe/*.fdb_latexmk
+informe/*.fls
+informe/*.synctex.gz

@@ -1,0 +1,63 @@
+services:
+  etcd:
+    container_name: rag-etcd
+    image: quay.io/coreos/etcd:v3.5.18
+    command: etcd -advertise-client-urls=http://etcd:2379 -listen-client-urls=http://0.0.0.0:2379 --data-dir=/etcd
+    volumes: [etcd_data:/etcd]
+    healthcheck:
+      test: ["CMD", "etcdctl", "endpoint", "health"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+  minio:
+    container_name: rag-minio
+    image: minio/minio:RELEASE.2024-12-18T13-15-44Z
+    command: minio server /minio_data --console-address ':9001'
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes: [minio_data:/minio_data]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+  milvus:
+    container_name: rag-milvus
+    image: milvusdb/milvus:v2.6.6
+    command: ["milvus", "run", "standalone"]
+    security_opt: ["seccomp:unconfined"]
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+      MINIO_ACCESS_KEY_ID: minioadmin
+      MINIO_SECRET_ACCESS_KEY: minioadmin
+    volumes: [milvus_data:/var/lib/milvus]
+    ports: ["19530:19530", "9091:9091"]
+    depends_on:
+      etcd: {condition: service_healthy}
+      minio: {condition: service_healthy}
+  ollama:
+    image: ollama/ollama:latest
+    ports: ["11434:11434"]
+    volumes: [ollama_data:/root/.ollama]
+  api:
+    build: .
+    command: uvicorn app.api:app --host 0.0.0.0 --port 8000
+    env_file: .env
+    ports: ["8000:8000"]
+    depends_on: [milvus, ollama]
+    volumes: ["./data:/work/data", "./reports:/work/reports"]
+  frontend:
+    build: .
+    command: streamlit run app/frontend.py --server.address=0.0.0.0 --server.port=8501
+    env_file: .env
+    environment:
+      API_URL: http://api:8000
+    ports: ["8501:8501"]
+    depends_on: [api]
+volumes:
+  etcd_data:
+  minio_data:
+  milvus_data:
+  ollama_data:
