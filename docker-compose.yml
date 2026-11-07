@@ -1,9 +1,19 @@
+name: taller-rag
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: 10m
+    max-file: "3"
+
 services:
   etcd:
     container_name: rag-etcd
     image: quay.io/coreos/etcd:v3.5.18
     command: etcd -advertise-client-urls=http://etcd:2379 -listen-client-urls=http://0.0.0.0:2379 --data-dir=/etcd
     volumes: [etcd_data:/etcd]
+    mem_limit: 512m
+    logging: *logging
     healthcheck:
       test: ["CMD", "etcdctl", "endpoint", "health"]
       interval: 15s
@@ -11,12 +21,14 @@ services:
       retries: 10
   minio:
     container_name: rag-minio
-    image: minio/minio:RELEASE.2024-12-18T13-15-44Z
+    image: milvusdb/minio:RELEASE.2024-12-18T13-15-44Z
     command: minio server /minio_data --console-address ':9001'
     environment:
-      MINIO_ROOT_USER: minioadmin
-      MINIO_ROOT_PASSWORD: minioadmin
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
     volumes: [minio_data:/minio_data]
+    mem_limit: 512m
+    logging: *logging
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
       interval: 15s
@@ -30,34 +42,117 @@ services:
     environment:
       ETCD_ENDPOINTS: etcd:2379
       MINIO_ADDRESS: minio:9000
-      MINIO_ACCESS_KEY_ID: minioadmin
-      MINIO_SECRET_ACCESS_KEY: minioadmin
+      MINIO_ACCESS_KEY_ID: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
     volumes: [milvus_data:/var/lib/milvus]
-    ports: ["19530:19530", "9091:9091"]
+    ports: ["127.0.0.1:19530:19530", "127.0.0.1:9091:9091"]
+    mem_limit: 3g
+    cpus: 2
+    logging: *logging
     depends_on:
       etcd: {condition: service_healthy}
       minio: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9091/healthz"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 90s
+  solr:
+    image: solr:9.10.1
+    command: solr-precreate rag /opt/solr/server/solr/configsets/rag
+    environment:
+      SOLR_HEAP: 768m
+    volumes:
+      - ./solr/configsets/rag:/opt/solr/server/solr/configsets/rag:ro
+      - solr_data:/var/solr
+    ports: ["127.0.0.1:8983:8983"]
+    mem_limit: 1500m
+    cpus: 1
+    logging: *logging
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8983/solr/rag/admin/ping"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
   ollama:
-    image: ollama/ollama:latest
-    ports: ["11434:11434"]
+    image: ollama/ollama:0.40.10
+    ports: ["127.0.0.1:11434:11434"]
     volumes: [ollama_data:/root/.ollama]
+    environment:
+      OLLAMA_MAX_LOADED_MODELS: "1"
+      OLLAMA_NUM_PARALLEL: "1"
+      OLLAMA_KEEP_ALIVE: 10m
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    mem_limit: 4g
+    cpus: 4
+    logging: *logging
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 20s
   api:
     build: .
+    image: taller-rag-app:0.1
     command: uvicorn app.api:app --host 0.0.0.0 --port 8000
     env_file: .env
-    ports: ["8000:8000"]
-    depends_on: [milvus, ollama]
-    volumes: ["./data:/work/data", "./reports:/work/reports"]
+    environment:
+      HF_HOME: /cache/hf
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    ports: ["127.0.0.1:8000:8000"]
+    mem_limit: 3g
+    cpus: 3
+    logging: *logging
+    depends_on:
+      milvus: {condition: service_healthy}
+      solr: {condition: service_healthy}
+      ollama: {condition: service_healthy}
+    volumes:
+      - ./app:/work/app
+      - ./scripts:/work/scripts
+      - ./tests:/work/tests
+      - ./prompts:/work/prompts
+      - ./eval:/work/eval
+      - ./data:/work/data
+      - ./reports:/work/reports
+      - hf_cache:/cache/hf
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; urllib.request.urlopen('http://localhost:8000/health', timeout=5)"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 20s
   frontend:
-    build: .
+    image: taller-rag-app:0.1
     command: streamlit run app/frontend.py --server.address=0.0.0.0 --server.port=8501
     env_file: .env
     environment:
       API_URL: http://api:8000
-    ports: ["8501:8501"]
-    depends_on: [api]
+    ports: ["127.0.0.1:8501:8501"]
+    mem_limit: 512m
+    cpus: 0.5
+    logging: *logging
+    depends_on:
+      api: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health', timeout=5)"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 20s
 volumes:
   etcd_data:
   minio_data:
   milvus_data:
+  solr_data:
   ollama_data:
+  hf_cache:
