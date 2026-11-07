@@ -1,0 +1,2027 @@
+{
+  "sha256_before": "f4a669f17eaedd357f72b70c2192e685b6d534a94f6ffaeadbced7290b181728",
+  "sha256_expected": "f4a669f17eaedd357f72b70c2192e685b6d534a94f6ffaeadbced7290b181728",
+  "rows": 169248,
+  "fields": 33,
+  "parquet_leaf_columns": 34,
+  "nested_fields": {
+    "keyword_matches": {
+      "type": "list<element: string>",
+      "leaf_paths": [
+        "keyword_matches.list.element"
+      ]
+    },
+    "top_terms": {
+      "type": "list<element: struct<term: string, count: int64>>",
+      "leaf_paths": [
+        "top_terms.list.element.term",
+        "top_terms.list.element.count"
+      ]
+    }
+  },
+  "schema": {
+    "document_id": "string",
+    "text": "string",
+    "collection_name": "string",
+    "title": "string",
+    "url": "string",
+    "source": "string",
+    "source_type": "string",
+    "language": "string",
+    "country_key": "string",
+    "created_at": "string",
+    "synced_at": "string",
+    "mongo_id": "string",
+    "strategy": "string",
+    "url_domain": "string",
+    "final_url": "string",
+    "language_base": "string",
+    "publisher": "string",
+    "uri": "string",
+    "section": "string",
+    "event_id": "string",
+    "event_context": "string",
+    "keyword_family": "string",
+    "collection_keyword": "string",
+    "collection_keyword_label": "string",
+    "collection_query": "string",
+    "keyword_matches": "list<element: string>",
+    "top_terms": "list<element: struct<term: string, count: int64>>",
+    "word_count": "int64",
+    "char_count": "int64",
+    "text_sha256": "string"
+  },
+  "null_percent": {
+    "document_id": 0.0,
+    "text": 0.0,
+    "collection_name": 0.0,
+    "title": 38.210200415957644,
+    "url": 0.0,
+    "source": 0.0,
+    "source_type": 58.68666099451693,
+    "language": 7.761982416335791,
+    "country_key": 58.68666099451693,
+    "created_at": 0.013589525430138022,
+    "synced_at": 0.0,
+    "mongo_id": 0.0,
+    "strategy": 38.210200415957644,
+    "url_domain": 0.0,
+    "final_url": 38.210200415957644,
+    "language_base": 7.761982416335791,
+    "publisher": 0.0,
+    "author_id": 3.41510682548686,
+    "author_name": 7.881924749480053,
+    "author_handle": 61.78979958404235,
+    "uri": 0.0,
+    "section": 96.89686141047457,
+    "event_id": 99.29216297976933,
+    "event_context": 99.29807146908678,
+    "keyword_family": 0.7137455095481188,
+    "collection_keyword": 61.7957080733598,
+    "collection_keyword_label": 61.7957080733598,
+    "collection_query": 61.78979958404235,
+    "keyword_matches": 0.0,
+    "top_terms": 0.0,
+    "word_count": 0.0,
+    "char_count": 0.0,
+    "text_sha256": 0.0
+  },
+  "document_id_unique": true,
+  "document_id_nulls": 0,
+  "dup_text_rows": 14771,
+  "unique_text_hashes": 154477,
+  "empty_text_rows": 0,
+  "text_sha256_mismatches": 0,
+  "text_sha256_variant_mismatches": {
+    "UTF-8 literal": 0
+  },
+  "word_count_mismatches": 0,
+  "char_count_mismatches": 0,
+  "count_method": "Palabras: len(text.split()); caracteres: len(text); nulos tratados como cadena vacía solo al medir.",
+  "distributions": {
+    "collection_name": {
+      "url_crawls": 104578,
+      "bluesky_posts": 64670
+    },
+    "source": {
+      "media_cloud": 103380,
+      "bluesky": 64670,
+      "gdelt": 1198
+    },
+    "source_type": {
+      "(nulo)": 99326,
+      "social_post": 64670,
+      "news_article": 5252
+    },
+    "language_base": {
+      "en": 82682,
+      "es": 66908,
+      "(nulo)": 13137,
+      "hu": 4133,
+      "de": 557,
+      "pt": 468,
+      "fr": 307,
+      "nl": 204,
+      "ja": 116,
+      "it": 106,
+      "ca": 64,
+      "sv": 58,
+      "uk": 56,
+      "pl": 51,
+      "ru": 46,
+      "fi": 44,
+      "nb": 32,
+      "tr": 31,
+      "da": 26,
+      "ar": 25,
+      "zh": 20,
+      "el": 19,
+      "cs": 18,
+      "cy": 14,
+      "id": 12,
+      "ro": 9,
+      "ak": 8,
+      "bg": 8,
+      "gl": 6,
+      "eu": 6,
+      "ko": 4,
+      "gb": 4,
+      "sk": 3,
+      "av": 3,
+      "no": 3,
+      "et": 3,
+      "sr": 3,
+      "co": 3,
+      "sco": 3,
+      "lt": 3,
+      "he": 2,
+      "af": 2,
+      "am": 2,
+      "hi": 2,
+      "sg": 2,
+      "ie": 2,
+      "vi": 2,
+      "spa": 2,
+      "ml": 2,
+      "is": 1,
+      "th": 1,
+      "as": 1,
+      "an": 1,
+      "hr": 1,
+      "tl": 1,
+      "ms": 1,
+      "nn": 1,
+      "sl": 1,
+      "cl": 1,
+      "mx": 1,
+      "lv": 1,
+      "aa": 1,
+      "us": 1,
+      "au": 1,
+      "ke": 1,
+      "kh": 1,
+      "la": 1,
+      "ng": 1,
+      "nz": 1,
+      "pk": 1,
+      "za": 1,
+      "te": 1,
+      "sq": 1,
+      "kn": 1,
+      "mr": 1,
+      "bs": 1
+    },
+    "keyword_family": {
+      "A": 100098,
+      "J": 10403,
+      "E": 7585,
+      "L": 5809,
+      "Q": 5666,
+      "K": 5525,
+      "O": 5438,
+      "el_espectador": 4884,
+      "B1": 3155,
+      "F": 3036,
+      "D": 2346,
+      "B2": 2294,
+      "N": 2259,
+      "C": 1975,
+      "G": 1677,
+      "M": 1650,
+      "P": 1251,
+      "(nulo)": 1208,
+      "R": 1143,
+      "H": 770,
+      "I": 708,
+      "bbc": 368
+    }
+  },
+  "collection_query_distribution": {
+    "(nulo)": 104578,
+    "protect nature UK": 980,
+    "biodiversity crisis UK": 956,
+    "take action UK": 912,
+    "hope UK": 907,
+    "emergency Hungary": 895,
+    "hope Hungary": 894,
+    "emergency Colombia": 889,
+    "accountability UK": 888,
+    "act now UK": 886,
+    "hope Colombia": 883,
+    "power UK": 878,
+    "emergency UK": 877,
+    "collective action UK": 866,
+    "act now Hungary": 864,
+    "political will UK": 861,
+    "blame UK": 846,
+    "opposition UK": 836,
+    "threat UK": 835,
+    "political will Hungary": 834,
+    "flourish UK": 827,
+    "emergencia Colombia": 826,
+    "responsibility UK": 822,
+    "governance UK": 814,
+    "global warming UK": 813,
+    "climate change UK": 812,
+    "threat Hungary": 806,
+    "local people UK": 798,
+    "opposition Hungary": 794,
+    "prosper UK": 782,
+    "nature conservation UK": 775,
+    "amenaza Colombia": 768,
+    "threat Colombia": 763,
+    "power Colombia": 760,
+    "GDP growth UK": 755,
+    "backlash UK": 742,
+    "recycle UK": 731,
+    "economic growth UK": 731,
+    "poder Colombia": 730,
+    "controversy UK": 725,
+    "crisis Hungary": 722,
+    "protected areas UK": 716,
+    "crisis UK": 712,
+    "crisis Colombia": 706,
+    "disappearing wildlife UK": 700,
+    "Indigenous communities UK": 673,
+    "pollution UK": 672,
+    "take action Colombia": 663,
+    "power Hungary": 644,
+    "United Nations Colombia": 639,
+    "national heritage UK": 629,
+    "nature loss UK": 628,
+    "climate change Colombia": 609,
+    "oposición Colombia": 607,
+    "biodiversity Colombia": 607,
+    "threat United Kingdom": 569,
+    "local nature UK": 559,
+    "emergency United Kingdom": 543,
+    "accountability Hungary": 540,
+    "hope United Kingdom": 527,
+    "United Nations United Kingdom": 525,
+    "human pressure UK": 519,
+    "opposition United Kingdom": 511,
+    "blame Hungary": 511,
+    "esperanza Colombia": 499,
+    "United Nations UK": 490,
+    "take action Hungary": 476,
+    "power United Kingdom": 475,
+    "biodiversity UK": 469,
+    "crisis United Kingdom": 459,
+    "we can make a difference UK": 455,
+    "reduce waste UK": 425,
+    "governance Hungary": 422,
+    "plastic pollution UK": 401,
+    "biodiversity loss UK": 380,
+    "political will United Kingdom": 341,
+    "biodiversidad Colombia": 332,
+    "pollution United Kingdom": 330,
+    "local knowledge UK": 328,
+    "United Nations Hungary": 316,
+    "Indigenous communities Colombia": 310,
+    "culpa Colombia": 292,
+    "Naciones Unidas Colombia": 290,
+    "backlash Hungary": 288,
+    "responsibility United Kingdom": 287,
+    "governance United Kingdom": 280,
+    "local people Colombia": 275,
+    "responsabilidad Colombia": 268,
+    "economic growth United Kingdom": 254,
+    "responsibility Hungary": 252,
+    "blame Colombia": 247,
+    "backlash United Kingdom": 231,
+    "accountability United Kingdom": 227,
+    "take action United Kingdom": 226,
+    "climate change United Kingdom": 225,
+    "controversia Colombia": 224,
+    "act now United Kingdom": 218,
+    "protected land UK": 217,
+    "blame United Kingdom": 214,
+    "pollution Colombia": 200,
+    "accountability Colombia": 200,
+    "Indigenous peoples UK": 199,
+    "climate change Hungary": 195,
+    "governance Colombia": 195,
+    "comunidades indígenas Colombia": 193,
+    "cambio climático Colombia": 191,
+    "individual action UK": 185,
+    "controversy United Kingdom": 184,
+    "Indigenous peoples Colombia": 184,
+    "political will Colombia": 179,
+    "responsibility Colombia": 172,
+    "land-use change UK": 152,
+    "opposition Colombia": 144,
+    "pueblos indígenas Colombia": 137,
+    "local people United Kingdom": 131,
+    "controversy Hungary": 124,
+    "controversy Colombia": 124,
+    "economic growth Hungary": 108,
+    "crecimiento económico Colombia": 106,
+    "nature conservation Colombia": 104,
+    "gobernanza Colombia": 99,
+    "local people Hungary": 94,
+    "act now Colombia": 88,
+    "biodiversity United Kingdom": 80,
+    "backlash Colombia": 80,
+    "GDP growth Hungary": 79,
+    "economic growth Colombia": 72,
+    "GDP growth United Kingdom": 69,
+    "contaminación Colombia": 66,
+    "iconic species UK": 66,
+    "Convention on Biological Diversity Colombia": 56,
+    "fewer birds UK": 54,
+    "national heritage United Kingdom": 54,
+    "áreas protegidas Colombia": 53,
+    "global warming Colombia": 51,
+    "protect nature Colombia": 51,
+    "protected areas Colombia": 47,
+    "tomar medidas Colombia": 39,
+    "local nature Colombia": 39,
+    "pollution Hungary": 39,
+    "sustainable lifestyle UK": 39,
+    "biological diversity UK": 39,
+    "collective action Colombia": 37,
+    "nature loss Colombia": 36,
+    "prosper United Kingdom": 36,
+    "global warming United Kingdom": 35,
+    "biodiversity Hungary": 33,
+    "biodiversity loss Colombia": 33,
+    "flourish United Kingdom": 33,
+    "local knowledge Colombia": 33,
+    "crecimiento del PIB Colombia": 31,
+    "national heritage Hungary": 30,
+    "biodiversity crisis Colombia": 30,
+    "hope Magyarorszag": 27,
+    "flourish Colombia": 27,
+    "collective action Hungary": 26,
+    "global warming Hungary": 26,
+    "charismatic species UK": 25,
+    "voluntad política Colombia": 25,
+    "GDP growth Colombia": 25,
+    "collective action United Kingdom": 23,
+    "flourish Hungary": 22,
+    "unsustainable development UK": 22,
+    "prosper Hungary": 22,
+    "rendición de cuentas Colombia": 21,
+    "vita Magyarorszag": 19,
+    "plastic pollution Hungary": 18,
+    "rural identity UK": 17,
+    "nature conservation United Kingdom": 17,
+    "COP15 UK": 16,
+    "plastic pollution Colombia": 16,
+    "patrimonio nacional Colombia": 16,
+    "calentamiento global Colombia": 16,
+    "power Magyarorszag": 16,
+    "national heritage Colombia": 15,
+    "hatalom Magyarorszag": 15,
+    "recycle Hungary": 15,
+    "protected land Colombia": 14,
+    "acción colectiva Colombia": 14,
+    "we can make a difference United Kingdom": 13,
+    "pérdida de biodiversidad Colombia": 13,
+    "actuar ahora Colombia": 13,
+    "población local Colombia": 13,
+    "Indigenous peoples United Kingdom": 12,
+    "we can make a difference Hungary": 12,
+    "conservación de la naturaleza Colombia": 11,
+    "fewer insects UK": 11,
+    "land-use change United Kingdom": 11,
+    "local knowledge United Kingdom": 11,
+    "nature loss United Kingdom": 11,
+    "opposition Magyarorszag": 11,
+    "recycle Colombia": 10,
+    "florecer Colombia": 10,
+    "crisis de biodiversidad Colombia": 10,
+    "local nature United Kingdom": 10,
+    "human pressure United Kingdom": 10,
+    "válság Magyarorszag": 10,
+    "klímaváltozás Magyarorszag": 10,
+    "nature conservation Hungary": 9,
+    "recycle United Kingdom": 9,
+    "prosperar Colombia": 9,
+    "proteger la naturaleza Colombia": 9,
+    "prosper Colombia": 9,
+    "biodiversity loss United Kingdom": 8,
+    "human pressure Hungary": 8,
+    "hatalom Hungary": 7,
+    "land-use change Colombia": 7,
+    "Indigenous peoples Hungary": 7,
+    "Indigenous communities United Kingdom": 7,
+    "vita Hungary": 7,
+    "Convention on Biological Diversity UK": 7,
+    "individual action Hungary": 6,
+    "remény Magyarorszag": 6,
+    "protect nature United Kingdom": 6,
+    "protected areas United Kingdom": 6,
+    "crisis Magyarorszag": 5,
+    "vészhelyzet Magyarorszag": 5,
+    "veszély Magyarorszag": 5,
+    "human pressure Colombia": 5,
+    "emergency Magyarorszag": 5,
+    "kormányzás Magyarorszag": 5,
+    "protect nature Hungary": 5,
+    "remény Hungary": 5,
+    "individual action United Kingdom": 4,
+    "reduce waste United Kingdom": 4,
+    "biological diversity Colombia": 4,
+    "diversidad biológica Colombia": 4,
+    "reciclar Colombia": 4,
+    "biological diversity Hungary": 4,
+    "reducir los residuos Colombia": 4,
+    "plastic pollution United Kingdom": 4,
+    "reduce waste Colombia": 4,
+    "individual action Colombia": 4,
+    "contaminación por plásticos Colombia": 3,
+    "we can make a difference Colombia": 3,
+    "protected land Hungary": 3,
+    "nature loss Hungary": 3,
+    "naturaleza local Colombia": 3,
+    "felelősség Magyarorszag": 3,
+    "gazdasági növekedés Magyarorszag": 3,
+    "local knowledge Hungary": 3,
+    "accountability Magyarorszag": 3,
+    "governance Magyarorszag": 3,
+    "biological diversity United Kingdom": 2,
+    "especies emblemáticas Colombia": 2,
+    "disappearing wildlife Colombia": 2,
+    "biodiversity crisis Hungary": 2,
+    "iconic species Colombia": 2,
+    "acción individual Colombia": 2,
+    "Convention on Biological Diversity Hungary": 2,
+    "GDP-növekedés Magyarorszag": 2,
+    "Convention on Biological Diversity United Kingdom": 2,
+    "threat Magyarorszag": 2,
+    "estilo de vida sostenible Colombia": 2,
+    "rural identity Colombia": 2,
+    "local nature Hungary": 2,
+    "rural identity United Kingdom": 2,
+    "identidad rural Colombia": 2,
+    "COP15 Colombia": 2,
+    "szennyezés Magyarorszag": 2,
+    "protected land United Kingdom": 1,
+    "Convenio sobre la Diversidad Biológica Colombia": 1,
+    "fewer birds Colombia": 1,
+    "klímaváltozás Hungary": 1,
+    "biodiversity loss Hungary": 1,
+    "desarrollo insostenible Colombia": 1,
+    "veszély Hungary": 1,
+    "responsibility Magyarorszag": 1,
+    "political will Magyarorszag": 1,
+    "conocimiento local Colombia": 1,
+    "pollution Magyarorszag": 1,
+    "újrahasznosítás Magyarorszag": 1,
+    "nature conservation Magyarorszag": 1,
+    "ellentmondás Magyarorszag": 1,
+    "cselekedni Magyarorszag": 1,
+    "tierras protegidas Colombia": 1,
+    "land-use change Hungary": 1,
+    "take action Magyarorszag": 1,
+    "Indigenous communities Hungary": 1,
+    "local people Magyarorszag": 1,
+    "menos aves Colombia": 1,
+    "sustainable lifestyle United Kingdom": 1,
+    "sustainable lifestyle Hungary": 1,
+    "politikai akarat Magyarorszag": 1,
+    "unsustainable development Hungary": 1,
+    "pérdida de naturaleza Colombia": 1,
+    "helyi lakosság Magyarorszag": 1,
+    "reduce waste Hungary": 1,
+    "disappearing wildlife United Kingdom": 1
+  },
+  "lengths": {
+    "bluesky_posts": {
+      "words": {
+        "count": 64670.0,
+        "mean": 32.729596412556056,
+        "std": 13.320368739639953,
+        "min": 1.0,
+        "50%": 35.0,
+        "90%": 49.0,
+        "95%": 52.0,
+        "99%": 56.0,
+        "max": 67.0
+      },
+      "chars": {
+        "count": 64670.0,
+        "mean": 211.30250502551414,
+        "std": 76.32595502803521,
+        "min": 40.0,
+        "50%": 232.0,
+        "90%": 295.0,
+        "95%": 298.0,
+        "99%": 300.0,
+        "max": 422.0
+      }
+    },
+    "url_crawls": {
+      "words": {
+        "count": 104578.0,
+        "mean": 745.745281034252,
+        "std": 1024.5718521034746,
+        "min": 2.0,
+        "50%": 622.0,
+        "90%": 1217.0,
+        "95%": 1615.1499999999942,
+        "99%": 2866.229999999996,
+        "max": 58181.0
+      },
+      "chars": {
+        "count": 104578.0,
+        "mean": 4686.680037866473,
+        "std": 6500.241950372093,
+        "min": 41.0,
+        "50%": 3882.0,
+        "90%": 7645.0,
+        "95%": 10112.0,
+        "99%": 17977.069999999963,
+        "max": 363528.0
+      }
+    }
+  },
+  "dates": {
+    "created_at": {
+      "min_utc": "2006-08-24T00:00:00+00:00",
+      "max_utc": "2026-09-21T18:03:56+00:00",
+      "unparseable_rows": 23,
+      "unparseable_percent": 0.013589525430138022,
+      "by_year": {
+        "2026": 62396,
+        "2025": 28862,
+        "2024": 24609,
+        "2023": 13097,
+        "2022": 12272,
+        "2021": 9419,
+        "2020": 6346,
+        "2019": 5377,
+        "2018": 3164,
+        "2017": 2100,
+        "2016": 1462,
+        "2015": 38,
+        "2014": 29,
+        "2013": 20,
+        "2011": 17,
+        "2012": 10,
+        "2010": 3,
+        "2009": 2,
+        "2008": 1,
+        "2006": 1
+      },
+      "by_month": {
+        "2026-08": 13388,
+        "2026-07": 8990,
+        "2026-09": 8723,
+        "2026-04": 7524,
+        "2026-06": 6852,
+        "2024-10": 5685,
+        "2026-05": 5277,
+        "2026-03": 4378,
+        "2026-01": 4192,
+        "2026-02": 3072,
+        "2025-07": 2908,
+        "2025-10": 2818,
+        "2025-06": 2713,
+        "2024-11": 2695,
+        "2024-09": 2640,
+        "2025-09": 2620,
+        "2025-02": 2512,
+        "2025-11": 2445,
+        "2025-05": 2438,
+        "2025-03": 2264,
+        "2024-08": 2175,
+        "2025-01": 2120,
+        "2025-04": 2035,
+        "2024-04": 2019,
+        "2025-12": 2010,
+        "2025-08": 1979,
+        "2024-07": 1674,
+        "2024-12": 1643,
+        "2024-05": 1474,
+        "2023-09": 1405,
+        "2022-12": 1363,
+        "2024-06": 1331,
+        "2022-11": 1319,
+        "2022-07": 1309,
+        "2022-08": 1306,
+        "2023-08": 1245,
+        "2023-07": 1221,
+        "2023-06": 1193,
+        "2023-03": 1191,
+        "2024-03": 1160,
+        "2024-02": 1144,
+        "2021-10": 1088,
+        "2022-06": 1085,
+        "2023-11": 1083,
+        "2022-09": 1070,
+        "2022-10": 1053,
+        "2023-12": 1051,
+        "2023-05": 1036,
+        "2023-10": 1025,
+        "2021-11": 1006,
+        "2024-01": 969,
+        "2021-09": 948,
+        "2023-04": 942,
+        "2023-02": 854,
+        "2023-01": 851,
+        "2022-05": 850,
+        "2021-06": 846,
+        "2020-09": 818,
+        "2022-03": 809,
+        "2021-12": 803,
+        "2019-05": 778,
+        "2022-01": 772,
+        "2021-07": 761,
+        "2021-08": 743,
+        "2022-02": 742,
+        "2021-03": 717,
+        "2021-05": 659,
+        "2021-01": 651,
+        "2020-12": 647,
+        "2021-04": 627,
+        "2020-11": 624,
+        "2020-10": 616,
+        "2019-04": 604,
+        "2022-04": 594,
+        "2021-02": 570,
+        "2020-06": 567,
+        "2019-06": 543,
+        "2019-03": 499,
+        "2020-02": 486,
+        "2019-08": 485,
+        "2020-01": 476,
+        "2020-08": 466,
+        "2020-07": 455,
+        "2020-05": 455,
+        "2019-09": 434,
+        "2019-12": 411,
+        "2020-04": 398,
+        "2019-10": 384,
+        "2019-11": 367,
+        "2018-07": 343,
+        "2019-07": 343,
+        "2018-03": 342,
+        "2020-03": 338,
+        "2018-06": 305,
+        "2018-05": 305,
+        "2018-10": 284,
+        "2019-02": 281,
+        "2018-12": 272,
+        "2018-08": 272,
+        "2018-01": 261,
+        "2019-01": 248,
+        "2018-04": 232,
+        "2018-02": 226,
+        "2017-12": 215,
+        "2017-07": 197,
+        "2017-11": 191,
+        "2017-03": 187,
+        "2017-10": 186,
+        "2017-09": 178,
+        "2017-05": 177,
+        "2017-06": 175,
+        "2016-09": 167,
+        "2017-08": 163,
+        "2018-09": 162,
+        "2018-11": 160,
+        "2016-08": 152,
+        "2017-01": 150,
+        "2017-02": 142,
+        "2016-05": 141,
+        "2017-04": 139,
+        "2016-06": 133,
+        "2016-03": 129,
+        "2016-11": 121,
+        "2016-10": 114,
+        "2016-02": 109,
+        "2016-12": 102,
+        "2016-04": 100,
+        "2016-01": 99,
+        "2016-07": 95,
+        "2014-04": 15,
+        "2011-01": 9,
+        "2015-04": 7,
+        "2015-10": 7,
+        "2015-09": 5,
+        "2015-03": 5,
+        "2015-11": 4,
+        "2014-07": 4,
+        "2013-10": 4,
+        "2013-05": 4,
+        "2012-12": 4,
+        "2013-07": 3,
+        "2014-08": 3,
+        "2011-11": 3,
+        "2015-08": 3,
+        "2012-06": 2,
+        "2015-07": 2,
+        "2013-01": 2,
+        "2015-01": 2,
+        "2011-12": 2,
+        "2013-06": 2,
+        "2014-06": 2,
+        "2015-12": 2,
+        "2010-06": 2,
+        "2014-10": 2,
+        "2008-07": 1,
+        "2014-01": 1,
+        "2012-08": 1,
+        "2014-11": 1,
+        "2013-11": 1,
+        "2013-04": 1,
+        "2009-11": 1,
+        "2012-11": 1,
+        "2012-10": 1,
+        "2011-08": 1,
+        "2013-08": 1,
+        "2009-10": 1,
+        "2015-05": 1,
+        "2010-10": 1,
+        "2011-03": 1,
+        "2012-01": 1,
+        "2011-09": 1,
+        "2013-09": 1,
+        "2013-02": 1,
+        "2014-05": 1,
+        "2006-08": 1
+      },
+      "by_format": {
+        "ISO T con Z": {
+          "rows": 58490,
+          "unparseable_percent": 0.0
+        },
+        "ISO T con offset": {
+          "rows": 6209,
+          "unparseable_percent": 0.0
+        },
+        "ISO T sin zona": {
+          "rows": 5229,
+          "unparseable_percent": 0.0
+        },
+        "solo fecha": {
+          "rows": 99297,
+          "unparseable_percent": 0.0
+        },
+        "vacía o nula": {
+          "rows": 23,
+          "unparseable_percent": 100.0
+        }
+      }
+    },
+    "synced_at": {
+      "min_utc": "2026-10-06T10:39:44+00:00",
+      "max_utc": "2026-10-06T10:41:32+00:00",
+      "unparseable_rows": 0,
+      "unparseable_percent": 0.0,
+      "by_year": {
+        "2026": 169248
+      },
+      "by_month": {
+        "2026-10": 169248
+      },
+      "by_format": {
+        "fecha con espacio": {
+          "rows": 169248,
+          "unparseable_percent": 0.0
+        }
+      }
+    }
+  },
+  "urls": {
+    "url": {
+      "quality": {
+        "http": 169248
+      },
+      "top_20_domains": {
+        "bsky.app": 64670,
+        "www.infobae.com": 19766,
+        "www.eltiempo.com": 12229,
+        "www.theguardian.com": 7216,
+        "www.elespectador.com": 5456,
+        "www.independent.co.uk": 4799,
+        "theconversation.com": 3721,
+        "www.dailymail.co.uk": 3305,
+        "extra.com.co": 1942,
+        "www.larepublica.co": 1716,
+        "www.diariodelsur.com.co": 1568,
+        "www.standard.co.uk": 1395,
+        "www.hsbnoticias.com": 1380,
+        "www.express.co.uk": 1344,
+        "diariolalibertad.com": 1231,
+        "www.dailyrecord.co.uk": 1005,
+        "www.walesonline.co.uk": 958,
+        "www.elcolombiano.com": 948,
+        "www.minuto30.com": 922,
+        "www.prnewswire.co.uk": 896
+      }
+    },
+    "final_url": {
+      "quality": {
+        "http": 104578,
+        "vacía": 64670
+      },
+      "top_20_domains": {
+        "www.infobae.com": 19766,
+        "www.eltiempo.com": 12229,
+        "www.theguardian.com": 7225,
+        "www.elespectador.com": 5456,
+        "www.independent.co.uk": 4799,
+        "theconversation.com": 3721,
+        "www.dailymail.com": 3306,
+        "extra.com.co": 1942,
+        "www.larepublica.co": 1712,
+        "www.diariodelsur.com.co": 1601,
+        "www.standard.co.uk": 1395,
+        "www.hsbnoticias.com": 1380,
+        "www.express.co.uk": 1344,
+        "diariolalibertad.com": 1231,
+        "www.dailyrecord.co.uk": 1004,
+        "www.walesonline.co.uk": 958,
+        "www.elcolombiano.com": 948,
+        "www.minuto30.com": 922,
+        "hoydiariodelmagdalena.com.co": 899,
+        "www.prnewswire.co.uk": 896
+      }
+    },
+    "comparison": {
+      "both_present": 104578,
+      "same_when_both_present": 88008,
+      "different_when_both_present": 16570,
+      "different_domain_when_both_present": 6560
+    }
+  },
+  "sample_comparison": {
+    "collection_name": [
+      {
+        "category": "bluesky_posts",
+        "corpus_n": 64670,
+        "sample_n": 3643,
+        "corpus_percent": 38.210200415957644,
+        "sample_percent": 36.43,
+        "difference_pp": -1.7802004159576441
+      },
+      {
+        "category": "url_crawls",
+        "corpus_n": 104578,
+        "sample_n": 6357,
+        "corpus_percent": 61.78979958404235,
+        "sample_percent": 63.57000000000001,
+        "difference_pp": 1.7802004159576583
+      }
+    ],
+    "source": [
+      {
+        "category": "bluesky",
+        "corpus_n": 64670,
+        "sample_n": 3643,
+        "corpus_percent": 38.210200415957644,
+        "sample_percent": 36.43,
+        "difference_pp": -1.7802004159576441
+      },
+      {
+        "category": "gdelt",
+        "corpus_n": 1198,
+        "sample_n": 70,
+        "corpus_percent": 0.7078370202306674,
+        "sample_percent": 0.7000000000000001,
+        "difference_pp": -0.007837020230667346
+      },
+      {
+        "category": "media_cloud",
+        "corpus_n": 103380,
+        "sample_n": 6287,
+        "corpus_percent": 61.081962563811686,
+        "sample_percent": 62.870000000000005,
+        "difference_pp": 1.7880374361883185
+      }
+    ],
+    "source_type": [
+      {
+        "category": "(nulo)",
+        "corpus_n": 99326,
+        "sample_n": 6007,
+        "corpus_percent": 58.68666099451693,
+        "sample_percent": 60.07,
+        "difference_pp": 1.383339005483073
+      },
+      {
+        "category": "news_article",
+        "corpus_n": 5252,
+        "sample_n": 350,
+        "corpus_percent": 3.10313858952543,
+        "sample_percent": 3.5000000000000004,
+        "difference_pp": 0.39686141047457024
+      },
+      {
+        "category": "social_post",
+        "corpus_n": 64670,
+        "sample_n": 3643,
+        "corpus_percent": 38.210200415957644,
+        "sample_percent": 36.43,
+        "difference_pp": -1.7802004159576441
+      }
+    ],
+    "language_base": [
+      {
+        "category": "(nulo)",
+        "corpus_n": 13137,
+        "sample_n": 753,
+        "corpus_percent": 7.761982416335791,
+        "sample_percent": 7.53,
+        "difference_pp": -0.2319824163357911
+      },
+      {
+        "category": "aa",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "af",
+        "corpus_n": 2,
+        "sample_n": 0,
+        "corpus_percent": 0.0011816978634902628,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0011816978634902628
+      },
+      {
+        "category": "ak",
+        "corpus_n": 8,
+        "sample_n": 0,
+        "corpus_percent": 0.004726791453961051,
+        "sample_percent": 0.0,
+        "difference_pp": -0.004726791453961051
+      },
+      {
+        "category": "am",
+        "corpus_n": 2,
+        "sample_n": 0,
+        "corpus_percent": 0.0011816978634902628,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0011816978634902628
+      },
+      {
+        "category": "an",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "ar",
+        "corpus_n": 25,
+        "sample_n": 2,
+        "corpus_percent": 0.014771223293628285,
+        "sample_percent": 0.02,
+        "difference_pp": 0.0052287767063717155
+      },
+      {
+        "category": "as",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "au",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "av",
+        "corpus_n": 3,
+        "sample_n": 0,
+        "corpus_percent": 0.0017725467952353943,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0017725467952353943
+      },
+      {
+        "category": "bg",
+        "corpus_n": 8,
+        "sample_n": 0,
+        "corpus_percent": 0.004726791453961051,
+        "sample_percent": 0.0,
+        "difference_pp": -0.004726791453961051
+      },
+      {
+        "category": "bs",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "ca",
+        "corpus_n": 64,
+        "sample_n": 4,
+        "corpus_percent": 0.03781433163168841,
+        "sample_percent": 0.04,
+        "difference_pp": 0.0021856683683115913
+      },
+      {
+        "category": "cl",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "co",
+        "corpus_n": 3,
+        "sample_n": 0,
+        "corpus_percent": 0.0017725467952353943,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0017725467952353943
+      },
+      {
+        "category": "cs",
+        "corpus_n": 18,
+        "sample_n": 2,
+        "corpus_percent": 0.010635280771412365,
+        "sample_percent": 0.02,
+        "difference_pp": 0.009364719228587635
+      },
+      {
+        "category": "cy",
+        "corpus_n": 14,
+        "sample_n": 0,
+        "corpus_percent": 0.00827188504443184,
+        "sample_percent": 0.0,
+        "difference_pp": -0.00827188504443184
+      },
+      {
+        "category": "da",
+        "corpus_n": 26,
+        "sample_n": 0,
+        "corpus_percent": 0.015362072225373415,
+        "sample_percent": 0.0,
+        "difference_pp": -0.015362072225373415
+      },
+      {
+        "category": "de",
+        "corpus_n": 557,
+        "sample_n": 25,
+        "corpus_percent": 0.32910285498203823,
+        "sample_percent": 0.25,
+        "difference_pp": -0.07910285498203823
+      },
+      {
+        "category": "el",
+        "corpus_n": 19,
+        "sample_n": 1,
+        "corpus_percent": 0.011226129703157497,
+        "sample_percent": 0.01,
+        "difference_pp": -0.001226129703157497
+      },
+      {
+        "category": "en",
+        "corpus_n": 82682,
+        "sample_n": 4917,
+        "corpus_percent": 48.852571374550955,
+        "sample_percent": 49.17,
+        "difference_pp": 0.3174286254490468
+      },
+      {
+        "category": "es",
+        "corpus_n": 66908,
+        "sample_n": 4012,
+        "corpus_percent": 39.53252032520325,
+        "sample_percent": 40.12,
+        "difference_pp": 0.5874796747967466
+      },
+      {
+        "category": "et",
+        "corpus_n": 3,
+        "sample_n": 0,
+        "corpus_percent": 0.0017725467952353943,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0017725467952353943
+      },
+      {
+        "category": "eu",
+        "corpus_n": 6,
+        "sample_n": 1,
+        "corpus_percent": 0.0035450935904707886,
+        "sample_percent": 0.01,
+        "difference_pp": 0.006454906409529212
+      },
+      {
+        "category": "fi",
+        "corpus_n": 44,
+        "sample_n": 1,
+        "corpus_percent": 0.025997352996785784,
+        "sample_percent": 0.01,
+        "difference_pp": -0.015997352996785785
+      },
+      {
+        "category": "fr",
+        "corpus_n": 307,
+        "sample_n": 15,
+        "corpus_percent": 0.18139062204575535,
+        "sample_percent": 0.15,
+        "difference_pp": -0.03139062204575535
+      },
+      {
+        "category": "gb",
+        "corpus_n": 4,
+        "sample_n": 0,
+        "corpus_percent": 0.0023633957269805256,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0023633957269805256
+      },
+      {
+        "category": "gl",
+        "corpus_n": 6,
+        "sample_n": 0,
+        "corpus_percent": 0.0035450935904707886,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0035450935904707886
+      },
+      {
+        "category": "he",
+        "corpus_n": 2,
+        "sample_n": 0,
+        "corpus_percent": 0.0011816978634902628,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0011816978634902628
+      },
+      {
+        "category": "hi",
+        "corpus_n": 2,
+        "sample_n": 0,
+        "corpus_percent": 0.0011816978634902628,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0011816978634902628
+      },
+      {
+        "category": "hr",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "hu",
+        "corpus_n": 4133,
+        "sample_n": 188,
+        "corpus_percent": 2.4419786349026285,
+        "sample_percent": 1.8800000000000001,
+        "difference_pp": -0.5619786349026283
+      },
+      {
+        "category": "id",
+        "corpus_n": 12,
+        "sample_n": 1,
+        "corpus_percent": 0.007090187180941577,
+        "sample_percent": 0.01,
+        "difference_pp": 0.002909812819058423
+      },
+      {
+        "category": "ie",
+        "corpus_n": 2,
+        "sample_n": 0,
+        "corpus_percent": 0.0011816978634902628,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0011816978634902628
+      },
+      {
+        "category": "is",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "it",
+        "corpus_n": 106,
+        "sample_n": 4,
+        "corpus_percent": 0.06262998676498394,
+        "sample_percent": 0.04,
+        "difference_pp": -0.022629986764983935
+      },
+      {
+        "category": "ja",
+        "corpus_n": 116,
+        "sample_n": 5,
+        "corpus_percent": 0.06853847608243524,
+        "sample_percent": 0.05,
+        "difference_pp": -0.018538476082435237
+      },
+      {
+        "category": "ke",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "kh",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "kn",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "ko",
+        "corpus_n": 4,
+        "sample_n": 0,
+        "corpus_percent": 0.0023633957269805256,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0023633957269805256
+      },
+      {
+        "category": "la",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "lt",
+        "corpus_n": 3,
+        "sample_n": 0,
+        "corpus_percent": 0.0017725467952353943,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0017725467952353943
+      },
+      {
+        "category": "lv",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "ml",
+        "corpus_n": 2,
+        "sample_n": 0,
+        "corpus_percent": 0.0011816978634902628,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0011816978634902628
+      },
+      {
+        "category": "mr",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "ms",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "mx",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "nb",
+        "corpus_n": 32,
+        "sample_n": 1,
+        "corpus_percent": 0.018907165815844205,
+        "sample_percent": 0.01,
+        "difference_pp": -0.008907165815844205
+      },
+      {
+        "category": "ng",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "nl",
+        "corpus_n": 204,
+        "sample_n": 16,
+        "corpus_percent": 0.1205331820760068,
+        "sample_percent": 0.16,
+        "difference_pp": 0.0394668179239932
+      },
+      {
+        "category": "nn",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "no",
+        "corpus_n": 3,
+        "sample_n": 0,
+        "corpus_percent": 0.0017725467952353943,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0017725467952353943
+      },
+      {
+        "category": "nz",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "pk",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "pl",
+        "corpus_n": 51,
+        "sample_n": 3,
+        "corpus_percent": 0.0301332955190017,
+        "sample_percent": 0.03,
+        "difference_pp": -0.00013329551900170128
+      },
+      {
+        "category": "pt",
+        "corpus_n": 468,
+        "sample_n": 39,
+        "corpus_percent": 0.2765173000567215,
+        "sample_percent": 0.38999999999999996,
+        "difference_pp": 0.11348269994327848
+      },
+      {
+        "category": "ro",
+        "corpus_n": 9,
+        "sample_n": 2,
+        "corpus_percent": 0.0053176403857061825,
+        "sample_percent": 0.02,
+        "difference_pp": 0.014682359614293818
+      },
+      {
+        "category": "ru",
+        "corpus_n": 46,
+        "sample_n": 1,
+        "corpus_percent": 0.027179050860276045,
+        "sample_percent": 0.01,
+        "difference_pp": -0.017179050860276046
+      },
+      {
+        "category": "sco",
+        "corpus_n": 3,
+        "sample_n": 1,
+        "corpus_percent": 0.0017725467952353943,
+        "sample_percent": 0.01,
+        "difference_pp": 0.008227453204764605
+      },
+      {
+        "category": "sg",
+        "corpus_n": 2,
+        "sample_n": 0,
+        "corpus_percent": 0.0011816978634902628,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0011816978634902628
+      },
+      {
+        "category": "sk",
+        "corpus_n": 3,
+        "sample_n": 1,
+        "corpus_percent": 0.0017725467952353943,
+        "sample_percent": 0.01,
+        "difference_pp": 0.008227453204764605
+      },
+      {
+        "category": "sl",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "spa",
+        "corpus_n": 2,
+        "sample_n": 0,
+        "corpus_percent": 0.0011816978634902628,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0011816978634902628
+      },
+      {
+        "category": "sq",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "sr",
+        "corpus_n": 3,
+        "sample_n": 0,
+        "corpus_percent": 0.0017725467952353943,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0017725467952353943
+      },
+      {
+        "category": "sv",
+        "corpus_n": 58,
+        "sample_n": 1,
+        "corpus_percent": 0.03426923804121762,
+        "sample_percent": 0.01,
+        "difference_pp": -0.024269238041217618
+      },
+      {
+        "category": "te",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "th",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "tl",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "tr",
+        "corpus_n": 31,
+        "sample_n": 0,
+        "corpus_percent": 0.018316316884099074,
+        "sample_percent": 0.0,
+        "difference_pp": -0.018316316884099074
+      },
+      {
+        "category": "uk",
+        "corpus_n": 56,
+        "sample_n": 4,
+        "corpus_percent": 0.03308754017772736,
+        "sample_percent": 0.04,
+        "difference_pp": 0.006912459822272642
+      },
+      {
+        "category": "us",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "vi",
+        "corpus_n": 2,
+        "sample_n": 0,
+        "corpus_percent": 0.0011816978634902628,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0011816978634902628
+      },
+      {
+        "category": "za",
+        "corpus_n": 1,
+        "sample_n": 0,
+        "corpus_percent": 0.0005908489317451314,
+        "sample_percent": 0.0,
+        "difference_pp": -0.0005908489317451314
+      },
+      {
+        "category": "zh",
+        "corpus_n": 20,
+        "sample_n": 0,
+        "corpus_percent": 0.01181697863490263,
+        "sample_percent": 0.0,
+        "difference_pp": -0.01181697863490263
+      }
+    ],
+    "keyword_family": [
+      {
+        "category": "(nulo)",
+        "corpus_n": 1208,
+        "sample_n": 70,
+        "corpus_percent": 0.7137455095481188,
+        "sample_percent": 0.7000000000000001,
+        "difference_pp": -0.013745509548118706
+      },
+      {
+        "category": "A",
+        "corpus_n": 100098,
+        "sample_n": 6047,
+        "corpus_percent": 59.14279636982417,
+        "sample_percent": 60.47,
+        "difference_pp": 1.3272036301758305
+      },
+      {
+        "category": "B1",
+        "corpus_n": 3155,
+        "sample_n": 218,
+        "corpus_percent": 1.8641283796558896,
+        "sample_percent": 2.18,
+        "difference_pp": 0.31587162034411054
+      },
+      {
+        "category": "B2",
+        "corpus_n": 2294,
+        "sample_n": 151,
+        "corpus_percent": 1.3554074494233315,
+        "sample_percent": 1.51,
+        "difference_pp": 0.15459255057666854
+      },
+      {
+        "category": "C",
+        "corpus_n": 1975,
+        "sample_n": 117,
+        "corpus_percent": 1.1669266401966345,
+        "sample_percent": 1.17,
+        "difference_pp": 0.0030733598033654275
+      },
+      {
+        "category": "D",
+        "corpus_n": 2346,
+        "sample_n": 134,
+        "corpus_percent": 1.3861315938740781,
+        "sample_percent": 1.34,
+        "difference_pp": -0.04613159387407806
+      },
+      {
+        "category": "E",
+        "corpus_n": 7585,
+        "sample_n": 440,
+        "corpus_percent": 4.481589147286822,
+        "sample_percent": 4.3999999999999995,
+        "difference_pp": -0.08158914728682287
+      },
+      {
+        "category": "F",
+        "corpus_n": 3036,
+        "sample_n": 168,
+        "corpus_percent": 1.7938173567782192,
+        "sample_percent": 1.68,
+        "difference_pp": -0.11381735677821925
+      },
+      {
+        "category": "G",
+        "corpus_n": 1677,
+        "sample_n": 61,
+        "corpus_percent": 0.9908536585365854,
+        "sample_percent": 0.61,
+        "difference_pp": -0.38085365853658537
+      },
+      {
+        "category": "H",
+        "corpus_n": 770,
+        "sample_n": 7,
+        "corpus_percent": 0.4549536774437512,
+        "sample_percent": 0.06999999999999999,
+        "difference_pp": -0.3849536774437512
+      },
+      {
+        "category": "I",
+        "corpus_n": 708,
+        "sample_n": 38,
+        "corpus_percent": 0.41832104367555306,
+        "sample_percent": 0.38,
+        "difference_pp": -0.03832104367555306
+      },
+      {
+        "category": "J",
+        "corpus_n": 10403,
+        "sample_n": 614,
+        "corpus_percent": 6.146601436944602,
+        "sample_percent": 6.140000000000001,
+        "difference_pp": -0.006601436944601247
+      },
+      {
+        "category": "K",
+        "corpus_n": 5525,
+        "sample_n": 330,
+        "corpus_percent": 3.2644403478918513,
+        "sample_percent": 3.3000000000000003,
+        "difference_pp": 0.03555965210814893
+      },
+      {
+        "category": "L",
+        "corpus_n": 5809,
+        "sample_n": 345,
+        "corpus_percent": 3.432241444507468,
+        "sample_percent": 3.45,
+        "difference_pp": 0.017758555492532135
+      },
+      {
+        "category": "M",
+        "corpus_n": 1650,
+        "sample_n": 74,
+        "corpus_percent": 0.9749007373794668,
+        "sample_percent": 0.74,
+        "difference_pp": -0.23490073737946682
+      },
+      {
+        "category": "N",
+        "corpus_n": 2259,
+        "sample_n": 147,
+        "corpus_percent": 1.3347277368122519,
+        "sample_percent": 1.47,
+        "difference_pp": 0.1352722631877481
+      },
+      {
+        "category": "O",
+        "corpus_n": 5438,
+        "sample_n": 189,
+        "corpus_percent": 3.213036490830025,
+        "sample_percent": 1.8900000000000001,
+        "difference_pp": -1.3230364908300247
+      },
+      {
+        "category": "P",
+        "corpus_n": 1251,
+        "sample_n": 78,
+        "corpus_percent": 0.7391520136131594,
+        "sample_percent": 0.7799999999999999,
+        "difference_pp": 0.04084798638684051
+      },
+      {
+        "category": "Q",
+        "corpus_n": 5666,
+        "sample_n": 358,
+        "corpus_percent": 3.3477500472679145,
+        "sample_percent": 3.58,
+        "difference_pp": 0.2322499527320856
+      },
+      {
+        "category": "R",
+        "corpus_n": 1143,
+        "sample_n": 64,
+        "corpus_percent": 0.6753403289846852,
+        "sample_percent": 0.64,
+        "difference_pp": -0.0353403289846852
+      },
+      {
+        "category": "bbc",
+        "corpus_n": 368,
+        "sample_n": 27,
+        "corpus_percent": 0.21743240688220836,
+        "sample_percent": 0.27,
+        "difference_pp": 0.05256759311779166
+      },
+      {
+        "category": "el_espectador",
+        "corpus_n": 4884,
+        "sample_n": 323,
+        "corpus_percent": 2.8857061826432218,
+        "sample_percent": 3.2300000000000004,
+        "difference_pp": 0.34429381735677866
+      }
+    ]
+  },
+  "manifest": {
+    "status": "Manifiesto leído como JSON. Conteos de autores omitidos por privacidad; solo se publican sus porcentajes de nulos. Las validaciones de origen requieren el archivo fuente y no son verificables con el Parquet de salida.",
+    "comparison": [
+      {
+        "figure": "output_sha256",
+        "manifest": "f4a669f17eaedd357f72b70c2192e685b6d534a94f6ffaeadbced7290b181728",
+        "measured": "f4a669f17eaedd357f72b70c2192e685b6d534a94f6ffaeadbced7290b181728",
+        "matches": true
+      },
+      {
+        "figure": "output_bytes",
+        "manifest": 256941261,
+        "measured": 256941261,
+        "matches": true
+      },
+      {
+        "figure": "rows",
+        "manifest": 169248,
+        "measured": 169248,
+        "matches": true
+      },
+      {
+        "figure": "columns",
+        "manifest": 33,
+        "measured": 33,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.document_id",
+        "manifest": 169248,
+        "measured": 169248,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.text",
+        "manifest": 169248,
+        "measured": 169248,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.collection_name",
+        "manifest": 169248,
+        "measured": 169248,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.title",
+        "manifest": 104574,
+        "measured": 104574,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.url",
+        "manifest": 169248,
+        "measured": 169248,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.source",
+        "manifest": 169248,
+        "measured": 169248,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.source_type",
+        "manifest": 69922,
+        "measured": 69922,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.language",
+        "manifest": 156111,
+        "measured": 156111,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.country_key",
+        "manifest": 69922,
+        "measured": 69922,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.created_at",
+        "manifest": 169225,
+        "measured": 169225,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.synced_at",
+        "manifest": 169248,
+        "measured": 169248,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.mongo_id",
+        "manifest": 169248,
+        "measured": 169248,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.strategy",
+        "manifest": 104578,
+        "measured": 104578,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.url_domain",
+        "manifest": 169248,
+        "measured": 169248,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.final_url",
+        "manifest": 104578,
+        "measured": 104578,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.language_base",
+        "manifest": 156111,
+        "measured": 156111,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.publisher",
+        "manifest": 169248,
+        "measured": 169248,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.uri",
+        "manifest": 169248,
+        "measured": 169248,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.section",
+        "manifest": 5252,
+        "measured": 5252,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.event_id",
+        "manifest": 1198,
+        "measured": 1198,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.event_context",
+        "manifest": 1188,
+        "measured": 1188,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.keyword_family",
+        "manifest": 168040,
+        "measured": 168040,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.collection_keyword",
+        "manifest": 64660,
+        "measured": 64660,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.collection_keyword_label",
+        "manifest": 64660,
+        "measured": 64660,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.collection_query",
+        "manifest": 64670,
+        "measured": 64670,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.keyword_matches",
+        "manifest": 107159,
+        "measured": 107159,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.top_terms",
+        "manifest": 169240,
+        "measured": 169240,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.word_count",
+        "manifest": 169248,
+        "measured": 169248,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.char_count",
+        "manifest": 169248,
+        "measured": 169248,
+        "matches": true
+      },
+      {
+        "figure": "nonempty_counts.text_sha256",
+        "manifest": 169248,
+        "measured": 169248,
+        "matches": true
+      },
+      {
+        "figure": "distributions.collection_name.bluesky_posts",
+        "manifest": 64670,
+        "measured": 64670,
+        "matches": true
+      },
+      {
+        "figure": "distributions.collection_name.url_crawls",
+        "manifest": 104578,
+        "measured": 104578,
+        "matches": true
+      },
+      {
+        "figure": "distributions.source.bluesky",
+        "manifest": 64670,
+        "measured": 64670,
+        "matches": true
+      },
+      {
+        "figure": "distributions.source.media_cloud",
+        "manifest": 103380,
+        "measured": 103380,
+        "matches": true
+      },
+      {
+        "figure": "distributions.source.gdelt",
+        "manifest": 1198,
+        "measured": 1198,
+        "matches": true
+      },
+      {
+        "figure": "unique_texts",
+        "manifest": 154477,
+        "measured": 154477,
+        "matches": true
+      },
+      {
+        "figure": "duplicate_text_rows",
+        "manifest": 14771,
+        "measured": 14771,
+        "matches": true
+      },
+      {
+        "figure": "validation.all_columns_round_trip",
+        "manifest": true,
+        "measured": null,
+        "matches": null
+      },
+      {
+        "figure": "validation.ids_unique",
+        "manifest": true,
+        "measured": true,
+        "matches": true
+      },
+      {
+        "figure": "validation.required_fields_nonempty",
+        "manifest": true,
+        "measured": true,
+        "matches": true
+      },
+      {
+        "figure": "validation.text_ids_collection_order_preserved",
+        "manifest": true,
+        "measured": null,
+        "matches": null
+      }
+    ]
+  },
+  "sampling_population": {
+    "rows": 154477,
+    "by_collection": {
+      "url_crawls": 98200,
+      "bluesky_posts": 56277
+    }
+  },
+  "samples": {
+    "seed": 42,
+    "nested": true,
+    "700": {
+      "url_crawls": 445,
+      "bluesky_posts": 255
+    },
+    "10000": {
+      "url_crawls": 6357,
+      "bluesky_posts": 3643
+    },
+    "method": "Deduplicación por hash, ID mínimo, procedencias ordenadas; permutación fija seed 42 por estrato; cuotas proporcionales Webster monótonas."
+  },
+  "sha256_after": "f4a669f17eaedd357f72b70c2192e685b6d534a94f6ffaeadbced7290b181728",
+  "sha256_ok": true
+}
