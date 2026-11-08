@@ -138,6 +138,8 @@ services:
     environment:
       API_URL: http://api:8000
     ports: ["127.0.0.1:8501:8501"]
+    volumes:
+      - ./app:/work/app
     mem_limit: 512m
     cpus: 0.5
     logging: *logging
