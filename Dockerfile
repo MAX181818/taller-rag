@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.11.18-slim
 WORKDIR /work
 ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 HF_HOME=/cache/hf
 COPY requirements.lock.txt .
