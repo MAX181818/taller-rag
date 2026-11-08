@@ -6,3 +6,4 @@ RUN pip install --no-cache-dir -r requirements.lock.txt --extra-index-url https:
 COPY app/ app/
 COPY scripts/ scripts/
 COPY tests/ tests/
+COPY pytest.ini .
