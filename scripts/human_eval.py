@@ -89,6 +89,8 @@ def sample(records, golds, n, seed, out):
 def _scores(path):
     result = {}
     for row in _read(path):
+        if not any((row.get(c) or "").strip() for c in CRITERIA):
+            continue  # respuesta que nadie calificó
         for c in CRITERIA:
             value = (row.get(c) or "").strip()
             if value not in ("0", "1", "2"):
@@ -100,9 +102,9 @@ def _scores(path):
 
 def agree(a_path, b_path, key_path, out):
     a, b = _scores(a_path), _scores(b_path)
-    key = _read(key_path)
+    key = [k for k in _read(key_path) if (k["item_id"], CRITERIA[0]) in a]
     ids = [k["item_id"] for k in key]
-    if a.keys() != b.keys() or {i for i, _ in a} != set(ids):
+    if not ids or a.keys() != b.keys() or {i for i, _ in a} != set(ids):
         raise ValueError("Las hojas y la clave no tienen los mismos ítems.")
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)

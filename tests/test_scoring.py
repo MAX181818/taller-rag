@@ -242,6 +242,17 @@ def test_agree_celda_vacia(tmp_path):
         human_eval.agree(a, b, key, tmp_path / "o")
 
 
+def test_agree_omite_respuestas_sin_calificar(tmp_path):
+    a_rows, b_rows = rows([0, 1, 2, 2]), rows([0, 1, 2, 2])
+    for r in (a_rows[3], b_rows[3]):
+        for c in human_eval.CRITERIA:
+            r[c] = ""
+    a, b, key = setup_agree(tmp_path, a_rows, b_rows)
+    human_eval.agree(a, b, key, tmp_path / "o")
+    items = (tmp_path / "o" / "human_eval_items.csv").read_text(encoding="utf-8").splitlines()
+    assert len(items) == 4  # encabezado + 3 respuestas calificadas
+
+
 def test_load_raw_keeps_retry_over_error_and_never_replaces_success(tmp_path):
     from scripts.score_generation import load_raw
     base = dict(tag="main", model="m", backend="solr", qid="Q01")
