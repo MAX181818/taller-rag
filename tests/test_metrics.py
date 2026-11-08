@@ -164,15 +164,28 @@ def test_all_conditions_and_split(tmp_path, fake_retriever):
                    "main,ablations,filters,10k", "test")
     rows = read_csv(out / "per_question.csv")
     assert {r["qid"] for r in rows} == {"q01", "q02", "q03"}
-    assert len({r["condition"] for r in rows}) == 15
-    assert len(rows) == (11 * 3 + 4 * 2) * 4
+    assert len({r["condition"] for r in rows}) == 16
+    assert len(rows) == (12 * 3 + 4 * 2) * 4
     calls = [call for call in fake_retriever if call[0].startswith("Pregunta")]
-    assert len(calls) == 41
+    assert len(calls) == 44
     assert any(c[3] == "tok256_10k" and c[1] == "solr" for c in calls)
     assert any(c[4] == "minilm" and c[1] == "milvus" for c in calls)
     assert any(c[6] for c in calls)
     assert {c[5]["collection_name"] for c in calls if c[5]} == {"bluesky_posts", "url_crawls"}
     assert all(c[4] == "e5small" for c in calls if c[1] == "solr")
+    assert any(c[1] == "milvus" and c[3] == "tok128" and c[4] == "minilm" for c in calls)
+    config = json.loads((out / "run_config.json").read_text(encoding="utf-8"))
+    assert "c_minilm_tok128" in config["collections"]["milvus"]
+
+
+def test_ablation_milvus_minilm_tok128_exists():
+    conditions = evaluator.conditions_for(["ablations"])
+    condition = next((c for c in conditions
+                      if c["condition"] == "ablations_milvus_tok128_minilm"), None)
+    assert condition is not None
+    assert evaluator.retrieval_args(question("q01"), condition) == dict(
+        backend="milvus", k=10, chunker="tok128", encoder="minilm",
+        one_per_doc=False, filters=None)
 
 
 def test_inspection_fixed_six_dev_questions_and_cache(tmp_path, fake_retriever):

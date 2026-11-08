@@ -93,6 +93,44 @@ def test_main_escribe_salidas(tmp_path):
     assert set(json.loads(lines[0])["evidence"][0]) == {"n", "document_id", "title", "url"}
 
 
+@pytest.mark.parametrize("extra", [(), ("type",)])
+def test_bootstrap_por_pregunta_con_corridas_identicas(monkeypatch, extra):
+    scored = [dict(qid=qid, tag="main", model="m1", backend="milvus", type="inyeccion",
+                   error=0, **{metric: value for metric in sg.METRICS})
+              for qid, value in (("Q1", 0), ("Q2", 1)) for _ in range(3)]
+    samples = []
+    bootstrap = sg.bootstrap_ci
+
+    def capture(values):
+        samples.append(list(values))
+        return bootstrap(values)
+
+    monkeypatch.setattr(sg, "bootstrap_ci", capture)
+    summary = sg.summarize(scored, extra)[0]
+    assert summary["n"] == 6
+    assert summary["n_questions"] == 2
+    assert summary["runs_identical"] == 1.0
+    assert samples == [[0.0, 1.0]] * len(sg.METRICS)
+    for metric in sg.METRICS:
+        assert summary[f"{metric}_mean"] == 0.5
+        assert summary[f"{metric}_ci_low"] == 0.0
+        assert summary[f"{metric}_ci_high"] == 1.0
+
+
+def test_promedios_por_pregunta_excluyen_vacios_y_errores():
+    scored = [dict(qid=qid, tag="main", model="m1", backend="milvus", error=0,
+                   **{metric: value for metric in sg.METRICS})
+              for qid, value in (("Q1", 0), ("Q1", 1), ("Q1", ""), ("Q2", 1))]
+    scored.append(dict(qid="Q3", tag="main", model="m1", backend="milvus", error=1))
+    summary = sg.summarize(scored)[0]
+    assert summary["n_questions"] == 2
+    assert summary["runs_identical"] == 0.5
+    for metric in sg.METRICS:
+        assert summary[f"{metric}_mean"] == 0.75
+        assert summary[f"{metric}_ci_low"] == 0.5
+        assert summary[f"{metric}_ci_high"] == 1.0
+
+
 def fake(responses):
     calls = []
 

@@ -121,6 +121,34 @@ def test_missing_inputs_omit_sections(tmp_path, capsys):
     assert "Aviso" in capsys.readouterr().err
 
 
+def test_figure_labels_and_alternating_offsets(tmp_path, monkeypatch):
+    analyze = module()
+    captured = {}
+    monkeypatch.setattr(analyze, "save_figure", lambda fig, path: captured.update({path.name: fig}))
+    metrics = [dict(condition=f"main_{engine}_tok256_e5small", k=5, metric=metric, mean=.5)
+               for engine in ("solr", "milvus", "hybrid") for metric in ("recall", "ndcg")]
+    scores = [dict(tag="main", model=f"m{i}", backend="milvus", cites_relevant_mean=.5)
+              for i in range(4)]
+    latency = [dict(row, cold=False, metric="generation_ms", p95=100) for row in scores]
+    by_type = [dict(scores[0], type=kind, n=2, abstention_correct_mean=.5)
+               for kind in ("inyeccion", "sin_respuesta")]
+    try:
+        analyze.figures(tmp_path, metrics, scores, by_type, latency, [], [])
+        for ax in captured["recuperacion_por_k.png"].axes:
+            assert {t.get_text() for t in ax.get_legend().get_texts()} == {"Solr", "Milvus", "Híbrido"}
+        ax = captured["errores_por_tipo.png"].axes[0]
+        assert [t.get_text() for t in ax.get_yticklabels()] == ["inyección", "sin respuesta"]
+        annotations = captured["latencia_vs_calidad.png"].axes[0].texts
+        offsets = [t.get_position() for t in annotations]
+        assert len(set(offsets)) == 4
+        assert any(y > 0 for x, y in offsets) and any(y < 0 for x, y in offsets)
+        assert any(x > 0 for x, y in offsets) and any(x < 0 for x, y in offsets)
+        assert all(t.anncoords == "offset points" and t.get_fontsize() >= 9 for t in annotations)
+    finally:
+        for fig in captured.values():
+            analyze.plt.close(fig)
+
+
 def test_markdown_escaping_and_formats():
     analyze = module()
     lines = []

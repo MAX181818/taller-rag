@@ -57,6 +57,7 @@ def conditions_for(groups):
                 for chunker in ("sent256", "tok128"):
                     add(group, backend, chunker)
             add(group, "milvus", encoder="minilm")
+            add(group, "milvus", chunker="tok128", encoder="minilm")
             add(group, "milvus", one_per_doc=True)
         elif group == "filters":
             for backend in ("milvus", "solr"):

@@ -26,6 +26,8 @@ QUALITY = ("abstention_correct", "cites_relevant", "citations_valid_rate")
 LABELS = {"abstention_correct": "Abstención correcta", "cites_relevant": "Cita relevante",
           "citations_valid_rate": "Validez de citas", "correccion": "Corrección",
           "fidelidad": "Fidelidad", "relevancia": "Relevancia"}
+BACKEND_LABELS = {"solr": "Solr", "milvus": "Milvus", "hybrid": "Híbrido"}
+TYPE_LABELS = {"inyeccion": "inyección", "sin_respuesta": "sin respuesta"}
 PRINCIPAL = {f"main_{engine}_tok256_e5small" for engine in ("solr", "milvus", "hybrid")}
 
 
@@ -334,7 +336,8 @@ def figures(reports, metrics, scores, by_type, latency, judges, performance):
         for ax, metric, title in zip(axes, ("recall", "ndcg"), ("Recuperación Recall@k", "Recuperación nDCG@k")):
             for condition in sorted({r["condition"] for r in principal}):
                 rows = sorted([r for r in principal if r["condition"] == condition and r["metric"] == metric], key=lambda r: float(r["k"]))
-                errorbars(ax, [float(r["k"]) for r in rows], rows, "mean", "ci_low", "ci_high", label=condition.split("_")[1])
+                engine = condition.split("_")[1]
+                errorbars(ax, [float(r["k"]) for r in rows], rows, "mean", "ci_low", "ci_high", label=BACKEND_LABELS.get(engine, engine))
             ax.set(title=title, xlabel="Cantidad de resultados (k)", ylabel="Proporción", xticks=[1, 3, 5, 10])
             if ax.lines:
                 ax.legend(title="Motor")
@@ -354,10 +357,15 @@ def figures(reports, metrics, scores, by_type, latency, judges, performance):
     warm = [r for r in latency if r.get("tag") == "main" and r.get("metric") == "generation_ms" and str(r.get("cold")).lower() in ("false", "0") and number(r.get("p95")) is not None and quality.get((r.get("model"), backend(r))) is not None]
     if warm:
         fig, ax = plt.subplots(figsize=(8, 5))
-        for row in warm:
+        offsets = ((0, 12, "center", "bottom"), (0, -12, "center", "top"),
+                   (-12, 0, "right", "center"), (12, 0, "left", "center"))
+        for index, row in enumerate(warm):
             x, y = number(row["p95"]), quality[(row.get("model"), backend(row))]
             ax.scatter(x, y)
-            ax.annotate(f"{row['model']} × {backend(row)}", (x, y), xytext=(4, 4), textcoords="offset points")
+            dx, dy, ha, va = offsets[index % len(offsets)]
+            ax.annotate(f"{row['model']} × {BACKEND_LABELS.get(backend(row), backend(row))}",
+                        (x, y), xytext=(dx, dy), textcoords="offset points",
+                        ha=ha, va=va, fontsize=9)
         ax.set(title="Latencia y calidad de generación en caliente", xlabel="Latencia p95 (ms)", ylabel="Tasa de cita relevante")
         save_figure(fig, out / "latencia_vs_calidad.png")
     if performance:
@@ -386,7 +394,7 @@ def figures(reports, metrics, scores, by_type, latency, judges, performance):
         fig, ax = plt.subplots(figsize=(max(6, len(models)), max(4, len(kinds) * .6)))
         view = ax.imshow(np.ma.masked_invalid(matrix), vmin=0, vmax=1, aspect="auto", cmap="viridis")
         ax.set_xticks(range(len(models)), models, rotation=30, ha="right")
-        ax.set_yticks(range(len(kinds)), kinds)
+        ax.set_yticks(range(len(kinds)), [TYPE_LABELS.get(kind, kind) for kind in kinds])
         ax.set(title="Abstención correcta por tipo de pregunta", xlabel="Modelo (motores combinados por tamaño de muestra)", ylabel="Tipo de pregunta")
         fig.colorbar(view, ax=ax, label="Tasa de abstención correcta")
         save_figure(fig, out / "errores_por_tipo.png")

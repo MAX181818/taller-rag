@@ -74,7 +74,7 @@ def score_record(record, gold):
 
 
 def _mean_ci(values):
-    values = [float(v) for v in values if v != ""]
+    values = [float(v) for v in values if v not in ("", None)]
     if not values:
         return "", "", ""
     low, high = bootstrap_ci(values)
@@ -94,8 +94,18 @@ def summarize(scored, extra=()):
     for key, rows in sorted(_group(scored, keys).items(), key=lambda kv: tuple(map(str, kv[0]))):
         ok = [r for r in rows if not r.get("error")]
         item = dict(zip(keys, key), n=len(ok), n_total=len(rows), error_rate=1 - len(ok) / len(rows))
+        questions = [runs for runs in _group(ok, ("qid",)).values()
+                     if any(r.get(metric) not in ("", None) for r in runs for metric in METRICS)]
+        item["n_questions"] = len(questions)
+        item["runs_identical"] = (sum(
+            all(tuple(r.get(metric) for metric in METRICS) ==
+                tuple(runs[0].get(metric) for metric in METRICS) for r in runs)
+            for runs in questions) / len(questions) if questions else "")
         for metric in METRICS:
-            mean, low, high = _mean_ci([r[metric] for r in ok])
+            # Cada pregunta pesa una vez, aunque tenga más corridas.
+            values = [[float(r[metric]) for r in runs if r.get(metric) not in ("", None)]
+                      for runs in questions]
+            mean, low, high = _mean_ci([sum(v) / len(v) for v in values if v])
             item.update({f"{metric}_mean": mean, f"{metric}_ci_low": low, f"{metric}_ci_high": high})
         out.append(item)
     return out
