@@ -1,5 +1,7 @@
 # Taller RAG: Solr, Milvus y generación local
 
+**Informe del taller (PDF): [informe_taller_rag.pdf](informe_taller_rag.pdf)** · Grupo 4, Procesamiento de Lenguaje Natural, Pontificia Universidad Javeriana.
+
 Sistema de preguntas con evidencia sobre `dragons_rag`, corpus del catálogo
 `open_corpus_co_es==0.1.1a4`. Compara recuperación léxica (Solr, BM25), densa
 (Milvus) e híbrida (RRF), y genera las respuestas con modelos locales de Ollama.
