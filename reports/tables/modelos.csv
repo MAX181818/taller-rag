@@ -1,0 +1,11 @@
+﻿model,parameter_size,quantization_level,family,digest,source
+gemma2:2b,2.6B,Q4_0,gemma2,8ccf136fdd52,reports/runs/raw/abl_k10_config.json
+gemma2:2b,2.6B,Q4_0,gemma2,8ccf136fdd52,reports/runs/raw/abl_k3_config.json
+gemma2:2b,2.6B,Q4_0,gemma2,8ccf136fdd52,reports/runs/raw/abl_minilm_config.json
+gemma2:2b,2.6B,Q4_0,gemma2,8ccf136fdd52,reports/runs/raw/abl_onedoc_config.json
+gemma2:2b,2.6B,Q4_0,gemma2,8ccf136fdd52,reports/runs/raw/abl_sent256_config.json
+gemma2:2b,2.6B,Q4_0,gemma2,8ccf136fdd52,reports/runs/raw/abl_tok128_config.json
+gemma2:2b,2.6B,Q4_0,gemma2,8ccf136fdd52,reports/runs/raw/main_config.json
+llama3.2:1b,1.2B,Q8_0,llama,baf6a787fdff,reports/runs/raw/main_config.json
+llama3.2:3b,3.2B,Q4_K_M,llama,a80c4f17acd5,reports/runs/raw/main_config.json
+qwen2.5:1.5b,1.5B,Q4_K_M,qwen2,65ec06548149,reports/runs/raw/main_config.json
