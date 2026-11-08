@@ -139,6 +139,7 @@ services:
     env_file: .env
     environment:
       API_URL: http://api:8000
+      PYTHONPATH: /work
     ports: ["127.0.0.1:8501:8501"]
     volumes:
       - ./app:/work/app
