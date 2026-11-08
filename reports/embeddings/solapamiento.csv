@@ -1,0 +1,9 @@
+consulta,idioma,jaccard_top10,n_e5,n_minilm
+Transición energética y energías renovables en Colombia,es,0.14285714285714285,7,9
+Biodiversidad y acuerdos de la COP16 en Colombia,es,0.13333333333333333,7,10
+Elecciones presidenciales en Colombia,es,0.1111111111111111,10,10
+Conflicto armado y negociaciones de paz,es,0.0625,10,7
+Amazon rainforest conservation and deforestation,en,0.4,6,8
+Venezuelan migration to Colombia,en,0.2,10,8
+Earthquake damage and emergency response,en,0.17647058823529413,10,10
+Climate change and extreme weather,en,0.05555555555555555,10,9

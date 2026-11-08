@@ -1,0 +1,169 @@
+{
+  "schema": {
+    "collection_name": "c_e5small_sent256",
+    "auto_id": false,
+    "num_shards": 1,
+    "description": "{\"dim\": 384, \"model\": \"intfloat/multilingual-e5-small\", \"normalize\": true, \"passage_prefix\": \"passage: \", \"query_prefix\": \"query: \", \"revision\": \"614241f622f53c4eeff9890bdc4f31cfecc418b3\"}",
+    "fields": [
+      {
+        "field_id": 100,
+        "name": "chunk_id",
+        "description": "",
+        "type": 21,
+        "params": {
+          "max_length": 64
+        },
+        "is_primary": true
+      },
+      {
+        "field_id": 101,
+        "name": "text",
+        "description": "",
+        "type": 21,
+        "params": {
+          "max_length": 16384
+        }
+      },
+      {
+        "field_id": 102,
+        "name": "title",
+        "description": "",
+        "type": 21,
+        "params": {
+          "max_length": 2048
+        }
+      },
+      {
+        "field_id": 103,
+        "name": "url",
+        "description": "",
+        "type": 21,
+        "params": {
+          "max_length": 4096
+        }
+      },
+      {
+        "field_id": 104,
+        "name": "document_id",
+        "description": "",
+        "type": 21,
+        "params": {
+          "max_length": 256
+        }
+      },
+      {
+        "field_id": 105,
+        "name": "provenance_ids",
+        "description": "",
+        "type": 21,
+        "params": {
+          "max_length": 65535
+        }
+      },
+      {
+        "field_id": 106,
+        "name": "collection_name",
+        "description": "",
+        "type": 21,
+        "params": {
+          "max_length": 64
+        }
+      },
+      {
+        "field_id": 107,
+        "name": "source",
+        "description": "",
+        "type": 21,
+        "params": {
+          "max_length": 64
+        }
+      },
+      {
+        "field_id": 108,
+        "name": "language",
+        "description": "",
+        "type": 21,
+        "params": {
+          "max_length": 16
+        }
+      },
+      {
+        "field_id": 109,
+        "name": "chunker",
+        "description": "",
+        "type": 21,
+        "params": {
+          "max_length": 32
+        }
+      },
+      {
+        "field_id": 110,
+        "name": "vector",
+        "description": "",
+        "type": 101,
+        "params": {
+          "dim": 384
+        }
+      },
+      {
+        "field_id": 111,
+        "name": "created_ts",
+        "description": "",
+        "type": 5,
+        "params": {}
+      },
+      {
+        "field_id": 112,
+        "name": "start_char",
+        "description": "",
+        "type": 5,
+        "params": {}
+      },
+      {
+        "field_id": 113,
+        "name": "end_char",
+        "description": "",
+        "type": 5,
+        "params": {}
+      },
+      {
+        "field_id": 114,
+        "name": "n_tokens",
+        "description": "",
+        "type": 4,
+        "params": {}
+      }
+    ],
+    "functions": [],
+    "aliases": [],
+    "collection_id": 470310923706829737,
+    "consistency_level": 0,
+    "properties": {
+      "timezone": "UTC"
+    },
+    "num_partitions": 1,
+    "enable_dynamic_field": false,
+    "enable_namespace": false,
+    "created_timestamp": 470310972424978450,
+    "update_timestamp": 470310972424978450
+  },
+  "index": {
+    "field_name": "vector",
+    "index_type": "HNSW",
+    "metric_type": "COSINE",
+    "params": {
+      "M": 16,
+      "efConstruction": 200
+    }
+  },
+  "description": "{\"dim\": 384, \"model\": \"intfloat/multilingual-e5-small\", \"normalize\": true, \"passage_prefix\": \"passage: \", \"query_prefix\": \"query: \", \"revision\": \"614241f622f53c4eeff9890bdc4f31cfecc418b3\"}",
+  "fingerprint": {
+    "model": "intfloat/multilingual-e5-small",
+    "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "query_prefix": "query: ",
+    "passage_prefix": "passage: ",
+    "normalize": true,
+    "dim": 384
+  },
+  "count": 2443
+}

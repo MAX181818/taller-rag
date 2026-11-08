@@ -73,5 +73,30 @@
     "single_chunk_documents_pct": 36.78977272727273,
     "chunks_merged": 93,
     "offset_mismatches": 0
+  },
+  "tok256_10k": {
+    "n_documents": 10004,
+    "n_chunks": 36173,
+    "chunks_before_dedup": 36727,
+    "tokens_per_chunk": {
+      "p50": 256.0,
+      "p95": 256.0,
+      "max": 256
+    },
+    "chunks_per_document_by_collection": {
+      "bluesky_posts": {
+        "mean": 1.0,
+        "p50": 1.0,
+        "max": 1
+      },
+      "url_crawls": {
+        "mean": 5.202390312942287,
+        "p50": 4.0,
+        "max": 343
+      }
+    },
+    "single_chunk_documents_pct": 38.5045981607357,
+    "chunks_merged": 554,
+    "offset_mismatches": 0
   }
 }

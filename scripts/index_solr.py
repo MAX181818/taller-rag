@@ -20,6 +20,8 @@ logger = logging.getLogger(__name__)
 def _records(path):
     with path.open(encoding="utf-8") as source:
         for number, line in enumerate(source, 1):
+            if not line.strip():
+                continue
             try:
                 record = json.loads(line)
                 if not isinstance(record, dict) or not record.get("chunk_id") or not record.get("chunker"):

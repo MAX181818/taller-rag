@@ -1,0 +1,575 @@
+{
+  "pares": [
+    {
+      "tipo": "parafrasis",
+      "izquierda": "Colombia impulsa la energía solar.",
+      "derecha": "La energía del sol recibe impulso en Colombia."
+    },
+    {
+      "tipo": "parafrasis",
+      "izquierda": "La COP16 busca proteger la biodiversidad.",
+      "derecha": "Proteger la diversidad biológica es una meta de la COP16."
+    },
+    {
+      "tipo": "parafrasis",
+      "izquierda": "Los ciudadanos eligen presidente.",
+      "derecha": "La ciudadanía vota para elegir al presidente."
+    },
+    {
+      "tipo": "parafrasis",
+      "izquierda": "El gobierno negocia la paz.",
+      "derecha": "Las autoridades mantienen conversaciones de paz."
+    },
+    {
+      "tipo": "parafrasis",
+      "izquierda": "La Amazonía pierde bosque.",
+      "derecha": "La deforestación reduce la selva amazónica."
+    },
+    {
+      "tipo": "parafrasis",
+      "izquierda": "Migrantes venezolanos llegan a Colombia.",
+      "derecha": "Colombia recibe personas que migran desde Venezuela."
+    },
+    {
+      "tipo": "traduccion",
+      "izquierda": "Colombia impulsa la energía solar.",
+      "derecha": "Colombia promotes solar energy."
+    },
+    {
+      "tipo": "traduccion",
+      "izquierda": "La COP16 busca proteger la biodiversidad.",
+      "derecha": "COP16 seeks to protect biodiversity."
+    },
+    {
+      "tipo": "traduccion",
+      "izquierda": "Los ciudadanos eligen presidente.",
+      "derecha": "Citizens elect a president."
+    },
+    {
+      "tipo": "traduccion",
+      "izquierda": "El gobierno negocia la paz.",
+      "derecha": "The government negotiates peace."
+    },
+    {
+      "tipo": "traduccion",
+      "izquierda": "Un terremoto dañó varias viviendas.",
+      "derecha": "An earthquake damaged several homes."
+    },
+    {
+      "tipo": "traduccion",
+      "izquierda": "El cambio climático intensifica las lluvias.",
+      "derecha": "Climate change intensifies rainfall."
+    },
+    {
+      "tipo": "no_relacionados",
+      "izquierda": "Colombia impulsa la energía solar.",
+      "derecha": "Una receta de pan lleva harina."
+    },
+    {
+      "tipo": "no_relacionados",
+      "izquierda": "La COP16 busca proteger la biodiversidad.",
+      "derecha": "El equipo ganó el torneo de fútbol."
+    },
+    {
+      "tipo": "no_relacionados",
+      "izquierda": "Los ciudadanos eligen presidente.",
+      "derecha": "The telescope observed a distant galaxy."
+    },
+    {
+      "tipo": "no_relacionados",
+      "izquierda": "El gobierno negocia la paz.",
+      "derecha": "Los zapatos nuevos son azules."
+    },
+    {
+      "tipo": "no_relacionados",
+      "izquierda": "Un terremoto dañó varias viviendas.",
+      "derecha": "The musician released a new album."
+    },
+    {
+      "tipo": "no_relacionados",
+      "izquierda": "El cambio climático intensifica las lluvias.",
+      "derecha": "La biblioteca presta novelas históricas."
+    }
+  ],
+  "similitudes": [
+    {
+      "par": 0,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "parafrasis",
+      "similitud": 0.9732495007131914
+    },
+    {
+      "par": 1,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "parafrasis",
+      "similitud": 0.9593467794108967
+    },
+    {
+      "par": 2,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "parafrasis",
+      "similitud": 0.9612061248939929
+    },
+    {
+      "par": 3,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "parafrasis",
+      "similitud": 0.9063280292049879
+    },
+    {
+      "par": 4,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "parafrasis",
+      "similitud": 0.9362847272648115
+    },
+    {
+      "par": 5,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "parafrasis",
+      "similitud": 0.9677177002920179
+    },
+    {
+      "par": 6,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "traduccion",
+      "similitud": 0.930789313157612
+    },
+    {
+      "par": 7,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "traduccion",
+      "similitud": 0.9531767237240133
+    },
+    {
+      "par": 8,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "traduccion",
+      "similitud": 0.9024419679443896
+    },
+    {
+      "par": 9,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "traduccion",
+      "similitud": 0.9219374223592871
+    },
+    {
+      "par": 10,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "traduccion",
+      "similitud": 0.9017955531811267
+    },
+    {
+      "par": 11,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "traduccion",
+      "similitud": 0.9229035455433302
+    },
+    {
+      "par": 12,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "no_relacionados",
+      "similitud": 0.7822346864146914
+    },
+    {
+      "par": 13,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "no_relacionados",
+      "similitud": 0.7943874735192521
+    },
+    {
+      "par": 14,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "no_relacionados",
+      "similitud": 0.7109768505905066
+    },
+    {
+      "par": 15,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "no_relacionados",
+      "similitud": 0.7995247549714636
+    },
+    {
+      "par": 16,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "no_relacionados",
+      "similitud": 0.7152834436494172
+    },
+    {
+      "par": 17,
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "no_relacionados",
+      "similitud": 0.826944924931411
+    },
+    {
+      "par": 0,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "parafrasis",
+      "similitud": 0.9776235842636051
+    },
+    {
+      "par": 1,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "parafrasis",
+      "similitud": 0.9649943498752364
+    },
+    {
+      "par": 2,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "parafrasis",
+      "similitud": 0.9633515527400963
+    },
+    {
+      "par": 3,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "parafrasis",
+      "similitud": 0.9293753900960167
+    },
+    {
+      "par": 4,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "parafrasis",
+      "similitud": 0.9374550242391255
+    },
+    {
+      "par": 5,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "parafrasis",
+      "similitud": 0.9710253318060017
+    },
+    {
+      "par": 6,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "traduccion",
+      "similitud": 0.9591842506443458
+    },
+    {
+      "par": 7,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "traduccion",
+      "similitud": 0.9636015097437759
+    },
+    {
+      "par": 8,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "traduccion",
+      "similitud": 0.933874159330385
+    },
+    {
+      "par": 9,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "traduccion",
+      "similitud": 0.9602373587261057
+    },
+    {
+      "par": 10,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "traduccion",
+      "similitud": 0.9347017781666722
+    },
+    {
+      "par": 11,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "traduccion",
+      "similitud": 0.9393553849406018
+    },
+    {
+      "par": 12,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "no_relacionados",
+      "similitud": 0.7783400769944726
+    },
+    {
+      "par": 13,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "no_relacionados",
+      "similitud": 0.7889956702553091
+    },
+    {
+      "par": 14,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "no_relacionados",
+      "similitud": 0.7378292867978166
+    },
+    {
+      "par": 15,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "no_relacionados",
+      "similitud": 0.8112074412031367
+    },
+    {
+      "par": 16,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "no_relacionados",
+      "similitud": 0.7504720393189883
+    },
+    {
+      "par": 17,
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "no_relacionados",
+      "similitud": 0.8123352716644249
+    },
+    {
+      "par": 0,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "parafrasis",
+      "similitud": 0.8778364226657149
+    },
+    {
+      "par": 1,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "parafrasis",
+      "similitud": 0.8975367518194503
+    },
+    {
+      "par": 2,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "parafrasis",
+      "similitud": 0.8745130517489172
+    },
+    {
+      "par": 3,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "parafrasis",
+      "similitud": 0.7768107152390196
+    },
+    {
+      "par": 4,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "parafrasis",
+      "similitud": 0.7707505025564797
+    },
+    {
+      "par": 5,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "parafrasis",
+      "similitud": 0.9135230834149738
+    },
+    {
+      "par": 6,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "traduccion",
+      "similitud": 0.957279018728964
+    },
+    {
+      "par": 7,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "traduccion",
+      "similitud": 0.9950996678317541
+    },
+    {
+      "par": 8,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "traduccion",
+      "similitud": 0.9393411245903314
+    },
+    {
+      "par": 9,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "traduccion",
+      "similitud": 0.993893211336525
+    },
+    {
+      "par": 10,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "traduccion",
+      "similitud": 0.9854518349459276
+    },
+    {
+      "par": 11,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "traduccion",
+      "similitud": 0.9504409598513552
+    },
+    {
+      "par": 12,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "no_relacionados",
+      "similitud": -0.0905907643376849
+    },
+    {
+      "par": 13,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "no_relacionados",
+      "similitud": -0.06332475024460735
+    },
+    {
+      "par": 14,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "no_relacionados",
+      "similitud": -0.14900516845087658
+    },
+    {
+      "par": 15,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "no_relacionados",
+      "similitud": 0.041998906387619134
+    },
+    {
+      "par": 16,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "no_relacionados",
+      "similitud": -0.003972431227995556
+    },
+    {
+      "par": 17,
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "no_relacionados",
+      "similitud": 0.03616745873705508
+    }
+  ],
+  "resumen": [
+    {
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "parafrasis",
+      "media": 0.9506888102966498,
+      "min": 0.9063280292049879,
+      "max": 0.9732495007131914,
+      "brecha": 0.16487275996134787
+    },
+    {
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "traduccion",
+      "media": 0.9221740876516265,
+      "min": 0.9017955531811267,
+      "max": 0.9531767237240133,
+      "brecha": 0.16487275996134787
+    },
+    {
+      "encoder": "e5small",
+      "prefijo": "query: ",
+      "tipo": "no_relacionados",
+      "media": 0.7715586890127902,
+      "min": 0.7109768505905066,
+      "max": 0.826944924931411,
+      "brecha": 0.16487275996134787
+    },
+    {
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "parafrasis",
+      "media": 0.9573042055033469,
+      "min": 0.9293753900960167,
+      "max": 0.9776235842636051,
+      "brecha": 0.1730350085086393
+    },
+    {
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "traduccion",
+      "media": 0.9484924069253143,
+      "min": 0.933874159330385,
+      "max": 0.9636015097437759,
+      "brecha": 0.1730350085086393
+    },
+    {
+      "encoder": "e5small",
+      "prefijo": "",
+      "tipo": "no_relacionados",
+      "media": 0.7798632977056914,
+      "min": 0.7378292867978166,
+      "max": 0.8123352716644249,
+      "brecha": 0.1730350085086393
+    },
+    {
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "parafrasis",
+      "media": 0.8518284212407593,
+      "min": 0.7707505025564797,
+      "max": 0.9135230834149738,
+      "brecha": 0.9491608202501993
+    },
+    {
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "traduccion",
+      "media": 0.9702509695474762,
+      "min": 0.9393411245903314,
+      "max": 0.9950996678317541,
+      "brecha": 0.9491608202501993
+    },
+    {
+      "encoder": "minilm",
+      "prefijo": "",
+      "tipo": "no_relacionados",
+      "media": -0.038121124856081705,
+      "min": -0.14900516845087658,
+      "max": 0.041998906387619134,
+      "brecha": 0.9491608202501993
+    }
+  ],
+  "fingerprints": {
+    "e5small": {
+      "model": "intfloat/multilingual-e5-small",
+      "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "query_prefix": "query: ",
+      "passage_prefix": "passage: ",
+      "normalize": true,
+      "dim": 384
+    },
+    "minilm": {
+      "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+      "query_prefix": "",
+      "passage_prefix": "",
+      "normalize": true,
+      "dim": 384
+    }
+  }
+}

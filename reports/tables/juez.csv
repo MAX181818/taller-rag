@@ -1,0 +1,9 @@
+﻿model,backend,source,correccion_mean,correccion_ic,correccion_n,fidelidad_mean,fidelidad_ic,fidelidad_n,relevancia_mean,relevancia_ic,relevancia_n
+gemma2:2b,milvus,reports/generation/judge.jsonl,1.458,"[1.083, 1.751]",24.000,1.167,"[0.792, 1.542]",24.000,1.667,"[1.417, 1.875]",24.000
+gemma2:2b,solr,reports/generation/judge.jsonl,1.348,"[0.999, 1.739]",23.000,1.087,"[0.696, 1.436]",23.000,1.435,"[1.130, 1.739]",23.000
+llama3.2:1b,milvus,reports/generation/judge.jsonl,0.833,"[0.500, 1.167]",24.000,0.667,"[0.333, 1.000]",24.000,1.417,"[1.167, 1.625]",24.000
+llama3.2:1b,solr,reports/generation/judge.jsonl,0.542,"[0.250, 0.875]",24.000,0.500,"[0.208, 0.833]",24.000,1.167,"[0.917, 1.417]",24.000
+llama3.2:3b,milvus,reports/generation/judge.jsonl,1.417,"[1.083, 1.708]",24.000,1.250,"[0.875, 1.583]",24.000,1.667,"[1.458, 1.875]",24.000
+llama3.2:3b,solr,reports/generation/judge.jsonl,1.375,"[1.042, 1.708]",24.000,1.292,"[0.958, 1.625]",24.000,1.500,"[1.208, 1.792]",24.000
+qwen2.5:1.5b,milvus,reports/generation/judge.jsonl,1.333,"[0.958, 1.667]",24.000,1.167,"[0.792, 1.542]",24.000,1.542,"[1.292, 1.792]",24.000
+qwen2.5:1.5b,solr,reports/generation/judge.jsonl,1.083,"[0.708, 1.458]",24.000,0.958,"[0.667, 1.292]",24.000,1.250,"[0.917, 1.542]",24.000

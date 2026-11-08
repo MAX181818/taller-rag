@@ -1,4 +1,4 @@
-﻿"""Muestras estratificadas reproducibles sin texto ni datos de autores."""
+"""Muestras estratificadas reproducibles sin texto ni datos de autores."""
 import argparse
 from datetime import datetime, timezone
 import heapq

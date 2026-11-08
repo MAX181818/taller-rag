@@ -1,0 +1,209 @@
+{
+  "date": "2026-11-08T04:14:35.086149+00:00",
+  "seed": 42,
+  "gold": "eval/gold.jsonl",
+  "split": "all",
+  "k": [
+    1,
+    3,
+    5,
+    10
+  ],
+  "conditions": [
+    {
+      "condition": "main_solr_tok256_e5small",
+      "group": "main",
+      "backend": "solr",
+      "chunker": "tok256",
+      "encoder": "e5small",
+      "one_per_doc": false,
+      "filtered": false
+    },
+    {
+      "condition": "main_milvus_tok256_e5small",
+      "group": "main",
+      "backend": "milvus",
+      "chunker": "tok256",
+      "encoder": "e5small",
+      "one_per_doc": false,
+      "filtered": false
+    },
+    {
+      "condition": "main_hybrid_tok256_e5small",
+      "group": "main",
+      "backend": "hybrid",
+      "chunker": "tok256",
+      "encoder": "e5small",
+      "one_per_doc": false,
+      "filtered": false
+    },
+    {
+      "condition": "ablations_milvus_sent256_e5small",
+      "group": "ablations",
+      "backend": "milvus",
+      "chunker": "sent256",
+      "encoder": "e5small",
+      "one_per_doc": false,
+      "filtered": false
+    },
+    {
+      "condition": "ablations_milvus_tok128_e5small",
+      "group": "ablations",
+      "backend": "milvus",
+      "chunker": "tok128",
+      "encoder": "e5small",
+      "one_per_doc": false,
+      "filtered": false
+    },
+    {
+      "condition": "ablations_solr_sent256_e5small",
+      "group": "ablations",
+      "backend": "solr",
+      "chunker": "sent256",
+      "encoder": "e5small",
+      "one_per_doc": false,
+      "filtered": false
+    },
+    {
+      "condition": "ablations_solr_tok128_e5small",
+      "group": "ablations",
+      "backend": "solr",
+      "chunker": "tok128",
+      "encoder": "e5small",
+      "one_per_doc": false,
+      "filtered": false
+    },
+    {
+      "condition": "ablations_milvus_tok256_minilm",
+      "group": "ablations",
+      "backend": "milvus",
+      "chunker": "tok256",
+      "encoder": "minilm",
+      "one_per_doc": false,
+      "filtered": false
+    },
+    {
+      "condition": "ablations_milvus_tok128_minilm",
+      "group": "ablations",
+      "backend": "milvus",
+      "chunker": "tok128",
+      "encoder": "minilm",
+      "one_per_doc": false,
+      "filtered": false
+    },
+    {
+      "condition": "ablations_milvus_tok256_e5small_one_per_doc",
+      "group": "ablations",
+      "backend": "milvus",
+      "chunker": "tok256",
+      "encoder": "e5small",
+      "one_per_doc": true,
+      "filtered": false
+    },
+    {
+      "condition": "filters_milvus_tok256_e5small_unfiltered",
+      "group": "filters",
+      "backend": "milvus",
+      "chunker": "tok256",
+      "encoder": "e5small",
+      "one_per_doc": false,
+      "filtered": false
+    },
+    {
+      "condition": "filters_milvus_tok256_e5small_filtered",
+      "group": "filters",
+      "backend": "milvus",
+      "chunker": "tok256",
+      "encoder": "e5small",
+      "one_per_doc": false,
+      "filtered": true
+    },
+    {
+      "condition": "filters_solr_tok256_e5small_unfiltered",
+      "group": "filters",
+      "backend": "solr",
+      "chunker": "tok256",
+      "encoder": "e5small",
+      "one_per_doc": false,
+      "filtered": false
+    },
+    {
+      "condition": "filters_solr_tok256_e5small_filtered",
+      "group": "filters",
+      "backend": "solr",
+      "chunker": "tok256",
+      "encoder": "e5small",
+      "one_per_doc": false,
+      "filtered": true
+    },
+    {
+      "condition": "10k_solr_tok256_10k_e5small",
+      "group": "10k",
+      "backend": "solr",
+      "chunker": "tok256_10k",
+      "encoder": "e5small",
+      "one_per_doc": false,
+      "filtered": false
+    },
+    {
+      "condition": "10k_milvus_tok256_10k_e5small",
+      "group": "10k",
+      "backend": "milvus",
+      "chunker": "tok256_10k",
+      "encoder": "e5small",
+      "one_per_doc": false,
+      "filtered": false
+    }
+  ],
+  "package_versions": {
+    "pymilvus": "2.6.6",
+    "sentence-transformers": "4.1.0",
+    "requests": "2.32.3",
+    "numpy": "2.4.6",
+    "pandas": "2.2.3"
+  },
+  "python_version": "3.11.18",
+  "collections": {
+    "milvus": [
+      "c_e5small_sent256",
+      "c_e5small_tok128",
+      "c_e5small_tok256",
+      "c_e5small_tok256_10k",
+      "c_minilm_tok128",
+      "c_minilm_tok256"
+    ],
+    "solr_chunkers": [
+      "sent256",
+      "tok128",
+      "tok256",
+      "tok256_10k"
+    ]
+  },
+  "inspection_qids": [
+    "Q05",
+    "Q06",
+    "Q07",
+    "Q08",
+    "Q10",
+    "Q11"
+  ],
+  "bootstrap": {
+    "n": 1000,
+    "confidence": 0.95,
+    "method": "percentile"
+  },
+  "latency_policy": "Un calentamiento descartado por motor; primera consulta medida = cold.",
+  "counts": {
+    "gold_questions": 48,
+    "questions": 48,
+    "ranking_questions": 40,
+    "measured_pairs": 732,
+    "retrieval_calls": 732,
+    "warmup_calls": 3,
+    "per_question_rows": 2928,
+    "observed_chunks_by_collection": {
+      "url_crawls": 6281,
+      "bluesky_posts": 1039
+    }
+  }
+}

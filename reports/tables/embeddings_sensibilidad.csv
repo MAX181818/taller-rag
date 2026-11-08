@@ -1,0 +1,400 @@
+﻿campo,valor,source
+fingerprints.e5small.dim,384.000,reports/embeddings/sensibilidad.json
+fingerprints.e5small.model,intfloat/multilingual-e5-small,reports/embeddings/sensibilidad.json
+fingerprints.e5small.normalize,True,reports/embeddings/sensibilidad.json
+fingerprints.e5small.passage_prefix,passage: ,reports/embeddings/sensibilidad.json
+fingerprints.e5small.query_prefix,query: ,reports/embeddings/sensibilidad.json
+fingerprints.e5small.revision,614241f622f53c4eeff9890bdc4f31cfecc418b3,reports/embeddings/sensibilidad.json
+fingerprints.minilm.dim,384.000,reports/embeddings/sensibilidad.json
+fingerprints.minilm.model,sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2,reports/embeddings/sensibilidad.json
+fingerprints.minilm.normalize,True,reports/embeddings/sensibilidad.json
+fingerprints.minilm.passage_prefix,,reports/embeddings/sensibilidad.json
+fingerprints.minilm.query_prefix,,reports/embeddings/sensibilidad.json
+fingerprints.minilm.revision,e8f8c211226b894fcb81acc59f3b34ba3efd5f42,reports/embeddings/sensibilidad.json
+pares[0].derecha,La energía del sol recibe impulso en Colombia.,reports/embeddings/sensibilidad.json
+pares[0].izquierda,Colombia impulsa la energía solar.,reports/embeddings/sensibilidad.json
+pares[0].tipo,parafrasis,reports/embeddings/sensibilidad.json
+pares[1].derecha,Proteger la diversidad biológica es una meta de la COP16.,reports/embeddings/sensibilidad.json
+pares[1].izquierda,La COP16 busca proteger la biodiversidad.,reports/embeddings/sensibilidad.json
+pares[1].tipo,parafrasis,reports/embeddings/sensibilidad.json
+pares[2].derecha,La ciudadanía vota para elegir al presidente.,reports/embeddings/sensibilidad.json
+pares[2].izquierda,Los ciudadanos eligen presidente.,reports/embeddings/sensibilidad.json
+pares[2].tipo,parafrasis,reports/embeddings/sensibilidad.json
+pares[3].derecha,Las autoridades mantienen conversaciones de paz.,reports/embeddings/sensibilidad.json
+pares[3].izquierda,El gobierno negocia la paz.,reports/embeddings/sensibilidad.json
+pares[3].tipo,parafrasis,reports/embeddings/sensibilidad.json
+pares[4].derecha,La deforestación reduce la selva amazónica.,reports/embeddings/sensibilidad.json
+pares[4].izquierda,La Amazonía pierde bosque.,reports/embeddings/sensibilidad.json
+pares[4].tipo,parafrasis,reports/embeddings/sensibilidad.json
+pares[5].derecha,Colombia recibe personas que migran desde Venezuela.,reports/embeddings/sensibilidad.json
+pares[5].izquierda,Migrantes venezolanos llegan a Colombia.,reports/embeddings/sensibilidad.json
+pares[5].tipo,parafrasis,reports/embeddings/sensibilidad.json
+pares[6].derecha,Colombia promotes solar energy.,reports/embeddings/sensibilidad.json
+pares[6].izquierda,Colombia impulsa la energía solar.,reports/embeddings/sensibilidad.json
+pares[6].tipo,traduccion,reports/embeddings/sensibilidad.json
+pares[7].derecha,COP16 seeks to protect biodiversity.,reports/embeddings/sensibilidad.json
+pares[7].izquierda,La COP16 busca proteger la biodiversidad.,reports/embeddings/sensibilidad.json
+pares[7].tipo,traduccion,reports/embeddings/sensibilidad.json
+pares[8].derecha,Citizens elect a president.,reports/embeddings/sensibilidad.json
+pares[8].izquierda,Los ciudadanos eligen presidente.,reports/embeddings/sensibilidad.json
+pares[8].tipo,traduccion,reports/embeddings/sensibilidad.json
+pares[9].derecha,The government negotiates peace.,reports/embeddings/sensibilidad.json
+pares[9].izquierda,El gobierno negocia la paz.,reports/embeddings/sensibilidad.json
+pares[9].tipo,traduccion,reports/embeddings/sensibilidad.json
+pares[10].derecha,An earthquake damaged several homes.,reports/embeddings/sensibilidad.json
+pares[10].izquierda,Un terremoto dañó varias viviendas.,reports/embeddings/sensibilidad.json
+pares[10].tipo,traduccion,reports/embeddings/sensibilidad.json
+pares[11].derecha,Climate change intensifies rainfall.,reports/embeddings/sensibilidad.json
+pares[11].izquierda,El cambio climático intensifica las lluvias.,reports/embeddings/sensibilidad.json
+pares[11].tipo,traduccion,reports/embeddings/sensibilidad.json
+pares[12].derecha,Una receta de pan lleva harina.,reports/embeddings/sensibilidad.json
+pares[12].izquierda,Colombia impulsa la energía solar.,reports/embeddings/sensibilidad.json
+pares[12].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+pares[13].derecha,El equipo ganó el torneo de fútbol.,reports/embeddings/sensibilidad.json
+pares[13].izquierda,La COP16 busca proteger la biodiversidad.,reports/embeddings/sensibilidad.json
+pares[13].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+pares[14].derecha,The telescope observed a distant galaxy.,reports/embeddings/sensibilidad.json
+pares[14].izquierda,Los ciudadanos eligen presidente.,reports/embeddings/sensibilidad.json
+pares[14].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+pares[15].derecha,Los zapatos nuevos son azules.,reports/embeddings/sensibilidad.json
+pares[15].izquierda,El gobierno negocia la paz.,reports/embeddings/sensibilidad.json
+pares[15].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+pares[16].derecha,The musician released a new album.,reports/embeddings/sensibilidad.json
+pares[16].izquierda,Un terremoto dañó varias viviendas.,reports/embeddings/sensibilidad.json
+pares[16].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+pares[17].derecha,La biblioteca presta novelas históricas.,reports/embeddings/sensibilidad.json
+pares[17].izquierda,El cambio climático intensifica las lluvias.,reports/embeddings/sensibilidad.json
+pares[17].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+resumen[0].brecha,0.165,reports/embeddings/sensibilidad.json
+resumen[0].encoder,e5small,reports/embeddings/sensibilidad.json
+resumen[0].max,0.973,reports/embeddings/sensibilidad.json
+resumen[0].media,0.951,reports/embeddings/sensibilidad.json
+resumen[0].min,0.906,reports/embeddings/sensibilidad.json
+resumen[0].prefijo,query: ,reports/embeddings/sensibilidad.json
+resumen[0].tipo,parafrasis,reports/embeddings/sensibilidad.json
+resumen[1].brecha,0.165,reports/embeddings/sensibilidad.json
+resumen[1].encoder,e5small,reports/embeddings/sensibilidad.json
+resumen[1].max,0.953,reports/embeddings/sensibilidad.json
+resumen[1].media,0.922,reports/embeddings/sensibilidad.json
+resumen[1].min,0.902,reports/embeddings/sensibilidad.json
+resumen[1].prefijo,query: ,reports/embeddings/sensibilidad.json
+resumen[1].tipo,traduccion,reports/embeddings/sensibilidad.json
+resumen[2].brecha,0.165,reports/embeddings/sensibilidad.json
+resumen[2].encoder,e5small,reports/embeddings/sensibilidad.json
+resumen[2].max,0.827,reports/embeddings/sensibilidad.json
+resumen[2].media,0.772,reports/embeddings/sensibilidad.json
+resumen[2].min,0.711,reports/embeddings/sensibilidad.json
+resumen[2].prefijo,query: ,reports/embeddings/sensibilidad.json
+resumen[2].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+resumen[3].brecha,0.173,reports/embeddings/sensibilidad.json
+resumen[3].encoder,e5small,reports/embeddings/sensibilidad.json
+resumen[3].max,0.978,reports/embeddings/sensibilidad.json
+resumen[3].media,0.957,reports/embeddings/sensibilidad.json
+resumen[3].min,0.929,reports/embeddings/sensibilidad.json
+resumen[3].prefijo,,reports/embeddings/sensibilidad.json
+resumen[3].tipo,parafrasis,reports/embeddings/sensibilidad.json
+resumen[4].brecha,0.173,reports/embeddings/sensibilidad.json
+resumen[4].encoder,e5small,reports/embeddings/sensibilidad.json
+resumen[4].max,0.964,reports/embeddings/sensibilidad.json
+resumen[4].media,0.948,reports/embeddings/sensibilidad.json
+resumen[4].min,0.934,reports/embeddings/sensibilidad.json
+resumen[4].prefijo,,reports/embeddings/sensibilidad.json
+resumen[4].tipo,traduccion,reports/embeddings/sensibilidad.json
+resumen[5].brecha,0.173,reports/embeddings/sensibilidad.json
+resumen[5].encoder,e5small,reports/embeddings/sensibilidad.json
+resumen[5].max,0.812,reports/embeddings/sensibilidad.json
+resumen[5].media,0.780,reports/embeddings/sensibilidad.json
+resumen[5].min,0.738,reports/embeddings/sensibilidad.json
+resumen[5].prefijo,,reports/embeddings/sensibilidad.json
+resumen[5].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+resumen[6].brecha,0.949,reports/embeddings/sensibilidad.json
+resumen[6].encoder,minilm,reports/embeddings/sensibilidad.json
+resumen[6].max,0.914,reports/embeddings/sensibilidad.json
+resumen[6].media,0.852,reports/embeddings/sensibilidad.json
+resumen[6].min,0.771,reports/embeddings/sensibilidad.json
+resumen[6].prefijo,,reports/embeddings/sensibilidad.json
+resumen[6].tipo,parafrasis,reports/embeddings/sensibilidad.json
+resumen[7].brecha,0.949,reports/embeddings/sensibilidad.json
+resumen[7].encoder,minilm,reports/embeddings/sensibilidad.json
+resumen[7].max,0.995,reports/embeddings/sensibilidad.json
+resumen[7].media,0.970,reports/embeddings/sensibilidad.json
+resumen[7].min,0.939,reports/embeddings/sensibilidad.json
+resumen[7].prefijo,,reports/embeddings/sensibilidad.json
+resumen[7].tipo,traduccion,reports/embeddings/sensibilidad.json
+resumen[8].brecha,0.949,reports/embeddings/sensibilidad.json
+resumen[8].encoder,minilm,reports/embeddings/sensibilidad.json
+resumen[8].max,0.042,reports/embeddings/sensibilidad.json
+resumen[8].media,-0.038,reports/embeddings/sensibilidad.json
+resumen[8].min,-0.149,reports/embeddings/sensibilidad.json
+resumen[8].prefijo,,reports/embeddings/sensibilidad.json
+resumen[8].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[0].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[0].par,0.000,reports/embeddings/sensibilidad.json
+similitudes[0].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[0].similitud,0.973,reports/embeddings/sensibilidad.json
+similitudes[0].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[1].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[1].par,1.000,reports/embeddings/sensibilidad.json
+similitudes[1].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[1].similitud,0.959,reports/embeddings/sensibilidad.json
+similitudes[1].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[2].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[2].par,2.000,reports/embeddings/sensibilidad.json
+similitudes[2].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[2].similitud,0.961,reports/embeddings/sensibilidad.json
+similitudes[2].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[3].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[3].par,3.000,reports/embeddings/sensibilidad.json
+similitudes[3].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[3].similitud,0.906,reports/embeddings/sensibilidad.json
+similitudes[3].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[4].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[4].par,4.000,reports/embeddings/sensibilidad.json
+similitudes[4].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[4].similitud,0.936,reports/embeddings/sensibilidad.json
+similitudes[4].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[5].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[5].par,5.000,reports/embeddings/sensibilidad.json
+similitudes[5].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[5].similitud,0.968,reports/embeddings/sensibilidad.json
+similitudes[5].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[6].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[6].par,6.000,reports/embeddings/sensibilidad.json
+similitudes[6].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[6].similitud,0.931,reports/embeddings/sensibilidad.json
+similitudes[6].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[7].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[7].par,7.000,reports/embeddings/sensibilidad.json
+similitudes[7].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[7].similitud,0.953,reports/embeddings/sensibilidad.json
+similitudes[7].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[8].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[8].par,8.000,reports/embeddings/sensibilidad.json
+similitudes[8].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[8].similitud,0.902,reports/embeddings/sensibilidad.json
+similitudes[8].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[9].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[9].par,9.000,reports/embeddings/sensibilidad.json
+similitudes[9].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[9].similitud,0.922,reports/embeddings/sensibilidad.json
+similitudes[9].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[10].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[10].par,10.000,reports/embeddings/sensibilidad.json
+similitudes[10].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[10].similitud,0.902,reports/embeddings/sensibilidad.json
+similitudes[10].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[11].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[11].par,11.000,reports/embeddings/sensibilidad.json
+similitudes[11].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[11].similitud,0.923,reports/embeddings/sensibilidad.json
+similitudes[11].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[12].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[12].par,12.000,reports/embeddings/sensibilidad.json
+similitudes[12].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[12].similitud,0.782,reports/embeddings/sensibilidad.json
+similitudes[12].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[13].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[13].par,13.000,reports/embeddings/sensibilidad.json
+similitudes[13].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[13].similitud,0.794,reports/embeddings/sensibilidad.json
+similitudes[13].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[14].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[14].par,14.000,reports/embeddings/sensibilidad.json
+similitudes[14].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[14].similitud,0.711,reports/embeddings/sensibilidad.json
+similitudes[14].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[15].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[15].par,15.000,reports/embeddings/sensibilidad.json
+similitudes[15].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[15].similitud,0.800,reports/embeddings/sensibilidad.json
+similitudes[15].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[16].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[16].par,16.000,reports/embeddings/sensibilidad.json
+similitudes[16].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[16].similitud,0.715,reports/embeddings/sensibilidad.json
+similitudes[16].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[17].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[17].par,17.000,reports/embeddings/sensibilidad.json
+similitudes[17].prefijo,query: ,reports/embeddings/sensibilidad.json
+similitudes[17].similitud,0.827,reports/embeddings/sensibilidad.json
+similitudes[17].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[18].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[18].par,0.000,reports/embeddings/sensibilidad.json
+similitudes[18].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[18].similitud,0.978,reports/embeddings/sensibilidad.json
+similitudes[18].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[19].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[19].par,1.000,reports/embeddings/sensibilidad.json
+similitudes[19].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[19].similitud,0.965,reports/embeddings/sensibilidad.json
+similitudes[19].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[20].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[20].par,2.000,reports/embeddings/sensibilidad.json
+similitudes[20].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[20].similitud,0.963,reports/embeddings/sensibilidad.json
+similitudes[20].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[21].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[21].par,3.000,reports/embeddings/sensibilidad.json
+similitudes[21].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[21].similitud,0.929,reports/embeddings/sensibilidad.json
+similitudes[21].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[22].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[22].par,4.000,reports/embeddings/sensibilidad.json
+similitudes[22].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[22].similitud,0.937,reports/embeddings/sensibilidad.json
+similitudes[22].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[23].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[23].par,5.000,reports/embeddings/sensibilidad.json
+similitudes[23].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[23].similitud,0.971,reports/embeddings/sensibilidad.json
+similitudes[23].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[24].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[24].par,6.000,reports/embeddings/sensibilidad.json
+similitudes[24].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[24].similitud,0.959,reports/embeddings/sensibilidad.json
+similitudes[24].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[25].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[25].par,7.000,reports/embeddings/sensibilidad.json
+similitudes[25].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[25].similitud,0.964,reports/embeddings/sensibilidad.json
+similitudes[25].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[26].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[26].par,8.000,reports/embeddings/sensibilidad.json
+similitudes[26].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[26].similitud,0.934,reports/embeddings/sensibilidad.json
+similitudes[26].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[27].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[27].par,9.000,reports/embeddings/sensibilidad.json
+similitudes[27].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[27].similitud,0.960,reports/embeddings/sensibilidad.json
+similitudes[27].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[28].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[28].par,10.000,reports/embeddings/sensibilidad.json
+similitudes[28].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[28].similitud,0.935,reports/embeddings/sensibilidad.json
+similitudes[28].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[29].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[29].par,11.000,reports/embeddings/sensibilidad.json
+similitudes[29].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[29].similitud,0.939,reports/embeddings/sensibilidad.json
+similitudes[29].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[30].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[30].par,12.000,reports/embeddings/sensibilidad.json
+similitudes[30].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[30].similitud,0.778,reports/embeddings/sensibilidad.json
+similitudes[30].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[31].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[31].par,13.000,reports/embeddings/sensibilidad.json
+similitudes[31].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[31].similitud,0.789,reports/embeddings/sensibilidad.json
+similitudes[31].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[32].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[32].par,14.000,reports/embeddings/sensibilidad.json
+similitudes[32].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[32].similitud,0.738,reports/embeddings/sensibilidad.json
+similitudes[32].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[33].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[33].par,15.000,reports/embeddings/sensibilidad.json
+similitudes[33].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[33].similitud,0.811,reports/embeddings/sensibilidad.json
+similitudes[33].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[34].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[34].par,16.000,reports/embeddings/sensibilidad.json
+similitudes[34].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[34].similitud,0.750,reports/embeddings/sensibilidad.json
+similitudes[34].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[35].encoder,e5small,reports/embeddings/sensibilidad.json
+similitudes[35].par,17.000,reports/embeddings/sensibilidad.json
+similitudes[35].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[35].similitud,0.812,reports/embeddings/sensibilidad.json
+similitudes[35].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[36].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[36].par,0.000,reports/embeddings/sensibilidad.json
+similitudes[36].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[36].similitud,0.878,reports/embeddings/sensibilidad.json
+similitudes[36].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[37].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[37].par,1.000,reports/embeddings/sensibilidad.json
+similitudes[37].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[37].similitud,0.898,reports/embeddings/sensibilidad.json
+similitudes[37].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[38].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[38].par,2.000,reports/embeddings/sensibilidad.json
+similitudes[38].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[38].similitud,0.875,reports/embeddings/sensibilidad.json
+similitudes[38].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[39].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[39].par,3.000,reports/embeddings/sensibilidad.json
+similitudes[39].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[39].similitud,0.777,reports/embeddings/sensibilidad.json
+similitudes[39].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[40].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[40].par,4.000,reports/embeddings/sensibilidad.json
+similitudes[40].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[40].similitud,0.771,reports/embeddings/sensibilidad.json
+similitudes[40].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[41].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[41].par,5.000,reports/embeddings/sensibilidad.json
+similitudes[41].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[41].similitud,0.914,reports/embeddings/sensibilidad.json
+similitudes[41].tipo,parafrasis,reports/embeddings/sensibilidad.json
+similitudes[42].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[42].par,6.000,reports/embeddings/sensibilidad.json
+similitudes[42].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[42].similitud,0.957,reports/embeddings/sensibilidad.json
+similitudes[42].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[43].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[43].par,7.000,reports/embeddings/sensibilidad.json
+similitudes[43].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[43].similitud,0.995,reports/embeddings/sensibilidad.json
+similitudes[43].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[44].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[44].par,8.000,reports/embeddings/sensibilidad.json
+similitudes[44].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[44].similitud,0.939,reports/embeddings/sensibilidad.json
+similitudes[44].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[45].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[45].par,9.000,reports/embeddings/sensibilidad.json
+similitudes[45].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[45].similitud,0.994,reports/embeddings/sensibilidad.json
+similitudes[45].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[46].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[46].par,10.000,reports/embeddings/sensibilidad.json
+similitudes[46].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[46].similitud,0.985,reports/embeddings/sensibilidad.json
+similitudes[46].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[47].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[47].par,11.000,reports/embeddings/sensibilidad.json
+similitudes[47].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[47].similitud,0.950,reports/embeddings/sensibilidad.json
+similitudes[47].tipo,traduccion,reports/embeddings/sensibilidad.json
+similitudes[48].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[48].par,12.000,reports/embeddings/sensibilidad.json
+similitudes[48].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[48].similitud,-0.091,reports/embeddings/sensibilidad.json
+similitudes[48].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[49].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[49].par,13.000,reports/embeddings/sensibilidad.json
+similitudes[49].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[49].similitud,-0.063,reports/embeddings/sensibilidad.json
+similitudes[49].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[50].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[50].par,14.000,reports/embeddings/sensibilidad.json
+similitudes[50].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[50].similitud,-0.149,reports/embeddings/sensibilidad.json
+similitudes[50].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[51].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[51].par,15.000,reports/embeddings/sensibilidad.json
+similitudes[51].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[51].similitud,0.042,reports/embeddings/sensibilidad.json
+similitudes[51].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[52].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[52].par,16.000,reports/embeddings/sensibilidad.json
+similitudes[52].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[52].similitud,-0.004,reports/embeddings/sensibilidad.json
+similitudes[52].tipo,no_relacionados,reports/embeddings/sensibilidad.json
+similitudes[53].encoder,minilm,reports/embeddings/sensibilidad.json
+similitudes[53].par,17.000,reports/embeddings/sensibilidad.json
+similitudes[53].prefijo,,reports/embeddings/sensibilidad.json
+similitudes[53].similitud,0.036,reports/embeddings/sensibilidad.json
+similitudes[53].tipo,no_relacionados,reports/embeddings/sensibilidad.json
