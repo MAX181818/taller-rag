@@ -401,3 +401,17 @@ def test_monitor_nonzero_commands_ignore_stdout(monkeypatch):
     rows = sysmon.sample()
     assert len(rows) == 1 and rows[0]["timestamp"]
     assert all(value == "" for key, value in rows[0].items() if key != "timestamp")
+
+
+def test_frozen_evidence_with_other_params_is_rejected(experiment):
+    experiment.execute()
+    with pytest.raises(ValueError, match="otros parámetros"):
+        experiment.execute("--k", "3")
+
+
+def test_unload_failure_does_not_abort(experiment, monkeypatch):
+    def unload(model):
+        raise RuntimeError("modelo no descargado")
+    monkeypatch.setattr(runner, "unload", unload)
+    result = experiment.execute()
+    assert result["calls"] == 16 and result["errors"] == 0

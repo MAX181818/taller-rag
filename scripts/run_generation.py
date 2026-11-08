@@ -216,10 +216,16 @@ def _write_record(stream, record):
 
 def _freeze_evidence(args, questions):
     path = args.out_dir / f"{args.tag}_evidence.jsonl"
-    cached = {(row["qid"], row["backend"]): row
-              for row in _read_jsonl(path, tolerate_partial=True)}
     retrieval_params = dict(k=args.k, chunker=args.chunker, encoder=args.encoder,
                             filters=None, one_per_doc=args.one_per_doc)
+    cached = {(row["qid"], row["backend"]): row
+              for row in _read_jsonl(path, tolerate_partial=True)}
+    # Reusar evidencia congelada con otros parámetros mezclaría condiciones sin aviso.
+    stale = {json.dumps(row.get("params"), sort_keys=True) for row in cached.values()
+             if row.get("params") != retrieval_params}
+    if stale:
+        raise ValueError(f"La evidencia congelada en {path} se generó con otros parámetros "
+                         f"({', '.join(sorted(stale))}); use otro --tag o borre ese archivo.")
     with _append_stream(path) as target:
         for backend in args.backends:
             missing = [q for q in questions if (q["qid"], backend) not in cached]
@@ -230,7 +236,8 @@ def _freeze_evidence(args, questions):
                 start = perf_counter()
                 chunks = retrieve(question["question"], backend=backend, **retrieval_params)
                 record = dict(qid=question["qid"], backend=backend, chunks=deepcopy(chunks),
-                              retrieval_ms=(perf_counter() - start) * 1000)
+                              retrieval_ms=(perf_counter() - start) * 1000,
+                              params=retrieval_params)
                 _write_record(target, record)
                 cached[(question["qid"], backend)] = record
     return cached
@@ -300,10 +307,12 @@ def run(args):
             if not pending:
                 continue
             others = dict.fromkeys([*known_models, *args.models])
-            for other in others:
-                if other != model:
+            for other in [*[name for name in others if name != model], model]:
+                try:
                     unload(other)
-            unload(model)
+                except Exception as error:
+                    # Un modelo no descargado no debe abortar la corrida: sus llamadas quedan con error.
+                    LOGGER.warning("No se pudo descargar %s de memoria: %s", other, error)
             for position, (index, backend, question) in enumerate(pending):
                 frozen = evidence[(question["qid"], backend)]
                 record = dict(model=model, backend=backend, query=question["question"],
