@@ -133,6 +133,11 @@ Con los índices completos y sin otras corridas activas. Entre la validación y
 hojas de `eval/human/` con la [rúbrica](eval/rubrica.md). El protocolo está en
 [docs/EVALUACION.md](docs/EVALUACION.md).
 
+En esta entrega calificamos 8 de las 30 respuestas de las hojas (una por combinación
+de modelo y buscador); `human_eval agree` ignora las filas sin calificar y deja el
+resumen en `reports/generation/human_eval.csv`. La doble anotación de relevancia
+quedó sin hacer.
+
 ```text
 docker compose exec api python -m scripts.validate_gold --gold eval/gold.jsonl --sample data/samples/sample_700.csv --synthetic data/synthetic/injection_docs.jsonl
 docker compose exec api python -m scripts.pool_candidates --gold eval/gold.jsonl --k 3 --chunker tok256 --out-dir eval/annotations
@@ -207,4 +212,10 @@ originales, por lo que se revisan antes de compartirse.
 
 ## Equipo
 
-<!-- INTEGRANTES -->
+Grupo 4, Procesamiento de Lenguaje Natural, Pontificia Universidad Javeriana.
+
+- Massimo Enrique Maimone Guazzo
+- Jose Miguel Bejarano Restrepo
+- Juan Felipe Guzmán Sandoval
+- Silvio Mauricio Morales Osorio
+- David Alejandro Castillo Chiquiza
