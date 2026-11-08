@@ -91,7 +91,7 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-    mem_limit: 4g
+    mem_limit: 6g
     cpus: 4
     logging: *logging
     healthcheck:

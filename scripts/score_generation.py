@@ -24,13 +24,23 @@ def read_jsonl(path):
 
 
 def load_raw(tags, raw_dir):
-    """Registros de las corridas `{tag}_YYYYMMDD_HHMM.jsonl` (excluye el archivo de evidencia)."""
-    rows = []
+    """Registros de las corridas `{tag}_YYYYMMDD_HHMM.jsonl` (excluye el archivo de evidencia).
+
+    Una llamada fallida re-ejecutada con --resume aparece dos veces: se conserva el último
+    registro y se marca `retried`; una llamada ya exitosa nunca se reemplaza.
+    """
+    final = {}
     for tag in tags:
         for path in sorted(Path(raw_dir).glob(f"{tag}_*.jsonl")):
             if re.fullmatch(re.escape(tag) + r"_\d{8}_\d{4}\.jsonl", path.name):
-                rows += read_jsonl(path)
-    return rows
+                for row in read_jsonl(path):
+                    key = tuple(row.get(name) for name in ("tag", "model", "backend", "qid", "run_idx"))
+                    previous = final.get(key)
+                    if previous is None:
+                        final[key] = row
+                    elif previous.get("error"):
+                        final[key] = dict(row, retried=True)
+    return list(final.values())
 
 
 def score_record(record, gold):

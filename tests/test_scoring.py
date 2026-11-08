@@ -202,3 +202,15 @@ def test_agree_celda_vacia(tmp_path):
     a, b, key = setup_agree(tmp_path, rows([0, 1, 2, 2]), bad)
     with pytest.raises(ValueError, match=r"3.*fidelidad"):
         human_eval.agree(a, b, key, tmp_path / "o")
+
+
+def test_load_raw_keeps_retry_over_error_and_never_replaces_success(tmp_path):
+    from scripts.score_generation import load_raw
+    base = dict(tag="main", model="m", backend="solr", qid="Q01")
+    first = [dict(base, run_idx=1, error="500"), dict(base, run_idx=2, answer="ok [1]")]
+    second = [dict(base, run_idx=1, answer="reintento [1]"), dict(base, run_idx=2, answer="duplicado")]
+    for name, rows in (("main_20261108_0100.jsonl", first), ("main_20261108_0200.jsonl", second)):
+        (tmp_path / name).write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
+    rows = {r["run_idx"]: r for r in load_raw(["main"], tmp_path)}
+    assert rows[1]["answer"] == "reintento [1]" and rows[1]["retried"] is True
+    assert rows[2]["answer"] == "ok [1]" and "retried" not in rows[2]
