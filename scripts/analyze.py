@@ -334,7 +334,7 @@ def figures(reports, metrics, scores, by_type, latency, judges, performance):
     principal = [r for r in metrics if r.get("condition") in PRINCIPAL and number(r.get("k")) in (1, 3, 5, 10) and r.get("metric") in ("recall", "ndcg") and number(r.get("mean")) is not None]
     if principal:
         fig, axes = plt.subplots(1, 2, figsize=(11, 4))
-        for ax, metric, title in zip(axes, ("recall", "ndcg"), ("Recuperación Recall@k", "Recuperación nDCG@k")):
+        for ax, metric, title in zip(axes, ("recall", "ndcg"), ("Recall según k", "nDCG según k")):
             for condition in sorted({r["condition"] for r in principal}):
                 rows = sorted([r for r in principal if r["condition"] == condition and r["metric"] == metric], key=lambda r: float(r["k"]))
                 engine = condition.split("_")[1]
@@ -349,7 +349,7 @@ def figures(reports, metrics, scores, by_type, latency, judges, performance):
         fig, ax = plt.subplots(figsize=(max(8, len(rows)), 5))
         errorbars(ax, range(len(rows)), rows, "mean", "ci_low", "ci_high", linestyle="none")
         ax.set_xticks(range(len(rows)), [r["condition"] for r in rows], rotation=35, ha="right")
-        ax.set(title="Ablaciones frente al experimento principal", xlabel="Condición", ylabel="Recall@5")
+        ax.set(title="Ablaciones frente al experimento principal", xlabel="Condición", ylabel="Recall")
         save_figure(fig, out / "ablaciones_recuperacion.png")
     main = [r for r in scores if r.get("tag") == "main"]
     grouped_figure(main, QUALITY, out / "generacion_por_modelo.png", "Calidad de generación por modelo y motor")
