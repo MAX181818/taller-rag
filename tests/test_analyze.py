@@ -43,7 +43,7 @@ def sample(tmp_path):
     metrics = [dict(condition=c, k=k, metric=m, n=4, mean=.75, ci_low=.5, ci_high=1)
                for c in ("main_solr_tok256_e5small", "ablations_solr_sent256_e5small",
                          "filters_solr_tok256_e5small_filtered", "10k_solr_tok256_10k_e5small")
-               for k in (1, 3, 5, 10) for m in ("recall", "ndcg")]
+               for k in (1, 3, 5, 10) for m in ("hit", "recall", "mrr", "ndcg", "fragment_hit", "excluded")]
     write_csv(root, "retrieval/metrics.csv", metrics)
     write_csv(root, "retrieval/metrics_by_group.csv", [dict(metrics[0], group_by="type", group="directa")])
     write_csv(root, "retrieval/latency.csv", [dict(condition=metrics[0]["condition"], phase="warm", n=4, p50_ms=2, p95_ms=4)])
@@ -86,7 +86,20 @@ def test_outputs_and_provenance(sample):
     text = (root / "RESULTADOS.md").read_text(encoding="utf-8")
     for title in ("Recuperación", "Generación", "Rendimiento", "Embeddings", "Robustez (inyección)", "Casos para análisis de errores"):
         assert "## " + title in text
-    assert "0.750 (" + (root / "retrieval/metrics.csv").as_posix() + ")" in text
+    assert "| condición | k | métrica | n | media | IC 95 % |" in text
+    assert "| main_solr_tok256_e5small | 1 | recall | 4 | 0.750 | [0.500, 1.000] |" in text
+    assert "k: 1.000" not in text
+    retrieval = text.split("## Recuperación", 1)[1].split("## Generación", 1)[0]
+    assert " | 3 | " not in retrieval
+    assert "excluded" not in retrieval
+    for metric in ("hit", "recall", "mrr", "ndcg", "fragment_hit"):
+        assert f"| {metric} |" in retrieval
+    assert retrieval.count("Fuente:") == 4
+    assert "| 2.0 | 4.0 |" in text
+    assert "| tag | model | backend |" in text
+    for section in text.split("\n## ")[1:]:
+        assert "| " in section and "Fuente: `" in section
+    assert text.count("Fuente:") == sum(line.startswith("| ---") for line in text.splitlines())
     assert "@persona" not in text
     assert "123456789012abcd" not in (tex / "modelos.tex").read_text(encoding="utf-8")
     with (root / "tables/modelos.csv").open(encoding="utf-8-sig", newline="") as source:
@@ -106,6 +119,17 @@ def test_missing_inputs_omit_sections(tmp_path, capsys):
     assert "## Recuperación" not in text
     assert not list((root / "tables").glob("*.csv"))
     assert "Aviso" in capsys.readouterr().err
+
+
+def test_markdown_escaping_and_formats():
+    analyze = module()
+    lines = []
+    analyze.report_section(lines, "Ejemplo", [dict(
+        model="12", n=40, k=5, p95_ms=12.34, rate_mean=.5,
+        rate_ci_low=.25, rate_ci_high=.75, answer="a|b\nc", correccion_n=4, source="datos.csv")])
+    text = "\n".join(lines)
+    assert "| 12 | 40 | 5 | 12.3 | 0.500 [0.250, 0.750] | a&#124;b c | 4 |" in text
+    assert text.count("Fuente: `datos.csv`") == 1
 
 
 def test_cases_deterministic_and_categories():
@@ -139,7 +163,9 @@ def test_vram_provenance_in_report(sample):
     root, tex = sample
     module().analyze(root, tex)
     text = (root / "RESULTADOS.md").read_text(encoding="utf-8")
-    assert "vram_max_mb: 50.000 (" + (root / "runs/raw/sysmon_main.csv").as_posix() in text
+    assert "vram_max_mb" in text and "50.000" in text
+    performance = text.split("## Rendimiento", 1)[1].split("## Embeddings", 1)[0]
+    assert (root / "runs/raw/sysmon_main.csv").as_posix() in performance
     fidelity_case = text.split("### fidelidad_cero\n", 1)[1].split("###", 1)[0]
     assert (root / "generation/annotated_runs.jsonl").as_posix() in fidelity_case
     assert (root / "generation/judge.jsonl").as_posix() in fidelity_case

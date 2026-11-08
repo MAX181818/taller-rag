@@ -392,23 +392,58 @@ def figures(reports, metrics, scores, by_type, latency, judges, performance):
         save_figure(fig, out / "errores_por_tipo.png")
 
 
+def markdown_value(value, field, row):
+    numeric = number(value)
+    if numeric is None or isinstance(value, bool):
+        return formatted(value, field)
+    leaf = field.rsplit(".", 1)[-1]
+    if leaf in ("k", "n", "rows", "count", "total") or leaf.startswith(("n_", "count_")) or leaf.endswith(("_n", "_count", "_chunks")):
+        return f"{numeric:.0f}"
+    if "_ms" in field or (str(row.get("metric", "")).endswith("_ms") and field in ("p50", "p95", "p99", "mean", "std", "min", "max")):
+        return f"{numeric:.1f}"
+    return formatted(value, field)
+
+
+def markdown_table(lines, rows, columns=None):
+    """Agrupa por procedencia para citar una sola vez cada tabla."""
+    batches = defaultdict(list)
+    for row in rows:
+        sources = tuple(dict.fromkeys(str(row[key]) for key in row
+                        if (key == "source" or key.endswith("_source")) and row[key]))
+        batches[sources].append(row)
+    safe = lambda value: str(value).replace("\r", " ").replace("\n", " ").replace("|", "&#124;").replace("`", "'")
+    for sources, batch in batches.items():
+        fields = list(dict.fromkeys(key for row in batch for key in row
+                      if key != "source" and not key.endswith(("_source", "_ci_low", "_ci_high"))
+                      and key not in ("ci_low", "ci_high")))
+        specs = columns or [(key, key) for key in fields]
+        lines.append("| " + " | ".join(label for _, label in specs) + " |")
+        lines.append("| " + " | ".join("---" for _ in specs) + " |")
+        for row in batch:
+            cells = []
+            for key, _ in specs:
+                if key == "ic":
+                    low, high = row.get("ci_low"), row.get("ci_high")
+                    cell = f"[{markdown_value(low, 'mean', row)}, {markdown_value(high, 'mean', row)}]" if number(low) is not None and number(high) is not None else ""
+                else:
+                    field = row.get("campo", key) if key == "valor" else key
+                    cell = markdown_value(row.get(key, ""), field, row)
+                    prefix = key[:-5] if key.endswith("_mean") else "" if key == "mean" else None
+                    if prefix is not None and columns is None:
+                        low_key, high_key = (prefix + "_ci_low", prefix + "_ci_high") if prefix else ("ci_low", "ci_high")
+                        low, high = row.get(low_key), row.get(high_key)
+                        if number(low) is not None and number(high) is not None:
+                            cell += f" [{markdown_value(low, key, row)}, {markdown_value(high, key, row)}]"
+                cells.append(safe(cell))
+            lines.append("| " + " | ".join(cells) + " |")
+        lines.extend(["", "Fuente: " + "; ".join(f"`{source}`" for source in sources), ""])
+
+
 def report_section(lines, title, rows):
     if not rows:
         return
     lines.extend(["", f"## {title}", ""])
-    for row in rows:
-        source = row.get("source", "")
-        fields = []
-        for key, value in row.items():
-            if key == "source" or key.endswith("_source") or value is None or value == "":
-                continue
-            origin = source
-            if key == "vram_max_mb":
-                origin = row.get("vram_source", source)
-                if row.get("interval_source"):
-                    origin += "; " + row["interval_source"]
-            fields.append(f"{key}: {formatted(value, key)} ({origin})")
-        lines.append("- " + "; ".join(fields))
+    markdown_table(lines, rows)
 
 
 def analyze(reports, tex):
@@ -465,7 +500,20 @@ def analyze(reports, tex):
     performance = performance_rows(reports, latency)
     figures(reports, metrics, scores, by_type, latency, judges, performance)
     lines = ["# Resultados", "", "Valores observados y agregaciones de las fuentes indicadas. Los datos ausentes se omiten."]
-    report_section(lines, "Recuperación", metrics + groups + per_question[:5])
+    retrieval_groups = [(label, [r for r in tables[name]
+                         if number(r.get("k")) in (1, 5, 10)
+                         and r.get("metric") in ("hit", "recall", "mrr", "ndcg", "fragment_hit")])
+                        for label, name in (("Principal", "recuperacion_principal"),
+                                            ("Ablaciones", "recuperacion_ablaciones"),
+                                            ("Filtros", "recuperacion_filtros"),
+                                            ("10k", "recuperacion_10k"))]
+    if any(rows for _, rows in retrieval_groups):
+        lines.extend(["", "## Recuperación", ""])
+        for label, rows in retrieval_groups:
+            if rows:
+                lines.extend([f"### {label}", ""])
+                markdown_table(lines, rows, [("condition", "condición"), ("k", "k"),
+                    ("metric", "métrica"), ("n", "n"), ("mean", "media"), ("ic", "IC 95 %")])
     report_section(lines, "Generación", scores + judges + human)
     report_section(lines, "Rendimiento", retrieval_latency + tables["latencia_generacion"] + performance + models + context)
     report_section(lines, "Embeddings", embedding_rows + overlap)
@@ -480,11 +528,8 @@ def analyze(reports, tex):
         for category, rows in cases.items():
             if rows:
                 lines.extend([f"### {category}", ""])
-                for row in rows:
-                    source = row["source"]
-                    safe = lambda text: str(text).replace("\n", " ").replace("\r", " ").replace("`", "'")
-                    lines.append(f"- qid: {safe(row['qid'])} ({source}); modelo: {safe(row['model'])} ({source}); motor: {safe(row['backend'])} ({source}); respuesta: {safe(row['answer'])} ({source}); razón: {row['reason']} ({source}).")
-                lines.append("")
+                markdown_table(lines, rows, [("qid", "qid"), ("model", "modelo"),
+                    ("backend", "motor"), ("answer", "respuesta"), ("reason", "razón")])
     (reports / "RESULTADOS.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
