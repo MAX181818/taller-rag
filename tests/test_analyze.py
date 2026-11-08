@@ -59,7 +59,7 @@ def sample(tmp_path):
     write_csv(root, "generation/latency_summary.csv", [dict(tag="main", model="m_1%&", backend="solr", cold=cold, metric="generation_ms", n=n, p50=10, p95=20, tokens_per_s_mean=speed) for cold, n, speed in ((False, 3, 40), (True, 1, 20))])
     call = dict(run_id="r1", qid="Q01", type="directa", tag="main", model="m_1%&", backend="solr", run_idx=1, cold=False, error=0, citations_valid_rate="", cites_relevant=0, abstention_correct=1, abstention_with_citation=0, injection_success="", answered_without_evidence=1)
     write_csv(root, "generation/scores_per_call.csv", [call])
-    write_jsonl(root, "generation/annotated_runs.jsonl", [dict(run_id="r1", qid="Q01", type="directa", model="m_1%&", config={"backend": "solr"}, answer="Hola @persona " + "x" * 400, automatic={"answered_without_evidence": 1}, judge=None)])
+    write_jsonl(root, "generation/annotated_runs.jsonl", [dict(run_id="r1", qid="Q01", type="directa", model="m_1%&", config={"backend": "solr"}, answer="Hola @persona.bsky.social " + "x" * 400, automatic={"answered_without_evidence": 1}, judge=None)])
     write_jsonl(root, "generation/judge.jsonl", [dict(run_id="r1", qid="Q01", model="m_1%&", backend="solr", correccion=1, fidelidad=0, relevancia=2)])
     write_csv(root, "generation/human_eval.csv", [dict(model="m_1%&", backend="solr", criterio="fidelidad", n=2, promedio=1.5, kappa_global=.5, acuerdo_exacto_global=.5)])
     write_json(root, "runs/raw/main_config.json", {"model_info": {"m_1%&": {"parameter_size": "1B", "quantization_level": "Q4_0", "family": "f", "digest": "123456789012abcd"}}})
@@ -100,7 +100,7 @@ def test_outputs_and_provenance(sample):
     for section in text.split("\n## ")[1:]:
         assert "| " in section and "Fuente: `" in section
     assert text.count("Fuente:") == sum(line.startswith("| ---") for line in text.splitlines())
-    assert "@persona" not in text
+    assert "@persona.bsky.social" not in text
     assert "123456789012abcd" not in (tex / "modelos.tex").read_text(encoding="utf-8")
     with (root / "tables/modelos.csv").open(encoding="utf-8-sig", newline="") as source:
         assert next(csv.DictReader(source))["digest"] == "123456789012"
@@ -162,14 +162,14 @@ def test_markdown_escaping_and_formats():
 
 def test_cases_deterministic_and_categories():
     analyze = module()
-    rows = [dict(qid=f"Q{i:02}", model=m, backend="solr", run_id=f"{i}-{m}", type="directa", answer="@persona " + "z" * 400, automatic={"answered_without_evidence": 1, "abstention_correct": 0, "cites_relevant": hit, "injection_success": 1}, judge={"fidelidad": 0}) for i in reversed(range(8)) for m, hit in (("b", 0), ("a", 1))]
+    rows = [dict(qid=f"Q{i:02}", model=m, backend="solr", run_id=f"{i}-{m}", type="directa", answer="@persona.bsky.social " + "z" * 400, automatic={"answered_without_evidence": 1, "abstention_correct": 0, "cites_relevant": hit, "injection_success": 1}, judge={"fidelidad": 0}) for i in reversed(range(8)) for m, hit in (("b", 0), ("a", 1))]
     rows.append(dict(qid="Q99", model="a", backend="solr", type="sin_respuesta", answer="No sé", automatic={"abstention_correct": 1}))
     cases = analyze.select_cases(rows)
     assert cases == analyze.select_cases(list(reversed(rows)))
     assert set(cases) == {"answered_without_evidence", "fidelidad_cero", "abstencion_correcta_sin_respuesta", "abstencion_incorrecta", "discrepancia_modelos", "injection_success"}
     assert [(r["qid"], r["model"]) for r in cases["answered_without_evidence"]] == [("Q00", "a"), ("Q00", "b"), ("Q01", "a"), ("Q01", "b"), ("Q02", "a")]
     assert all(len(group) <= 5 for group in cases.values())
-    assert all(len(r["answer"]) <= 300 and "@persona" not in r["answer"] and r["reason"] for group in cases.values() for r in group)
+    assert all(len(r["answer"]) <= 300 and "@persona.bsky.social" not in r["answer"] and r["reason"] for group in cases.values() for r in group)
     assert len(cases["abstencion_correcta_sin_respuesta"]) == 1
 
 

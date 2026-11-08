@@ -1,7 +1,5 @@
 """Vectores normalizados y huellas de los codificadores en CPU."""
 from functools import lru_cache
-import os
-from pathlib import Path
 from typing import Literal
 
 from app import config
@@ -10,6 +8,11 @@ from app import config
 ENCODERS = {
     "e5small": ("intfloat/multilingual-e5-small", "query: ", "passage: "),
     "minilm": ("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2", "", ""),
+}
+
+REVISIONS = {
+    "e5small": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "minilm": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
 }
 
 
@@ -28,7 +31,7 @@ def _encoder(encoder):
 def _model(encoder):
     name, _, _ = _encoder(encoder)
     from sentence_transformers import SentenceTransformer
-    return SentenceTransformer(name, device="cpu")
+    return SentenceTransformer(name, device="cpu", revision=REVISIONS[encoder])
 
 
 def embed(texts: list[str], kind: Literal["query", "passage"],
@@ -50,8 +53,6 @@ def dim(encoder) -> int:
 def fingerprint(encoder) -> dict:
     model, query_prefix, passage_prefix = _encoder(encoder)
     dimension = dim(encoder)
-    home = Path(os.getenv("HF_HOME", str(Path.home() / ".cache/huggingface")))
-    ref = home / "hub" / ("models--" + model.replace("/", "--")) / "refs/main"
-    revision = ref.read_text(encoding="utf-8").strip() if ref.is_file() else "desconocida"
+    revision = REVISIONS[encoder]
     return dict(model=model, revision=revision, query_prefix=query_prefix,
                 passage_prefix=passage_prefix, normalize=True, dim=dimension)

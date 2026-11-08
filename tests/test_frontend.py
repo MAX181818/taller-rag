@@ -19,6 +19,32 @@ def test_motor_a_backend():
     assert frontend.motor_a_backend("Híbrido RRF") == "hybrid"
 
 
+def test_texto_literal_conserva_saltos_y_sintaxis():
+    text = "![imagen](https://example.com/image)\n[enlace](https://example.com)\n<b>hola</b>"
+    assert frontend.texto_literal(text) == text
+    assert frontend.texto_literal("@ana.bsky.social") == "@usuario"
+
+
+def test_mostrar_respuesta_usa_texto_literal(monkeypatch):
+    from contextlib import nullcontext
+    from types import SimpleNamespace
+    calls = []
+    for name in ("subheader", "caption"):
+        monkeypatch.setattr(frontend.st, name, lambda *a, **kw: None)
+    monkeypatch.setattr(frontend.st, "code", lambda text, **kw: calls.append((text, kw)))
+    monkeypatch.setattr(frontend.st, "columns", lambda n: [SimpleNamespace(metric=lambda *a: None)] * n)
+    monkeypatch.setattr(frontend.st, "expander", lambda title: nullcontext())
+    monkeypatch.setattr(frontend.st, "write", lambda *a: (_ for _ in ()).throw(AssertionError("Markdown")))
+    monkeypatch.setattr(frontend.st, "markdown", lambda *a: (_ for _ in ()).throw(AssertionError("Markdown")))
+    answer = "![imagen](https://example.com/x)\nsegunda línea"
+    frontend._mostrar_respuesta("Respuesta", dict(answer=answer, abstained=False,
+        invalid_citations=[], timings=dict(total_ms=0, retrieval_ms=0, generation_ms=0),
+        tokens={}, model="m", prompt_version="v", evidence=[dict(text="@ana.bsky.social",
+        url="https://bsky.app/profile/ana.bsky.social/post/1")]), None)
+    assert [text for text, _ in calls] == [answer, "@usuario", "https://bsky.app/profile/usuario/post/1"]
+    assert all(kw == dict(language=None, wrap_lines=True) for _, kw in calls)
+
+
 def test_payload_sin_filtros():
     p = frontend.construir_payload("¿hola?", "solr", 5, "m", 0.0, "Todas", "Todos",
                                    False, "tok256", "e5small", "v1")

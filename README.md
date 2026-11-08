@@ -3,9 +3,10 @@
 Sistema de preguntas con evidencia sobre `dragons_rag`, corpus del catálogo
 `open_corpus_co_es==0.1.1a4`. Compara recuperación léxica (Solr, BM25), densa
 (Milvus) e híbrida (RRF), y genera las respuestas con modelos locales de Ollama.
-La API es FastAPI y la interfaz de comparación es Streamlit. Las decisiones, la
-arquitectura detallada y los resultados están en el
-[informe](informe_taller_rag.pdf).
+La API es FastAPI y la interfaz de comparación es Streamlit. La arquitectura y
+las decisiones están en [informe_taller_rag.pdf](informe_taller_rag.pdf), en las
+secciones de arquitectura y decisiones. Las [evidencias de funcionamiento](reports/demo/)
+incluyen las capturas de la demostración.
 
 ## Requisitos
 
@@ -98,9 +99,12 @@ docker compose exec api python -m scripts.index_solr --chunks data/derived/chunk
 docker compose exec api python -m scripts.index_milvus --chunks data/derived/chunks_tok128.jsonl --encoder e5small --resume --describe
 docker compose exec api python -m scripts.index_solr --chunks data/derived/chunks_tok128.jsonl --resume
 docker compose exec api python -m scripts.index_milvus --chunks data/derived/chunks_tok256.jsonl --encoder minilm --resume --describe
+docker compose exec api python -m scripts.index_milvus --chunks data/derived/chunks_tok128.jsonl --encoder minilm --describe
 docker compose exec api python -m scripts.index_milvus --chunks data/derived/chunks_tok256_10k.jsonl --encoder e5small --resume --describe
 docker compose exec api python -m scripts.index_solr --chunks data/derived/chunks_tok256_10k.jsonl --resume
 ```
+
+El índice MiniLM con `tok128` crea la colección `c_minilm_tok128`.
 
 **Vía rápida.** Con dependencias, cachés y corpus listos, los pasos 3 a 9 se
 resumen en `powershell -NoProfile -File scripts/init.ps1` o `bash scripts/init.sh`.
@@ -141,12 +145,13 @@ docker compose exec api python -m scripts.run_generation --split test --backends
 docker compose exec api python -m scripts.run_generation --split test --backends milvus --models gemma2:2b --runs 3 --chunker tok128 --tag abl_tok128
 docker compose exec api python -m scripts.run_generation --split test --backends milvus --models gemma2:2b --runs 3 --chunker sent256 --tag abl_sent256
 docker compose exec api python -m scripts.run_generation --split test --backends milvus --models gemma2:2b --runs 3 --encoder minilm --tag abl_minilm
+docker compose exec api python -m scripts.run_generation --split test --backends milvus --models gemma2:2b --runs 3 --tag abl_minilm_tok128 --chunker tok128 --encoder minilm
 docker compose exec api python -m scripts.run_generation --split test --backends milvus --models gemma2:2b --runs 3 --one-per-doc --tag abl_onedoc
-docker compose exec api python -m scripts.judge_local --judge qwen2.5:7b --tags main abl_k3 abl_k10 abl_tok128 abl_sent256 abl_minilm abl_onedoc --run-idx 1 --resume
-docker compose exec api python -m scripts.score_generation --tags main abl_k3 abl_k10 abl_tok128 abl_sent256 abl_minilm abl_onedoc
+docker compose exec api python -m scripts.judge_local --judge qwen2.5:7b --tags main --run-idx 1 --resume
+docker compose exec api python -m scripts.score_generation --tags main abl_k3 abl_k10 abl_tok128 abl_sent256 abl_minilm abl_minilm_tok128 abl_onedoc
 docker compose exec api python -m scripts.human_eval sample --tags main --n 30 --seed 42 --out eval/human
 docker compose exec api python -m scripts.human_eval agree --a eval/human/hoja_evaluador_A.csv --b eval/human/hoja_evaluador_B.csv --key eval/human/clave_items.csv --out reports/generation
-docker compose exec api python -m scripts.score_generation --tags main abl_k3 abl_k10 abl_tok128 abl_sent256 abl_minilm abl_onedoc
+docker compose exec api python -m scripts.score_generation --tags main abl_k3 abl_k10 abl_tok128 abl_sent256 abl_minilm abl_minilm_tok128 abl_onedoc
 docker compose exec api python -m scripts.embeddings_probe --out reports/embeddings --k 5
 python -m scripts.analyze --reports reports --tex informe/tablas
 ```
@@ -177,7 +182,6 @@ eval/       gold, rúbrica y anotaciones
 tests/      pruebas unitarias y de integración
 docs/       protocolo de evaluación
 reports/    agregados, capturas y corridas locales
-informe/    fuentes y tablas del informe
 ```
 
 ## Problemas frecuentes

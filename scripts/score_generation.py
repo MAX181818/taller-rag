@@ -9,7 +9,6 @@ import sys
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from app.citations import is_abstention
 from app.metrics import bootstrap_ci, percentile
 from scripts.validate_gold import mask_handles
 

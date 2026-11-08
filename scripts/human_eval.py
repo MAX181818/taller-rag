@@ -9,7 +9,8 @@ if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.score_generation import load_raw, read_jsonl
-from scripts.validate_gold import mask_handles, weighted_kappa
+from app.privacy import mask_handles
+from scripts.validate_gold import weighted_kappa
 
 CRITERIA = ("correccion", "fidelidad", "relevancia", "calidad_citas", "abstencion")
 SHEET = ("item_id", "pregunta", "respuesta", "evidencia", "respuesta_referencia", "criterio",
@@ -69,7 +70,7 @@ def sample(records, golds, n, seed, out):
     items = []
     for i, r in enumerate(chosen, 1):
         g = golds[r["qid"]]
-        evidence = "\n".join(f"[{e['n']}] {mask_handles(e.get('text', '')[:400])}"
+        evidence = "\n".join(f"[{e['n']}] {mask_handles(e.get('text', ''))[:400]}"
                              for e in r.get("evidence") or [])
         items.append(dict(item_id=i, pregunta=g.get("question") or r.get("query"), respuesta=r["answer"],
                           evidencia=evidence, respuesta_referencia=g.get("reference_answer"),

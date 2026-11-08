@@ -1,4 +1,4 @@
-﻿"""Perfil reproducible del corpus: integridad, calidad y sesgos de recolección."""
+"""Perfil reproducible del corpus: integridad, calidad y sesgos de recolección."""
 import argparse
 import hashlib
 import json
@@ -61,8 +61,8 @@ def url_info(value):
 
 def manifest_comparison(path, df, report, input_path):
     """Contrasta cifras del manifiesto sin publicar conteos de autores."""
-    if not Path(path).exists():
-        return {"status": "Descarga fallida con gdown: red no accesible (WinError 10051); no se leyó el manifiesto.",
+    if path is None or not Path(path).exists():
+        return {"status": "Manifiesto no proporcionado: se omite la comparaci\u00f3n.",
                 "figures": None, "comparison": []}
     manifest = json.loads(Path(path).read_text(encoding="utf-8-sig"))
     nonempty = {c: int(df[c].map(is_nonempty).sum()) for c in df.columns if c not in PRIVATE}
@@ -105,7 +105,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", required=True, help="Parquet de entrada")
     parser.add_argument("--out", required=True, help="Directorio de informes")
-    parser.add_argument("--manifest", default=r"D:\taller-rag-trabajo\corpus_home\manifiesto.md", help="Manifiesto JSON de referencia")
+    parser.add_argument("--manifest", help="Manifiesto JSON de referencia")
     args = parser.parse_args()
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)

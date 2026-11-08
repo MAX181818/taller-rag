@@ -14,7 +14,7 @@ def chunk(doc="a", text="Texto", start=0, end=10, provenance=None):
     return dict(document_id=doc, provenance_ids=provenance or [doc],
                 start_char=start, end_char=end, text=text,
                 collection_name="bluesky_posts", rank=1, score=1.0,
-                title="Título @persona")
+                title="Título @persona.bsky.social")
 
 
 def test_document_metrics():
@@ -83,7 +83,7 @@ def test_bootstrap_is_deterministic_and_handles_empty():
 
 
 def question(qid, split="dev", kind="directa", relevant=True, target="bluesky_posts"):
-    return dict(qid=qid, split=split, question=f"Pregunta {qid} @persona",
+    return dict(qid=qid, split=split, question=f"Pregunta {qid} @persona.bsky.social",
                 language="es", type=kind, collection_target=target,
                 relevant=[dict(document_id="b", grade=2, evidence_quote="Texto",
                                evidence_span=[0, 5])] if relevant else [],
@@ -106,7 +106,7 @@ def fake_retriever(monkeypatch):
         calls.append((query, backend, k, chunker, encoder, filters, one_per_doc))
         if "sin" in query:
             return [chunk("z")]
-        return [chunk("x", "Texto @secreto", provenance=["x", "b"]), chunk("c")]
+        return [chunk("x", "Texto @secreto.bsky.social", provenance=["x", "b"]), chunk("c")]
 
     monkeypatch.setattr(socket.socket, "connect", forbidden)
     monkeypatch.setattr(evaluator, "retrieve", retrieve)
@@ -149,7 +149,7 @@ def test_evaluation_columns_exclusion_and_single_retrieval(tmp_path, fake_retrie
     assert all(r["n"] == "1" for r in latency)
     inspection = (out / "inspeccion.md").read_text(encoding="utf-8")
     assert "q01" in inspection and "✓" in inspection
-    assert "@secreto" not in inspection and "@persona" not in inspection
+    assert "@secreto" not in inspection and "@persona.bsky.social" not in inspection
     config = json.loads((out / "run_config.json").read_text(encoding="utf-8"))
     assert config["seed"] == 42 and config["counts"]["questions"] == 2
     assert "c_e5small_tok256" in config["collections"]["milvus"]

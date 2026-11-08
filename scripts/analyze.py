@@ -20,6 +20,7 @@ if __package__ in (None, ""):
 
 from app.citations import is_abstention
 from app.metrics import bootstrap_ci
+from app.privacy import mask_handles
 
 
 QUALITY = ("abstention_correct", "cites_relevant", "citations_valid_rate")
@@ -187,7 +188,7 @@ def select_cases(records):
                 if category == "fidelidad_cero" and row.get("judge_source"):
                     source = "; ".join(filter(None, (source, row["judge_source"])))
                 out[category].append(dict(qid=row.get("qid", ""), model=row.get("model", ""),
-                    backend=backend(row), answer=re.sub(r"@[\w.-]+", "[usuario]", row.get("answer") or "")[:300],
+                    backend=backend(row), answer=mask_handles(row.get("answer") or "")[:300],
                     reason=reasons[category], source=source or row.get("source", "")))
     return out
 

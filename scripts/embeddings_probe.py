@@ -11,6 +11,7 @@ if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from app import embeddings
+from app.privacy import mask_handles
 from app.config import collection_name
 
 
@@ -104,7 +105,7 @@ def summarize(rows):
 
 
 def _cell(value):
-    masked = re.sub(r"@[\w]+", "@usuario", str(value))
+    masked = mask_handles(str(value))
     return masked.replace("|", "\\|").replace("\r", " ").replace("\n", " ")
 
 
@@ -126,8 +127,7 @@ def run(out, k=5):
                              "| rank | score | document_id | colección | idioma | título / texto |",
                              "| --- | --- | --- | --- | --- | --- |"])
             for rank, hit in enumerate(hits[:k], 1):
-                title = hit.get("title") or re.sub(
-                    r"@[\w]+", "@usuario", hit.get("text", ""))[:80]
+                title = mask_handles(hit.get("title") or hit.get("text", ""))[:80]
                 fields = [rank, hit["score"], hit["document_id"],
                           hit.get("collection_name", name), hit.get("language", ""), title]
                 markdown.append("| " + " | ".join(_cell(value) for value in fields) + " |")

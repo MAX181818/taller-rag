@@ -24,11 +24,11 @@ try {
         Copy-Item -LiteralPath '.env.example' -Destination '.env'
     }
     if (-not (Test-Path -LiteralPath 'data/documentos_rag.parquet' -PathType Leaf)) {
-        throw 'Falta data/documentos_rag.parquet. Siga el paso 3 del README: paquete open_corpus_co_es==0.1.1a4, corpus dragons_rag y copia del Parquet.'
+        throw 'Falta data/documentos_rag.parquet. Siga el paso 2 del README: paquete open_corpus_co_es==0.1.1a4, corpus dragons_rag y copia del Parquet.'
     }
     $Esperado = 'f4a669f17eaedd357f72b70c2192e685b6d534a94f6ffaeadbced7290b181728'
     $Actual = (Get-FileHash -LiteralPath 'data/documentos_rag.parquet' -Algorithm SHA256).Hash
-    if ($Actual -ne $Esperado) { throw 'SHA-256 incorrecto. Repita el paso 3 del README.' }
+    if ($Actual -ne $Esperado) { throw 'SHA-256 incorrecto. Repita el paso 2 del README.' }
     if (-not (Test-Path -LiteralPath 'data/synthetic/injection_docs.jsonl' -PathType Leaf)) {
         throw 'Falta data/synthetic/injection_docs.jsonl; restaure los cuatro documentos sintéticos.'
     }

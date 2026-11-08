@@ -97,10 +97,7 @@ def _milvus_version():
     from pymilvus import MilvusClient
 
     client = MilvusClient(uri=config.MILVUS_URI, timeout=2)
-    try:
-        return client.get_server_version(timeout=2)
-    finally:
-        client.close()
+    return client.get_server_version(timeout=2)
 
 
 def collect_versions():
@@ -285,7 +282,10 @@ def run(args):
     done = _completed(args) if args.resume else set()
     hardware, versions = collect_hardware(), collect_versions()
     effective = _effective_config(args, questions, hardware, versions, prompt_version)
-    (args.out_dir / f"{args.tag}_config.json").write_text(
+    config_path = args.out_dir / f"{args.tag}_config.json"
+    if args.resume and config_path.exists():
+        config_path = args.out_dir / f"{args.tag}_config_resume_{datetime.now(timezone.utc):%Y%m%d_%H%M}.json"
+    config_path.write_text(
         json.dumps(effective, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     path = args.out_dir / f"{args.tag}_{datetime.now(timezone.utc):%Y%m%d_%H%M}.jsonl"
     total = sum((model, backend, q["qid"], index) not in done

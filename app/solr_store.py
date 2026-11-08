@@ -1,11 +1,12 @@
 """Acceso al core de búsqueda léxica y normalización de registros."""
-import os
 import re
 
 import requests
 
+from app import config
 
-SOLR_URL = os.environ.get("SOLR_URL", "http://solr:8983/solr/rag").rstrip("/")
+
+SOLR_URL = config.SOLR_URL.rstrip("/")
 _TIMEOUT = 30
 _FIELDS = frozenset({"chunk_id", "document_id", "provenance_ids", "chunker",
                      "start_char", "end_char", "n_tokens", "text", "title", "url",

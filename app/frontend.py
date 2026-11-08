@@ -5,6 +5,8 @@ from datetime import datetime, timezone
 import requests
 import streamlit as st
 
+from app.privacy import mask_handles
+
 API_URL = os.getenv("API_URL", "http://api:8000")
 TIMEOUT = 300
 PROMPT_VERSION = os.getenv("PROMPT_VERSION", "rag_v3")
@@ -14,6 +16,11 @@ COMANDO_PULL = "docker compose exec ollama ollama pull qwen2.5:1.5b"
 
 def motor_a_backend(label):
     return MOTORES[label]
+
+
+def texto_literal(text):
+    """Prepara texto privado para mostrarlo sin interpretar su sintaxis."""
+    return mask_handles(str(text))
 
 
 def construir_payload(query, backend, k, model, temperature, coleccion, idioma,
@@ -42,8 +49,8 @@ def formatear_fecha(created_ts):
 
 
 def formatear_evidencia_titulo(ev):
-    return (f"[{ev.get('n')}] {ev.get('title') or '(sin título)'} · {ev.get('source') or 's/f'}"
-            f" · {formatear_fecha(ev.get('created_ts'))} · {float(ev.get('score') or 0):.3f}")
+    return mask_handles(f"[{ev.get('n')}] {ev.get('title') or '(sin título)'} · {ev.get('source') or 's/f'}"
+                        f" · {formatear_fecha(ev.get('created_ts'))} · {float(ev.get('score') or 0):.3f}")
 
 
 def _llamar(metodo, ruta, **kw):
@@ -79,7 +86,7 @@ def _mostrar_respuesta(titulo, out, error):
     if error:
         st.error(error)
         return
-    st.write(out["answer"])
+    st.code(texto_literal(out["answer"]), language=None, wrap_lines=True)
     if out["abstained"]:
         st.warning("Abstención: el modelo indicó que no hay evidencia suficiente.")
     if out["invalid_citations"]:
@@ -93,9 +100,9 @@ def _mostrar_respuesta(titulo, out, error):
     st.caption(f"Modelo: {out['model']} · prompt: {out['prompt_version']}")
     for ev in out["evidence"]:
         with st.expander(formatear_evidencia_titulo(ev)):
-            st.write(ev["text"])
+            st.code(texto_literal(ev["text"]), language=None, wrap_lines=True)
             if str(ev.get("url") or "").startswith("http"):
-                st.markdown(f"[{ev['url']}]({ev['url']})")
+                st.code(texto_literal(ev["url"]), language=None, wrap_lines=True)
             st.caption(f"Colección: {ev.get('collection_name')} · idioma: {ev.get('language')}"
                        f" · documento: {ev.get('document_id')}"
                        f" · caracteres {ev.get('start_char')}–{ev.get('end_char')}"

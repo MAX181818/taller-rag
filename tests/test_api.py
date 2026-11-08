@@ -111,7 +111,7 @@ def ask_error(client, monkeypatch, error):
 def test_ask_503_when_retriever_down(client, monkeypatch):
     response = ask_error(client, monkeypatch, retrieval.RetrieverUnavailable("solr"))
     assert response.status_code == 503
-    assert response.json()["detail"].startswith("El recuperador solr no está disponible:")
+    assert response.json()["detail"] == "El motor solr no está disponible."
 
 
 def test_ask_503_when_encoder_mismatch(client, monkeypatch):
@@ -211,7 +211,7 @@ def test_validation_rejects_unknown_filter_key(client, route):
 
 @pytest.mark.parametrize("field,value", [
     ("query", "x" * 2001), ("k", 21), ("backend", "otro"), ("encoder", "otro"),
-    ("chunker", "../x"), ("chunker", "x" * 33), ("filters", {"language": ""}),
+    ("chunker", "../x"), ("chunker", "otro"), ("chunker", "x" * 33), ("filters", {"language": ""}),
     ("filters", {"language": "x" * 65}), ("filters", {"language": 12}),
     ("model", ""), ("model", "x" * 101), ("temperature", -0.1),
     ("temperature", 1.1), ("prompt_version", "../x"), ("prompt_version", "x" * 33)])
@@ -236,7 +236,7 @@ def test_retrieve_returns_chunks_and_latency(client, monkeypatch):
 
 
 @pytest.mark.parametrize("error,prefix", [
-    (retrieval.RetrieverUnavailable("milvus"), "El recuperador milvus no está disponible:"),
+    (retrieval.RetrieverUnavailable("milvus"), "El motor milvus no está disponible."),
     (EncoderMismatch("huella"), "La colección fue indexada con otro encoder:")])
 def test_retrieve_translates_errors(client, monkeypatch, error, prefix):
     def fail(**kwargs):

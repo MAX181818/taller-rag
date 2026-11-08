@@ -52,8 +52,8 @@ def test_cli_genera_informes_con_fakes(probe, monkeypatch, tmp_path, capsys):
     def search(client, name, qvec, k, filters=None, fingerprint=None):
         calls.append((name, k, fingerprint))
         return [dict(document_id=f"doc{i // 2}", score=1 - i / 100,
-                     collection_name="corpus", language="es", title="" if i else "Título @secreto | noticia",
-                     text="Texto @oculto " + "x" * 100) for i in range(k)]
+                     collection_name="corpus", language="es", title="" if i else "Título @secreto.bsky.social | noticia",
+                     text="Texto @oculto.bsky.social " + "x" * 100) for i in range(k)]
 
     monkeypatch.setattr(probe, "search", search)
     probe.main(["--out", str(tmp_path), "--k", "3"])

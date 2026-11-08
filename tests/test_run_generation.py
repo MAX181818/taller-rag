@@ -325,7 +325,7 @@ def test_versions_with_fake_http_and_milvus(monkeypatch):
     monkeypatch.setitem(sys.modules, "pymilvus", SimpleNamespace(MilvusClient=Client))
     versions = runner.collect_versions()
     assert [versions[k] for k in ("ollama", "solr", "milvus")] == ["0.40", "9.10", "2.6"]
-    assert urls[1].endswith("/solr/admin/info/system") and closed == [True]
+    assert urls[1].endswith("/solr/admin/info/system") and closed == []
 
 
 @pytest.mark.parametrize("text,expected", [
@@ -415,3 +415,14 @@ def test_unload_failure_does_not_abort(experiment, monkeypatch):
     monkeypatch.setattr(runner, "unload", unload)
     result = experiment.execute()
     assert result["calls"] == 16 and result["errors"] == 0
+
+
+def test_resume_preserves_original_config(experiment):
+    experiment.execute()
+    original = experiment.out / "ensayo_config.json"
+    before = original.read_bytes()
+    experiment.execute("--resume")
+    assert original.read_bytes() == before
+    resumed = list(experiment.out.glob("ensayo_config_resume_????????_????.json"))
+    assert len(resumed) == 1
+    assert json.loads(resumed[0].read_text(encoding="utf-8"))["resume"] is True

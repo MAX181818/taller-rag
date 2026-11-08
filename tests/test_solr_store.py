@@ -208,3 +208,25 @@ def test_resume_recreate_and_commits(monkeypatch, tmp_path):
 @pytest.mark.parametrize("records", [[], [record(), record("b", "sent256")]])
 def test_invalid_input_has_no_side_effects(tmp_path, records):
     assert indexer.main(["--chunks", chunks_file(tmp_path, records), "--recreate"]) == 1
+
+
+def test_index_skips_blank_lines(tmp_path):
+    path = tmp_path / "chunks.jsonl"
+    path.write_text("\n  \n" + json.dumps(record()) + "\n\t\n", encoding="utf-8")
+    assert list(indexer._records(path)) == [record()]
+
+
+def test_solr_endpoint_uses_shared_config(monkeypatch):
+    import importlib
+    from app import config
+
+    monkeypatch.setattr(config, "SOLR_URL", "http://configured:8983/solr/core/")
+    try:
+        importlib.reload(store)
+        urls = []
+        monkeypatch.setattr(requests, "get", lambda url, **kw: urls.append(url) or response({"status": "OK"}))
+        assert store.ping() is True
+        assert urls == ["http://configured:8983/solr/core/admin/ping"]
+    finally:
+        monkeypatch.undo()
+        importlib.reload(store)

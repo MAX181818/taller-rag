@@ -33,7 +33,7 @@ class RetrieveRequest(BaseModel):
     query: Query
     backend: Literal["milvus", "solr", "hybrid"] = "milvus"
     k: int = Field(default=config.DEFAULT_K, ge=1, le=20)
-    chunker: Version = config.CHUNKER
+    chunker: Literal["tok256", "sent256", "tok128", "tok256_10k"] = config.CHUNKER
     encoder: Literal["e5small", "minilm"] = config.ENCODER
     filters: dict[Literal["collection_name", "language"], FilterValue] | None = None
     one_per_doc: bool = False
@@ -65,8 +65,7 @@ async def log_request(request: Request, call_next):
 
 @app.exception_handler(retrieval.RetrieverUnavailable)
 async def retriever_error(request: Request, error: retrieval.RetrieverUnavailable):
-    return JSONResponse(status_code=503, content={"detail":
-        f"El recuperador {error.backend} no está disponible: {error}"})
+    return JSONResponse(status_code=503, content={"detail": str(error)})
 
 
 @app.exception_handler(EncoderMismatch)

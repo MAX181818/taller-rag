@@ -1,4 +1,4 @@
-﻿"""Contratos de muestreo y fechas para las tareas siguientes."""
+"""Contratos de muestreo y fechas para las tareas siguientes."""
 import pandas as pd
 import pytest
 from scripts.make_sample import make_sample, normalize_created_at
@@ -82,4 +82,7 @@ def test_manifest_comparison(tmp_path):
     assert cifras["distributions.collection_name.A"]["matches"] is True
     assert cifras["validation.all_columns_round_trip"]["matches"] is None
     assert "author_id" not in json.dumps(resultado)
-    assert manifest_comparison(tmp_path / "ausente", df, perfil, archivo)["figures"] is None
+    for path in (None, tmp_path / "ausente"):
+        missing = manifest_comparison(path, df, perfil, archivo)
+        assert missing["status"] == "Manifiesto no proporcionado: se omite la comparaci\u00f3n."
+        assert missing["comparison"] == []

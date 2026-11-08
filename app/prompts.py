@@ -4,10 +4,11 @@ import hashlib
 from pathlib import Path
 import re
 
+from app.privacy import mask_handles
+
 
 ABSTENTION = "No hay evidencia suficiente en los documentos recuperados."
 _ROOT = Path(__file__).resolve().parents[1]
-_HANDLE = re.compile(r"(?<![\w@])@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+")
 
 
 def load_prompt(version: str = "rag_v1") -> tuple[str, str]:
@@ -44,7 +45,7 @@ def build_context(chunks: list[dict], budget_chars: int) -> tuple[str, list[dict
             f"fecha: {_date(chunk.get('created_ts'))} | "
             f"título: {chunk.get('title') or 's/t'})\n{text}"
         )
-        block = _HANDLE.sub("@usuario", block)
+        block = mask_handles(block)
         added = len(block) + (2 if blocks else 0)
         if size + added > budget_chars:
             continue

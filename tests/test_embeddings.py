@@ -12,8 +12,8 @@ def embeddings(monkeypatch):
     calls, loads = [], []
 
     class Model:
-        def __init__(self, name, device):
-            loads.append((name, device))
+        def __init__(self, name, device, revision=None):
+            loads.append((name, device, revision))
 
         def encode(self, texts, normalize_embeddings):
             calls.append((texts, normalize_embeddings))
@@ -35,7 +35,7 @@ def test_prefixes_applied(embeddings):
         module.embed(["x"], "query", encoder)
         module.embed(["x"], "passage", encoder)
     assert [texts for texts, _ in calls] == [["query: x"], ["passage: x"], ["x"], ["x"]]
-    assert len(loads) == 2 and all(device == "cpu" for _, device in loads)
+    assert len(loads) == 2 and all(device == "cpu" for _, device, _ in loads)
 
 
 def test_vectors_normalized(embeddings):
@@ -46,17 +46,20 @@ def test_vectors_normalized(embeddings):
     assert calls[0][1] is True
 
 
-def test_fingerprint_reads_cached_revision(embeddings, monkeypatch, tmp_path):
-    module, _, _ = embeddings
+@pytest.mark.parametrize("encoder,model,revision", [
+    ("e5small", "intfloat/multilingual-e5-small", "614241f622f53c4eeff9890bdc4f31cfecc418b3"),
+    ("minilm", "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2", "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"),
+])
+def test_fingerprint_matches_loaded_revision(embeddings, monkeypatch, tmp_path, encoder, model, revision):
+    module, _, loads = embeddings
     monkeypatch.setenv("HF_HOME", str(tmp_path))
-    assert module.fingerprint("e5small")["revision"] == "desconocida"
-    ref = tmp_path / "hub/models--intfloat--multilingual-e5-small/refs/main"
+    ref = tmp_path / "hub" / ("models--" + model.replace("/", "--")) / "refs/main"
     ref.parent.mkdir(parents=True)
-    ref.write_text("abc123\n", encoding="utf-8")
-    assert module.fingerprint("e5small") == dict(
-        model="intfloat/multilingual-e5-small", revision="abc123", query_prefix="query: ",
-        passage_prefix="passage: ", normalize=True, dim=2)
-    assert module.dim("minilm") == 2
+    ref.write_text("otra-revision\n", encoding="utf-8")
+    result = module.fingerprint(encoder)
+    assert result["revision"] == revision
+    assert loads == [(model, "cpu", revision)]
+    assert result["dim"] == 2
 
 
 def test_invalid_encoder_or_kind_rejected(embeddings):
@@ -67,23 +70,6 @@ def test_invalid_encoder_or_kind_rejected(embeddings):
         module.dim("invalid")
     assert loads == []
     assert module.embed([], "query") == []
-
-
-def test_fingerprint_reads_revision_after_model_load(embeddings, monkeypatch, tmp_path):
-    module, _, _ = embeddings
-    monkeypatch.setenv("HF_HOME", str(tmp_path))
-    original_model = module._model
-    ref = tmp_path / "hub/models--intfloat--multilingual-e5-small/refs/main"
-
-    def load_model(encoder):
-        ref.parent.mkdir(parents=True, exist_ok=True)
-        ref.write_text("revision-cargada\n", encoding="utf-8")
-        return original_model(encoder)
-
-    monkeypatch.setattr(module, "dim", lambda encoder: load_model(encoder).get_sentence_embedding_dimension())
-    first = module.fingerprint("e5small")
-    assert first["revision"] == "revision-cargada"
-    assert module.fingerprint("e5small") == first
 
 
 def test_collection_name():

@@ -7,18 +7,17 @@ from pathlib import Path
 import re
 import sys
 
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from app.privacy import mask_handles
+
 TYPES = ('directa', 'comparativa', 'temporal', 'ambigua', 'sin_respuesta', 'inyeccion')
 ENUMS = dict(split=('dev', 'test'), language=('es', 'en', 'otro'), type=TYPES,
              collection_target=('bluesky_posts', 'url_crawls', 'ambas', 'ninguna'),
              status=('borrador', 'verificada'))
 REQUIRED = (*ENUMS, 'qid', 'question', 'relevant', 'reference_url',
             'reference_answer', 'answer_criterion', 'expected_abstention')
-
-
-def mask_handles(s):
-    # Cubre @handles y el perfil dentro de los enlaces de Bluesky (bsky.app/profile/<handle>/...).
-    s = re.sub(r'@[\w-]+(?:\.[\w-]+)+', '@usuario', s)
-    return re.sub(r'(bsky\.app/profile/)[^/\s"]+', r'\1usuario', s)
 
 
 def load_gold(path):

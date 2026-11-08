@@ -17,6 +17,7 @@ if __package__ in (None, ""):
 
 from app.metrics import (bootstrap_ci, doc_ranking, dup_rate_at_k, fragment_hit_at_k,
                          hit_at_k, mrr, ndcg_at_k, percentile, recall_at_k)
+from app.privacy import mask_handles
 
 
 KS = (1, 3, 5, 10)
@@ -129,7 +130,7 @@ def summarize(rows, group_by=None):
 
 
 def mask_text(text):
-    return re.sub(r"@[\w.-]+", "[usuario]", " ".join(str(text).split()))
+    return mask_handles(" ".join(str(text).split()))
 
 
 def markdown_text(text):
