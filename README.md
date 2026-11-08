@@ -156,7 +156,7 @@ hojas de `eval/human/` con la [rúbrica](eval/rubrica.md). El protocolo está en
 En esta entrega calificamos 8 de las 30 respuestas de las hojas (una por combinación
 de modelo y buscador); `human_eval agree` ignora las filas sin calificar y deja el
 resumen en `reports/generation/human_eval.csv`. La doble anotación de relevancia
-quedó sin hacer, por eso `relevancia_A.csv` y `relevancia_B.csv` no están en el repositorio.
+de 12 preguntas está en `eval/annotations/relevancia_A.csv` y `relevancia_B.csv` (kappa 0,95).
 
 ```text
 docker compose exec api python -m scripts.validate_gold --gold eval/gold.jsonl --sample data/samples/sample_700.csv --synthetic data/synthetic/injection_docs.jsonl
