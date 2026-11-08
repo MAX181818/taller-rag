@@ -2,6 +2,7 @@
 gemma2:2b,2.6B,Q4_0,gemma2,8ccf136fdd52,reports/runs/raw/abl_k10_config.json
 gemma2:2b,2.6B,Q4_0,gemma2,8ccf136fdd52,reports/runs/raw/abl_k3_config.json
 gemma2:2b,2.6B,Q4_0,gemma2,8ccf136fdd52,reports/runs/raw/abl_minilm_config.json
+gemma2:2b,2.6B,Q4_0,gemma2,8ccf136fdd52,reports/runs/raw/abl_minilm_tok128_config.json
 gemma2:2b,2.6B,Q4_0,gemma2,8ccf136fdd52,reports/runs/raw/abl_onedoc_config.json
 gemma2:2b,2.6B,Q4_0,gemma2,8ccf136fdd52,reports/runs/raw/abl_sent256_config.json
 gemma2:2b,2.6B,Q4_0,gemma2,8ccf136fdd52,reports/runs/raw/abl_tok128_config.json

@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-08T00:54:49.573831+00:00",
+  "date": "2026-11-08T03:46:24.214578+00:00",
   "seed": 42,
   "gold": "eval/gold.jsonl",
   "split": "all",
@@ -83,6 +83,15 @@
       "filtered": false
     },
     {
+      "condition": "ablations_milvus_tok128_minilm",
+      "group": "ablations",
+      "backend": "milvus",
+      "chunker": "tok128",
+      "encoder": "minilm",
+      "one_per_doc": false,
+      "filtered": false
+    },
+    {
       "condition": "ablations_milvus_tok256_e5small_one_per_doc",
       "group": "ablations",
       "backend": "milvus",
@@ -160,6 +169,7 @@
       "c_e5small_tok128",
       "c_e5small_tok256",
       "c_e5small_tok256_10k",
+      "c_minilm_tok128",
       "c_minilm_tok256"
     ],
     "solr_chunkers": [
@@ -187,13 +197,13 @@
     "gold_questions": 48,
     "questions": 48,
     "ranking_questions": 40,
-    "measured_pairs": 684,
-    "retrieval_calls": 684,
+    "measured_pairs": 732,
+    "retrieval_calls": 732,
     "warmup_calls": 3,
-    "per_question_rows": 2736,
+    "per_question_rows": 2928,
     "observed_chunks_by_collection": {
-      "url_crawls": 5829,
-      "bluesky_posts": 1011
+      "url_crawls": 6281,
+      "bluesky_posts": 1039
     }
   }
 }

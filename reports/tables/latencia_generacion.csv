@@ -17,6 +17,12 @@ abl_minilm,gemma2:2b,milvus,False,total_ms,70.000,1535.743,9728.112,83.310,repor
 abl_minilm,gemma2:2b,milvus,True,retrieval_ms_original,2.000,110.436,178.701,86.118,reports/generation/latency_summary.csv,cold
 abl_minilm,gemma2:2b,milvus,True,generation_ms,2.000,5469.558,6642.579,86.118,reports/generation/latency_summary.csv,cold
 abl_minilm,gemma2:2b,milvus,True,total_ms,2.000,5480.752,6653.979,86.118,reports/generation/latency_summary.csv,cold
+abl_minilm_tok128,gemma2:2b,milvus,False,retrieval_ms_original,71.000,34.792,44.500,74.431,reports/generation/latency_summary.csv,warm
+abl_minilm_tok128,gemma2:2b,milvus,False,generation_ms,71.000,5927.643,8226.186,74.431,reports/generation/latency_summary.csv,warm
+abl_minilm_tok128,gemma2:2b,milvus,False,total_ms,71.000,5929.843,8230.315,74.431,reports/generation/latency_summary.csv,warm
+abl_minilm_tok128,gemma2:2b,milvus,True,retrieval_ms_original,1.000,36.799,36.799,85.931,reports/generation/latency_summary.csv,cold
+abl_minilm_tok128,gemma2:2b,milvus,True,generation_ms,1.000,4517.657,4517.657,85.931,reports/generation/latency_summary.csv,cold
+abl_minilm_tok128,gemma2:2b,milvus,True,total_ms,1.000,4528.414,4528.414,85.931,reports/generation/latency_summary.csv,cold
 abl_onedoc,gemma2:2b,milvus,False,retrieval_ms_original,70.000,117.019,248.193,82.041,reports/generation/latency_summary.csv,warm
 abl_onedoc,gemma2:2b,milvus,False,generation_ms,70.000,1774.339,11849.132,82.041,reports/generation/latency_summary.csv,warm
 abl_onedoc,gemma2:2b,milvus,False,total_ms,70.000,1776.863,11851.999,82.041,reports/generation/latency_summary.csv,warm
