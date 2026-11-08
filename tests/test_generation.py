@@ -39,7 +39,7 @@ def rag_env(monkeypatch, tmp_path):
     path = tmp_path / "runs.jsonl"
     real_log = runlog.log_run
     monkeypatch.setattr(runlog, "log_run", lambda record: real_log(record, path=path))
-    rag._model_info.cache_clear()
+    rag._cached_model_info.cache_clear()
     monkeypatch.setattr(generation, "model_info", lambda model: {"family": "prueba"})
 
     def forbidden(*args, **kwargs):
@@ -48,7 +48,7 @@ def rag_env(monkeypatch, tmp_path):
     monkeypatch.setattr(rag, "retrieve", forbidden)
     monkeypatch.setattr(generation, "generate", forbidden)
     yield path
-    rag._model_info.cache_clear()
+    rag._cached_model_info.cache_clear()
 
 
 def evidence(text="Evidencia"):
@@ -66,6 +66,15 @@ def test_generate_maps_404_to_model_not_available(monkeypatch):
         generation.generate("ausente", "Pregunta")
     assert caught.value.model == "ausente"
     assert "ausente" in str(caught.value) and "no está disponible" in str(caught.value)
+
+
+def test_list_models_404_is_generation_error(monkeypatch):
+    monkeypatch.setattr(requests, "get", lambda *a, **kw: Response(status=404))
+    monkeypatch.setattr(requests, "post", lambda *a, **kw: Response(status=404))
+    for request in (generation.list_models, lambda: generation.generate("", "Pregunta")):
+        with pytest.raises(generation.GenerationError, match="404") as caught:
+            request()
+        assert type(caught.value) is generation.GenerationError
 
 
 @pytest.mark.parametrize("error", [requests.ConnectionError("caído"), requests.Timeout("agotado")])
@@ -253,6 +262,23 @@ def test_model_info_failure_does_not_block_answer(monkeypatch, rag_env):
     monkeypatch.setattr(generation, "generate", lambda *a, **kw: generated())
     result = rag.answer("consulta", evidence=[evidence()])
     assert result["model_info"] == {} and result["answer"].startswith("Respuesta")
+
+
+def test_model_info_retries_after_failure_and_caches_success(monkeypatch, rag_env):
+    calls = []
+
+    def info(model):
+        calls.append(model)
+        if len(calls) == 1:
+            raise generation.GenerationError("Metadatos no disponibles")
+        return {"family": "recuperada"}
+
+    monkeypatch.setattr(generation, "model_info", info)
+    monkeypatch.setattr(generation, "generate", lambda *a, **kw: generated())
+    results = [rag.answer("consulta", model="prueba", evidence=[evidence()])["model_info"]
+               for _ in range(3)]
+    assert results == [{}, {"family": "recuperada"}, {"family": "recuperada"}]
+    assert calls == ["prueba", "prueba"]
 
 
 def test_runlog_appends_utf8_without_mutating_record(tmp_path):

@@ -11,9 +11,13 @@ from app.retrieval import retrieve
 
 
 @lru_cache(maxsize=None)
+def _cached_model_info(model) -> dict:
+    return generation.model_info(model)
+
+
 def _model_info(model) -> dict:
     try:
-        return generation.model_info(model)
+        return _cached_model_info(model)
     except Exception:
         return {}
 

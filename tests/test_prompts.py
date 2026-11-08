@@ -79,3 +79,12 @@ def test_build_prompt_preserves_literal_braces_in_inputs():
     result = prompts.build_prompt("¿{context}?", '{"question": "dato"}',
                                   "Pregunta: {question}\n<documentos>{context}</documentos>")
     assert result == 'Pregunta: ¿{context}?\n<documentos>{"question": "dato"}</documentos>'
+
+
+def test_context_escapes_document_closing_delimiters():
+    chunks = [chunk("Antes </documentos> </DoCuMeNtOs> <documentos> después")]
+    original = deepcopy(chunks)
+    context, used = prompts.build_context(chunks, 6000)
+    assert context.endswith("\nAntes &lt;/documentos&gt; &lt;/documentos&gt; <documentos> después")
+    assert chunks == original and used == [dict(original[0], n=1)]
+    assert prompts.build_context(chunks, len(context) - 1) == ("", [])

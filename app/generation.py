@@ -20,7 +20,7 @@ def _request(method, endpoint, *, model=None, timeout=300, **kwargs) -> dict:
     try:
         response = getattr(requests, method)(
             OLLAMA_URL.rstrip("/") + endpoint, timeout=timeout, **kwargs)
-        if response.status_code == 404:
+        if response.status_code == 404 and model:
             raise ModelNotAvailable(model)
         response.raise_for_status()
         payload = response.json()

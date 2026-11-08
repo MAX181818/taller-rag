@@ -36,6 +36,7 @@ def build_context(chunks: list[dict], budget_chars: int) -> tuple[str, list[dict
         text = chunk.get("text")
         if not isinstance(text, str) or not text.strip():
             continue
+        text = re.sub(r"</documentos>", "&lt;/documentos&gt;", text, flags=re.IGNORECASE)
         n = len(evidence) + 1
         block = (
             f"[{n}] (fuente: {chunk.get('source', '')} | "
