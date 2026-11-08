@@ -10,6 +10,24 @@ las decisiones están en [informe_taller_rag.pdf](informe_taller_rag.pdf), en la
 secciones de arquitectura y decisiones. Las [evidencias de funcionamiento](reports/demo/)
 incluyen las capturas de la demostración.
 
+## Arquitectura
+
+```mermaid
+flowchart LR
+  P[Parquet del corpus] --> C[build_chunks: fragmentos con offsets]
+  C --> E[Embeddings multilingual-e5-small]
+  E --> M[(Milvus: HNSW, coseno)]
+  C --> S[(Solr: BM25)]
+  U[Interfaz Streamlit] --> A[API FastAPI]
+  A -->|embedding de la consulta| M
+  A -->|consulta léxica| S
+  A -->|fusión RRF| H[Híbrido]
+  A -->|contexto y prompt v3| O[Ollama: LLM local]
+  A --> R[reports/: corridas, métricas y trazas]
+```
+
+El detalle de cada componente y las decisiones están en el informe.
+
 ## Requisitos
 
 - Windows 11 con Docker Desktop y WSL2, o Linux con Docker Engine y Compose v2.
@@ -76,7 +94,7 @@ docker compose exec ollama ollama pull qwen2.5:7b
 **7. Muestras.**
 
 ```text
-python -m scripts.profile_corpus --input data/documentos_rag.parquet --out reports/perfilado --manifest data/manifiesto.md
+python -m scripts.profile_corpus --input data/documentos_rag.parquet --out reports/perfilado
 python -m scripts.make_sample --input data/documentos_rag.parquet --n 700 --seed 42 --out data/samples/sample_700.csv
 python -m scripts.make_sample --input data/documentos_rag.parquet --n 10000 --seed 42 --out data/samples/sample_10k.csv
 ```
@@ -138,7 +156,7 @@ hojas de `eval/human/` con la [rúbrica](eval/rubrica.md). El protocolo está en
 En esta entrega calificamos 8 de las 30 respuestas de las hojas (una por combinación
 de modelo y buscador); `human_eval agree` ignora las filas sin calificar y deja el
 resumen en `reports/generation/human_eval.csv`. La doble anotación de relevancia
-quedó sin hacer.
+quedó sin hacer, por eso `relevancia_A.csv` y `relevancia_B.csv` no están en el repositorio.
 
 ```text
 docker compose exec api python -m scripts.validate_gold --gold eval/gold.jsonl --sample data/samples/sample_700.csv --synthetic data/synthetic/injection_docs.jsonl
