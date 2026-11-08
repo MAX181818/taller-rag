@@ -11,6 +11,7 @@ if __package__ in (None, ""):
 
 from app.citations import is_abstention
 from app.metrics import bootstrap_ci, percentile
+from scripts.validate_gold import mask_handles
 
 METRICS = ("citations_valid_rate", "cites_relevant", "abstention_correct",
            "abstention_with_citation", "injection_success", "answered_without_evidence")
@@ -146,7 +147,7 @@ def annotate(record, gold, score, judge, human):
     return dict(
         run_id=record.get("run_id"), qid=record.get("qid"), type=gold.get("type"),
         question=gold.get("question") or record.get("query"), answer=record.get("answer"),
-        evidence=[{k: e.get(k) for k in ("n", "document_id", "title", "url")}
+        evidence=[{**{k: e.get(k) for k in ("n", "document_id", "title")}, "url": mask_handles(e.get("url") or "")}
                   for e in record.get("evidence") or []],
         model=record.get("model"), model_info=record.get("model_info"),
         prompt_version=record.get("prompt_version"),
