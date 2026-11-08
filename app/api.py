@@ -103,12 +103,9 @@ async def prompt_error(request: Request, error: FileNotFoundError):
 
 
 def _milvus_alive():
-    client = milvus_store.MilvusClient(uri=config.MILVUS_URI, timeout=HEALTH_TIMEOUT)
-    try:
-        client.list_collections(timeout=HEALTH_TIMEOUT)
-        return True
-    finally:
-        client.close()
+    # Sin close(): pymilvus comparte el canal gRPC por URI y cerrarlo corta búsquedas en curso.
+    milvus_store.get_client().list_collections(timeout=HEALTH_TIMEOUT)
+    return True
 
 
 def _ollama_alive():

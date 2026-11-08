@@ -33,7 +33,7 @@ def client():
 
 
 def healthy(monkeypatch):
-    monkeypatch.setattr(milvus_store, "MilvusClient", lambda **kwargs: SimpleNamespace(
+    monkeypatch.setattr(milvus_store, "get_client", lambda: SimpleNamespace(
         list_collections=lambda **kwargs: [], close=lambda: None))
     monkeypatch.setattr(solr_store, "ping", lambda: True)
     monkeypatch.setattr(api.requests, "get", lambda url, timeout: SimpleNamespace(
@@ -61,21 +61,20 @@ def test_health_ok_and_short_transport_timeouts(client, monkeypatch):
         assert 0 < timeout <= 3
         calls.append("ollama")
         return SimpleNamespace(raise_for_status=lambda: None)
-    def client_factory(uri, timeout):
-        assert uri == config.MILVUS_URI
-        assert 0 < timeout <= 3
+    def client_factory():
         return SimpleNamespace(list_collections=collections, close=lambda: calls.append("closed"))
-    monkeypatch.setattr(milvus_store, "MilvusClient", client_factory)
+    monkeypatch.setattr(milvus_store, "get_client", client_factory)
     monkeypatch.setattr(api.requests, "get", tags)
     assert client.get("/health").json() == {"status": "ok", "deps": {
         "milvus": True, "solr": True, "ollama": True}}
-    assert set(calls) == {"milvus", "ollama", "closed"}
+    # Cerrar el cliente compartido cortaba búsquedas en curso (canal gRPC común por URI).
+    assert set(calls) == {"milvus", "ollama"}
 
 
 def test_health_bounds_blocked_checks(client, monkeypatch):
     release = Event()
     monkeypatch.setattr(api, "HEALTH_TIMEOUT", 0.03, raising=False)
-    monkeypatch.setattr(milvus_store, "MilvusClient", lambda **kw: release.wait())
+    monkeypatch.setattr(milvus_store, "get_client", lambda: release.wait())
     monkeypatch.setattr(solr_store, "ping", lambda: release.wait())
     monkeypatch.setattr(api.requests, "get", lambda *a, **kw: release.wait())
     start = perf_counter()
@@ -94,7 +93,7 @@ def test_health_swallows_exceptions(client, monkeypatch, dependency):
     healthy(monkeypatch)
     def fail(*args, **kwargs):
         raise RuntimeError("caído")
-    target, name = {"milvus": (milvus_store, "MilvusClient"),
+    target, name = {"milvus": (milvus_store, "get_client"),
                     "solr": (solr_store, "ping"), "ollama": (api.requests, "get")}[dependency]
     monkeypatch.setattr(target, name, fail)
     response = client.get("/health")
@@ -161,7 +160,7 @@ def test_health_reuses_pending_probes_and_refreshes(client, monkeypatch):
         release.wait()
         raise ConnectionError("caído")
     monkeypatch.setattr(api, "HEALTH_TIMEOUT", 0.03)
-    monkeypatch.setattr(milvus_store, "MilvusClient", lambda **kw: block("milvus"))
+    monkeypatch.setattr(milvus_store, "get_client", lambda: block("milvus"))
     monkeypatch.setattr(solr_store, "ping", lambda: block("solr"))
     monkeypatch.setattr(api.requests, "get", lambda *a, **kw: block("ollama"))
     try:
